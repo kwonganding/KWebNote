@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+
+<head>
+  <meta charset="utf-8">
+  <title>人生倒计时</title>
+</head>
+
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 460px"></div>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'svg',
+      useDirtyRect: false
+    });
+    var app = {};
+
+    var option;
+
+    //配置，总共1000个月，大约85岁
+    const birthday = new Date(1986, 11, 1);
+    const kmax = 1000;
+    const kv = Math.floor((Date.now() - birthday) / (1000 * 3600 * 24 * 30));
+    const krate = Math.floor((Date.now() - birthday) / (1000 * 3600 * 24 * 30) / kmax * 100) + "%";
+    option = {
+      series: [
+        {
+          type: 'gauge',
+          center: ['50%', '60%'],
+          startAngle: 205,
+          endAngle: -25,
+          min: 0,
+          max: kmax,
+          splitNumber: 10,
+          itemStyle: {
+            color: 'orange'
+          },
+          progress: {
+            show: true,
+            width: 38
+          },
+          pointer: {
+            show: false
+          },
+          axisLine: {
+            lineStyle: {
+              width: 35
+            }
+          },
+          axisTick: {
+            distance: -45,
+            splitNumber: 5,
+            lineStyle: {
+              width: 2,
+              color: '#999'
+            }
+          },
+          splitLine: {
+            distance: -52,
+            length: 14,
+            lineStyle: {
+              width: 3,
+              color: '#999'
+            }
+          },
+          axisLabel: {
+            distance: -10,
+            show: true,
+            color: '#999',
+            fontSize: 16
+          },
+          anchor: {
+            show: false
+          },
+          title: {
+            offsetCenter: [0, '10%'],
+            fontSize: 30
+          },
+          detail: {
+            valueAnimation: true,
+            width: '60%',
+            lineHeight: 40,
+            borderRadius: 8,
+            offsetCenter: [0, '-25%'],
+            fontSize: 60,
+            fontWeight: 'bolder',
+            formatter: krate,
+            color: 'auto'
+          },
+
+          data: [
+            {
+              value: kv,
+              name: '人生倒计时'
+            }
+          ]
+        },
+        {
+          type: 'gauge',
+          center: ['50%', '60%'],
+          startAngle: 205,
+          endAngle: -25,
+          min: 0,
+          max: kmax,
+          itemStyle: {
+            color: '#EE675C'
+          },
+          progress: {
+            show: true,
+            width: 8
+          },
+          pointer: {
+            show: false
+          },
+          axisLine: {
+            show: false
+          },
+          axisTick: {
+            show: false
+          },
+          splitLine: {
+            show: false
+          },
+          axisLabel: {
+            show: false
+          },
+          detail: {
+            show: false
+          },
+
+          data: [
+            {
+              value: kv
+            }
+          ]
+        }
+      ]
+    };
+
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+
+</html>

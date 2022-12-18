@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>响应式布局</title>
+    <style>
+        html {
+            font-size: 1em;
+            width: 90%;
+            margin: 0 5%;
+        }
+
+        html * {
+            box-sizing: border-box;
+        }
+
+        .nav ul {
+            list-style: none;
+            padding: 0px;
+        }
+
+        .nav a {
+            display: block;
+            background-color: antiquewhite;
+            margin: 1px;
+            padding: 1px;
+            border: skyblue 1px solid;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        @media screen and (min-width: 40em) {
+            .nav ul {
+                display: flex;
+            }
+
+            .nav li {
+                flex: 1;
+            }
+
+            .nav a {
+                border: skyblue 2px solid;
+                padding: 5px;
+                margin: 8px;
+            }
+        }
+
+        .nav a:hover {
+            background-color: skyblue;
+        }
+
+        .main {
+            display: flex;
+            flex-flow: row wrap;
+            gap: 10px;
+        }
+
+        .article {
+            flex: 10 1 800px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 5px;
+        }
+
+        .card {
+            border: 1px solid lavender;
+            padding: 5px;
+        }
+
+        .news {
+            background-color: azure;
+            padding: 5px;
+            flex: 1 1 300px;
+        }
+
+        .ad {
+            background-color: pink;
+            padding: 5px;
+            flex: 1 1 250px;
+        }
+
+        .footer {
+            background-color: azure;
+            margin-top: 2em;
+            padding: 1px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>小卤蛋</h1>
+
+    <div class="nav">
+        <ul>
+            <li><a href="#">首页</a></li>
+            <li><a href="#">商品</a></li>
+            <li><a href="#">新闻</a></li>
+            <li><a href="#">联系我们</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="article">
+            <h2>main header</h2>
+            <p>这就是平凡的世界，平凡的人生，苦难中不放弃追求，平凡中也能活出绚烂。二舅坎坷但积极的信念，让人深深的共鸣和触动</p>
+            <div class="cards">
+                <div class="card">
+                    <h4>Card1</h4>
+                    <p>纵有千古， 横有八荒； 前途似海， 来日方长。——梁启超</p>
+                </div>
+                <div class="card">
+                    <h4>Card2</h4>
+                    <p>纵有千古， 横有八荒； 前途似海， 来日方长。——梁启超</p>
+                </div>
+                <div class="card">
+                    <h4>Card3</h4>
+                    <p>纵有千古， 横有八荒； 前途似海， 来日方长。——梁启超</p>
+                </div>
+                <div class="card">
+                    <h4>Card4</h4>
+                    <p>纵有千古， 横有八荒； 前途似海， 来日方长。——梁启超</p>
+                </div>
+                <div class="card">
+                    <h4>Card5</h4>
+                    <p>每个人都有他的路，每条路都是正确的。人的不幸在于他们不想走自己那条路，总想走别人的路。——托马斯·伯恩哈德</p>
+                </div>
+            </div>
+        </div>
+        <div class="news">
+            <h3>news</h3>
+            <p>这就是平凡的世界，平凡的人生，苦难中不放弃追求，平凡中也能活出绚烂。二舅坎坷但积极的信念，让人深深的共鸣和触动</p>
+        </div>
+        <div class="ad">
+            <h3>ad</h3>
+            <p>一些广告内容块</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h2>Footer</h2>
+        <p>营业执照信息网络传播视听节目许可证：0910417网络文化经营许可证 沪网文【2019】3804-274号</p>
+    </div>
+</body>
+
+</html>

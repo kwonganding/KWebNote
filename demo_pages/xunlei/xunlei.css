@@ -1,0 +1,264 @@
+:root {
+    --header-height: 64px;
+    --max-width: 1200px;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-image: url(res/banner_bg.jpg);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-color: #080325;
+    color: white;
+    font-size: 16px;
+}
+
+.page-center {
+    max-width: var(--max-width);
+    min-width: 900px;
+    margin: 0px auto;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    background: url(res/banner_bgmask.png) no-repeat top center;
+    /* background-color: red; */
+    position: absolute;
+    top: 0px;
+}
+
+/************* nav ***************/
+
+.nav {
+    width: 100%;
+    height: var(--header-height);
+    transition: all 0.5s;
+    position: fixed;
+    top: 0px;
+    z-index: 99;
+}
+
+
+.nav:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: all 0.5s;
+}
+
+.logo img {
+    width: 78px;
+    margin-top: 14px;
+}
+
+.nav ul {
+    list-style: none;
+}
+
+.nav a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-wrap>ul {
+    list-style: none;
+    float: right;
+    line-height: var(--header-height);
+}
+
+.nav-wrap>ul>li {
+    display: inline-block;
+    margin: 0 15px;
+    position: relative;
+    padding: 0 15px;
+}
+
+.nav-wrap>ul>li::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    transform: scaleX(0);
+}
+
+.nav-wrap>ul>li:hover::after {
+    transform: scaleX(1);
+    transition: all 0.2s;
+}
+
+.nav-wrap>ul>li.active::after {
+    transform: scaleX(1);
+}
+
+.nav-list {
+    width: 100px;
+    font-size: 14px;
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 0 0 10px 10px;
+    top: var(--header-height);
+    left: 50%;
+    margin-left: -50px;
+    opacity: 0;
+    height: 0px;
+    overflow: hidden;
+}
+
+.nav-wrap>ul>li:hover>.nav-list {
+    opacity: 1;
+    height: max-content;
+    transition: all .3s;
+}
+
+.nav-list li {
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    list-style: none;
+}
+
+.nav-list ul li:first-child {
+    border-top: none;
+}
+
+.nav-list li a:hover {
+    color: rgb(30, 106, 247);
+}
+
+/***************** page1 ***********************/
+.page1 {
+    margin-top: var(--header-height);
+}
+
+.p1-banner-list {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+/* 球 */
+.p1-banner-line {
+    position: relative;
+    margin: 85px auto 0px auto;
+    width: 730px;
+    height: 730px;
+    background: url(res/earth01.png) no-repeat top center;
+}
+
+.p1-banner-line span {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: auto;
+    display: block;
+    background-repeat: no-repeat;
+    background-image: url(res/spr_bannerPathway.png);
+
+    transform: rotate(0deg);
+}
+
+.p1-banner-line .c1 {
+    background-position: -2436px -724px;
+    width: 648px;
+    height: 674px;
+    top: 30px;
+    left: 50%;
+    margin-left: -324px;
+    animation: p1-banner-line1 40s linear infinite;
+}
+
+.p1-banner-line .c2 {
+    background-position: -2436px 0px;
+    width: 719px;
+    height: 719px;
+    left: 50%;
+    margin-left: -358px;
+    top: 6px;
+    animation: p1-banner-line2 40s linear infinite;
+}
+
+@keyframes p1-banner-line1 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    0% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes p1-banner-line2 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    0% {
+        transform: rotate(-360deg);
+    }
+}
+
+.p1-banner-content {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    line-height: 6em;
+    left: 50%;
+    margin-left: -200px;
+    top: 50%;
+    margin-top: -200px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.p1-banner-content h2 {
+    font-size: 72px;
+    letter-spacing: 0.2em;
+    font-weight: 100;
+}
+
+.p1-banner-content p {
+    font-size: 20px;
+    letter-spacing: 1em;
+}
+
+.p1-banner-content button {
+    font-size: 24px;
+    color: inherit;
+    height: 68px;
+    padding: 5px 50px;
+    border: solid white 1px;
+    border-radius: 34px;
+    background-color: rgba(0, 0, 2550, 0.1);
+    /* transform: ; */
+}
+
+.p1-banner-content button:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 2550, 0.4);
+    transition: all 0.5s;
+}
+
+.p1-banner-nav {
+    list-style-type: none;
+    text-align: center;
+}
+
+.p1-banner-nav li {
+    display: inline-block;
+    margin: 10px 20px;
+}
+
+/***************** page2 ***********************/
+.main {
+    height: 2000px;
+}

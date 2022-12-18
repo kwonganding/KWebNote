@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS星空彩球大战</title>
+    <meta name="description" content="淘宝网 - 亚洲较大的网上交易平台，提供各类服饰、美容… ">
+    <meta name="description" content="可双人对战的游戏：一个人一个圈，进入圈的球会被吃掉获得积分，圈会增大；一个圈方向控制位置移动，另一个圈鼠标点击控制位置">
+    <style>
+        body {
+            margin: 0px;
+            background-color: black;
+            color: rgb(29, 219, 29);
+            overflow: hidden;
+        }
+
+        .header {
+            position: absolute;
+            top: -5px;
+            width: 300px;
+            left: calc(50% - 150px);
+            text-align: center;
+            line-height: 1.5em;
+        }
+
+        .header h1 {
+            text-shadow: 1px 1px 4px rgb(204, 226, 191);
+        }
+
+        #score1 {
+            color: rgb(248, 134, 41);
+            font-size: 1.2em;
+            padding: 0px 10px;
+        }
+
+        #score2 {
+            color: rgb(67, 67, 250);
+            font-size: 1.2em;
+            padding: 0px 10px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 60px;
+            text-align: center;
+            width: 100%;
+            height: 1em;
+        }
+
+        .footer button {
+            width: 50px;
+            font-size: 20px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            background-color: aquamarine;
+            opacity: 0.5;
+        }
+
+        .footer button:hover {
+            background-color: white;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>星空彩球大战</h1>
+        <p><span id="score1">小卤蛋：0</span> | <span id="score2">分数2：0</span></p>
+    </div>
+    <canvas></canvas>
+    <div class="footer">
+        <button onclick="addBall();" title="添加彩球，一次50可多次添加">➕</button>
+        <button onclick="start();" title="开始游戏">▶️</button>
+        <button onclick="stop();" title="暂停游戏">🔴</button>
+        <button onclick="restAll();" title="清空重置游戏">🗑️</button>
+    </div>
+</body>
+<script>
+    const ca = document.querySelector("canvas");
+    const ctx = ca.getContext('2d');
+    ctx.globalAlpha
+    const fw = ca.width = window.innerWidth;
+    const fh = ca.height = window.innerHeight;
+    let balls = [];
+    const ballN = 50;
+    const ballMax = 2000;
+    let isPlay = false;
+
+    //#region  User
+    class User {
+        constructor() {
+            this.pre = "";
+            this.evil = null;
+        }
+        updateScore() {
+            this.pre.innerText = "分数：" + this.evil.eatTotal;
+        }
+    }
+    User.draw = function () {
+        User.users.forEach((user) => {
+            user.evil.draw();
+        })
+    }
+    User.updateScore = function (evil) {
+        User.users.forEach((user) => {
+            if (user.evil === evil) {
+                user.updateScore();
+            }
+        })
+    }
+    User.loop = function () {
+        User.users.forEach((user) => {
+            user.evil.draw();
+            user.evil.checkBounds();
+            user.evil.eat();
+        })
+    }
+    User.clear = function () {
+        User.users.forEach((user) => {
+            user.evil.eatTotal = 0;
+            user.updateScore();
+        })
+    }
+    //#endregion
+
+    //初始化用户
+    User.user1 = new User();
+    User.user2 = new User();
+    User.users = new Set([User.user1, User.user2]);
+    User.user1.pre = document.getElementById("score1");
+    User.user2.pre = document.getElementById("score2");
+    //add user
+    User.user1.evil = new EvilCircle(random(0, fw), random(100, fh), 10, 10, 'rgb(248, 134, 41)', 40);
+    User.user2.evil = new EvilCircle(random(0, fw), random(100, fh), 10, 10, 'rgb(67, 67, 250)', 30);
+    User.draw();
+
+    //控制
+    function start() {
+        if (isPlay)
+            return;
+        isPlay = true;
+        loop();
+    }
+    function stop() {
+        isPlay = false;
+    }
+    function restAll() {
+        balls.splice(0, balls.length);
+        ctx.clearRect(0, 0, fw, fh);
+        loop();
+        User.clear();
+    }
+    function addBall() {
+        if (balls.length >= ballMax)
+            return;
+        for (let i = 0; i < ballN; i++) {
+            let size = random(5, 20);
+            let ball = new Ball(random(0 + size, fw - size), random(0 + size, fh - size), random(-5, 5), random(-5, 5), randomColor(), size);
+            balls.push(ball);
+            ball.draw();
+        }
+        User.draw();
+    }
+
+    function loop() {
+        ctx.fillStyle = 'rgb(0,0,0,0.3)';
+        ctx.fillRect(0, 0, fw, fh);
+        for (let i = 0; i < balls.length; i++) {
+            if (!balls[i].exist)
+                continue;
+            balls[i].draw();
+            balls[i].update();
+            balls[i].collisionDetect();
+        }
+        if (isPlay) {
+            User.loop();
+            requestAnimationFrame(loop);
+        }
+    }
+
+    window.onkeydown = (e) => {
+        if (!isPlay)
+            return;
+        switch (e.key) {
+            case 'ArrowUp':
+            case 'W':
+            case 'w':
+                User.user1.evil.y -= User.user1.evil.vely;
+                break;
+            case 'ArrowDown':
+            case 'S':
+            case 's':
+                User.user1.evil.y += User.user1.evil.vely;
+                break;
+            case 'ArrowLeft':
+            case 'A':
+            case 'a':
+                User.user1.evil.x -= User.user1.evil.velx;
+                break;
+            case 'ArrowRight':
+            case 'D':
+            case 'd':
+                User.user1.evil.x += User.user1.evil.velx;
+                break;
+        }
+    }
+    ca.onmousedown = (e) => {
+        if (!isPlay)
+            return;
+        User.user2.evil.x = e.offsetX;
+        User.user2.evil.y = e.offsetY;
+    }
+
+    //定义图形
+    function Shape(x, y, velx, vely, color, size) {
+        this.x = x;
+        this.y = y;
+        this.velx = velx; //x、y方向的速度
+        this.vely = vely;
+        this.exist = true; //是否存在，标记被吃掉
+        this.color = color;
+        this.size = size;
+    }
+    //ball：坐标、速度，颜色、大小
+    function Ball(x, y, velx, vely, color, size) {
+        Shape.call(this, x, y, velx, vely, color, size);
+        this.collisionBalls = new Map();
+        this.draw = function () {
+            ctx.beginPath();
+            ctx.fillStyle = this.color;
+            ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+            ctx.fill();
+        };
+        this.update = function () {
+            //四个边的碰撞检测，达到边缘，速度方向反转
+            if ((this.x + this.size) >= fw) {
+                this.velx = -(this.velx);
+            }
+            if ((this.x - this.size) <= 0) {
+                this.velx = -(this.velx);
+            }
+            if ((this.y + this.size) >= fh) {
+                this.vely = -(this.vely);
+            }
+            if ((this.y - this.size) <= 0) {
+                this.vely = -(this.vely);
+            }
+            //移动
+            this.x += this.velx;
+            this.y += this.vely;
+        }
+        this.collisionDetect = function () {
+            // collision /kəˈlɪʒ(ə)n/ 碰撞
+            // 与每个球的位置进行检测，消除闪烁
+            for (let i = 0; i < balls.length; i++) {
+                if (this === balls[i] || !balls[i].exist) {
+                    continue;
+                }
+                //用三角函数计算距离
+                const dx = this.x - balls[i].x;
+                const dy = this.y - balls[i].y;
+                const d = Math.sqrt(dx * dx + dy * dy);
+                //第一次小魚添加，第一次大魚移除
+                if (d < (this.size + balls[i].size) && !this.collisionBalls.has(balls[i])) {
+                    this.collisionBalls.set(balls[i], d);
+                    balls[i].color = this.color = randomColor();
+                }
+                else if (d >= (this.size + balls[i].size)) {
+                    this.collisionBalls.delete(balls[i]);
+                }
+            }
+        }
+    }
+    //恶魔球
+    function EvilCircle(x, y, velx, vely, color, size) {
+        //Evil /ˈiːvl/恶魔    Circle/ˈsɜːk(ə)l/
+        Shape.call(this, x, y, velx, vely, color, size);
+        this.eatTotal = 0;
+        this.draw = function () {
+            ctx.beginPath();
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = this.color;
+            let size = this.size + this.eatTotal / 2;
+            ctx.arc(this.x, this.y, size, 0, 2 * Math.PI);
+            ctx.stroke();
+        }
+        this.checkBounds = function () {
+            //四个边的碰撞检测，达到边缘，速度方向反转
+            if ((this.x + this.size) >= fw) {
+                this.x = fw - this.size;
+            }
+            if ((this.x - this.size) <= 0) {
+                this.x = this.size;
+            }
+            if ((this.y + this.size) >= fh) {
+                this.y = fh - this.size;
+            }
+            if ((this.y - this.size) <= 0) {
+                this.y = this.size;
+            }
+        }
+        this.eat = function () {
+            //吃小球
+            for (let i = 0; i < balls.length; i++) {
+                if (!balls[i].exist) {
+                    continue;
+                }
+                //用三角函数计算距离
+                const dx = Math.abs(this.x - balls[i].x);
+                const dy = Math.abs(this.y - balls[i].y);
+                const d = Math.sqrt(dx * dx + dy * dy);
+                //第一次小魚添加，第一次大魚移除
+                if (d < (this.size + balls[i].size)) {
+                    balls[i].exist = false;
+                    User.updateScore(this);
+                    this.eatTotal++;
+                }
+            }
+        }
+    }
+
+    //这两句代码还有必要吗？Ball里面用call调用Shape构造函数就是实现继承了
+    // Ball.prototype = Object.create(Shape.prototype);
+    // Ball.prototype.constructor = Ball;
+
+    //工具函数：随机数
+    function random(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    function randomColor() {
+        return `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12306</title>
+    <link rel="stylesheet" href="12306.css">
+    <link rel="icon" href="res/favicon.ico" type="image/x-icon">
+    <script src="../js/kutil.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <!-- 返回顶部，要放到顶部才行啊 -->
+    <a href="#" class="page-top-button" title="回到顶部">🔝</a>
+
+    <div class="header clearafter">
+        <div class="page-wrapper header-wrapper">
+            <div class="header-icon">
+                <h1><a href="#"><img src="res/logo.jpg" alt="中国跌路12306"></a></h1>
+            </div>
+            <div class="header-right-part">
+                <div class="header-right-search">
+                    <input type="text" placeholder="搜索车票、餐饮、常旅客、相关规章">
+                    <button><i class="bi bi-search"></i></button>
+                </div>
+                <div class="header-rmenu">
+                    <ul>
+                        <li><a href="#">爱心模式</a></li>
+                        <li class="header-menu-line">|</li>
+                        <li class="header-menu-li"><a href="#">语言<i class="dropdown-icon"></i></a>
+                            <ul class="header-menu-wrap">
+                                <li><a href="#">中文</a></li>
+                                <li><a href="#">English</a></li>
+                            </ul>
+                        </li>
+                        <li class="header-menu-line">|</li>
+                        <li class="header-menu-li"><a href="#">我的12306<i class="dropdown-icon"></i></a>
+                            <ul class="header-menu-wrap" style="width:120px">
+                                <li><a href="#">火车票钉钉</a></li>
+                                <li><a href="#">后补订单</a></li>
+                                <li><a href="#">计次-定期订单</a></li>
+                                <li><a href="#">约号钉钉</a></li>
+                                <li><a href="#">本人车票</a></li>
+                                <li class="menu-list-line"></li>
+                                <li><a href="#">我的餐饮-特产</a></li>
+                                <li><a href="#">我的保险</a></li>
+                                <li><a href="#">我的会员</a></li>
+                                <li class="menu-list-line"></li>
+                                <li><a href="#">个人信息</a></li>
+                                <li><a href="#">账户安全</a></li>
+                                <li class="menu-list-line"></li>
+                                <li><a href="#">乘车人</a></li>
+                                <li><a href="#">地址管理</a></li>
+                            </ul>
+                        </li>
+                        <li class="header-menu-line">|</li>
+                        <li><a href="#">注册</a></li>
+                        <li><a href="#">登录</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="claearbefore"></div>
+    <div class="nav-box">
+        <ul class="nav page-wrapper">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">车票<i class="dropdown-icon"></i></a>
+                <div class="navs">
+                    <div class="navs-item">
+                        <h3>购买</h3>
+                        <ul class="navs-item-list">
+                            <li><a href="#">单程</a></li>
+                            <li end><a href="#">往返</a></li>
+                            <li><a href="#">中转换乘</a></li>
+                            <li end><a href="#">计次•定期票</a></li>
+                        </ul>
+                    </div>
+                    <div class="navs-item">
+                        <h3>变更</h3>
+                        <ul class="navs-item-list">
+                            <li><a href="#">退票</a></li>
+                            <li end><a href="#">改签</a></li>
+                            <li><a href="#">变更到站</a></li>
+                        </ul>
+                    </div>
+                    <div class="navs-item">
+                        <h3>更多</h3>
+                        <ul class="navs-item-list">
+                            <li><a href="#">中铁银通卡</a></li>
+                            <li end><a href="#">久光直通车</a></li>
+                            <li><a href="#">是叫快递苏鲁</a></li>
+                            <li end><a href="#">国际列车</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#">团购服务<i class="dropdown-icon"></i></a>
+                <div class="navs">
+                    <div class="navs-item">
+                        <ul class="navs-item-list">
+                            <li><a href="#">务工人员</a></li>
+                            <li end><a href="#">学生团体</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#">会员服务<i class="dropdown-icon"></i></a>
+                <div class="navs">
+                    <div class="navs-item">
+                        <ul class="navs-item-list">
+                            <li><a href="#">会员管理</a></li>
+                            <li><a href="#">积分账户</a></li>
+                            <li><a href="#">积分兑换</a></li>
+                            <li><a href="#">会员专享</a></li>
+                            <li end><a href="#">会员中心</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#">战车服务<i class="dropdown-icon"></i></a>
+                <div class="navs">
+                    <div class="navs-item">
+                        <ul class="navs-item-list">
+                            <li><a href="#">重点旅客预约</a></li>
+                            <li><a href="#">便民托运</a></li>
+                            <li><a href="#">约车服务</a></li>
+                            <li><a href="#">车站引导</a></li>
+                            <li><a href="#">动车组介绍</a></li>
+                            <li end><a href="#">定制接送</a></li>
+                            <li><a href="#">站车风采</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#">商旅服务<i class="dropdown-icon"></i></a>
+                <div class="navs">
+                    <div class="navs-item">
+                        <ul class="navs-item-list">
+                            <li><a href="#">餐饮•特产</a></li>
+                            <li><a href="#">旅游</a></li>
+                            <li end><a href="#">保险</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#">出行指南<i class="dropdown-icon"></i></a>
+                <div class="navs">
+                    <div class="navs-item">
+                        <h3>常见问题</h3>
+                        <ul class="navs-item-list">
+                            <li><a href="#">车票</a></li>
+                            <li end><a href="#">购票</a></li>
+                            <li><a href="#">改签、变更到站</a></li>
+                            <li end><a href="#">退票</a></li>
+                            <li><a href="#" class="navs-more">更多>></a></li>
+                        </ul>
+                    </div>
+                    <div class="navs-item">
+                        <h3>旅客须知</h3>
+                        <ul class="navs-item-list">
+                            <li><a href="#">铁路电子客票</a></li>
+                            <li end><a href="#">身份核验</a></li>
+                            <li><a href="#" class="navs-more">更多>></a></li>
+                        </ul>
+                    </div>
+                    <div class="navs-item">
+                        <h3>相关章程</h3>
+                        <ul class="navs-item-list">
+                            <li><a href="#">铁路互联网售票暂行办法</a></li>
+                            <li end><a href="#">铁路旅客运输规程</a></li>
+                            <li><a href="#">铁路进站乘车禁止和限制携带品公告</a></li>
+                            <li end><a href="#">广深港高速铁路跨境旅客运输组织规则</a></li>
+                            <li><a href="#" class="navs-more">更多>></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#">信息查询<i class="dropdown-icon"></i></a>
+                <div class="navs">
+                    <div class="navs-item">
+                        <h3>常用查询</h3>
+                        <ul class="navs-item-list">
+                            <li><a href="#">正晚点</a></li>
+                            <li><a href="#">时刻表</a></li>
+                            <li><a href="#">公布票价</a></li>
+                            <li><a href="#">检票口</a></li>
+                            <li><a href="#">起售时间</a></li>
+                            <li end><a href="#">天气</a></li>
+                            <li><a href="#">交通查询</a></li>
+                            <li><a href="#">代售点</a></li>
+                            <li><a href="#">客服电话</a></li>
+                            <li><a href="#">列车状态</a></li>
+                            <li><a href="#">最新发布</a></li>
+                            <li end><a href="#">信用信息</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="banner">
+        <div class="banner-slide">
+            <ul class="banner-slide-img">
+                <li style='background-image: url("https://www.12306.cn/index/images/pic/banner20201223.jpg")'></li>
+                <li style='background-image: url("https://www.12306.cn/index/images/pic/banner20200707.jpg");'></li>
+                <li style='background-image: url("https://www.12306.cn/index/images/pic/banner0619.jpg");'></li>
+                <li style='background-image: url("https://www.12306.cn/index/images/pic/banner26.jpg");'></li>
+                <li style='background-image: url("https://www.12306.cn/index/images/pic/banner10.jpg");'></li>
+                <li style='background-image: url("https://www.12306.cn/index/images/pic/banner12.jpg");'></li>
+                <li style='background-image: url("https://www.12306.cn/index/images/pic/banner20201223.jpg")'></li>
+
+            </ul>
+            <ul class="banner-slide-dot">
+                <li class="on">1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+            </ul>
+        </div>
+        <div class="banner-search-wrapper page-wrapper">
+            <div class="banner-search-box ">
+                <ul class="banner-search-side">
+                    <li><a href="#" class="active" data-box=".banner-search-ticket"> <i class="bi bi-truck-front"></i> 车票</a></li>
+                    <li><a href="#" data-box=".banner-search-normal"> <i class="bi bi-search"></i> 常用查询</a></li>
+                    <li><a href="#" data-box=".banner-search-eat"><i class="bi bi-box"></i> 订餐</a></li>
+                </ul>
+                <div class="banner-search-main">
+                    <!-- 🚉车票 -->
+                    <div class="banner-search-ticket active">
+                        <ul class="banner-search-tab ticket">
+                            <li><a href="#" class="active" data-box=".banner-search-tabitem.ticket1">➡️单程</a></li>
+                            <li><a href="#" data-box=".banner-search-tabitem.ticket2">🔁往返</a></li>
+                            <li><a href="#" data-box=".banner-search-tabitem.ticket3">🔀中转换乘</a></li>
+                            <li><a href="#" data-box=".banner-search-tabitem.ticket4">↩️退改签</a></li>
+                        </ul>
+                        <div class="banner-search-tabwrapper">
+                            <!-- ➡️单程 -->
+                            <div class="banner-search-tabitem ticket1 active">
+                                <div class="search-form">
+                                    <div>
+                                        <label for="">出发地：</label>
+                                        <input type="text" name="" id="" placeholder="简拼/全拼/汉字">
+                                    </div>
+                                    <div>
+                                        <label for="">到达地：</label>
+                                        <input type="text" name="" id="" placeholder="简拼/全拼/汉字">
+                                    </div>
+                                    <div>
+                                        <label for="">出发日期：</label>
+                                        <input type="date" name="" id="" value="2022-09-03">
+                                    </div>
+                                    <div>
+                                        <label for="">&nbsp;</label>
+                                        <label style="width:auto">学生<input type="checkbox" name="ttype"></label>
+                                        <label style="width:auto">高铁/动车<input type="checkbox" name="ttype"></label>
+                                    </div>
+                                    <button class="search-button">查 &nbsp;&nbsp;询</button>
+                                </div>
+                            </div>
+                            <!-- 🔁往返 -->
+                            <div class="banner-search-tabitem ticket2">
+                                <div class="search-form">
+                                    <div>
+                                        <label for="">出发地：</label>
+                                        <input type="text" name="" id="" placeholder="简拼/全拼/汉字">
+                                    </div>
+                                    <div>
+                                        <label for="">到达地：</label>
+                                        <input type="text" name="" id="" placeholder="简拼/全拼/汉字">
+                                    </div>
+                                    <div>
+                                        <label for="">出发日期：</label>
+                                        <input type="date" name="" id="" value="2022-09-03">
+                                    </div>
+                                    <div>
+                                        <label for="">返程日期：</label>
+                                        <input type="date" name="" id="" value="2022-09-03">
+                                    </div>
+                                    <div>
+                                        <label for="">&nbsp;</label>
+                                        <label style="width:max-content">学生<input type="checkbox" name="ttype"></label>
+                                        <label style="width:max-content">高铁/动车<input type="checkbox"
+                                                name="ttype"></label>
+                                    </div>
+                                    <button class="search-button">查 &nbsp;&nbsp;询</button>
+                                </div>
+                            </div>
+                            <!-- 🔀中转换乘 -->
+                            <div class="banner-search-tabitem ticket3">
+                                <div class="search-form">
+                                    <div>
+                                        <label for="">出发地：</label>
+                                        <input type="text" name="" id="" placeholder="简拼/全拼/汉字">
+                                    </div>
+                                    <div>
+                                        <label for="">到达地：</label>
+                                        <input type="text" name="" id="" placeholder="简拼/全拼/汉字">
+                                    </div>
+                                    <div>
+                                        <label for="">乘车日期：</label>
+                                        <input type="date" name="" id="" value="2022-09-03">
+                                    </div>
+                                    <div class="search-form-rcbox">
+                                        <label for="">&nbsp;</label>
+                                        <label style="width:max-content">学生<input type="checkbox" name="ttype"></label>
+                                    </div>
+                                    <button class="search-button">查 &nbsp;&nbsp;询</button>
+                                </div>
+                            </div>
+                            <!-- ↩️退改签 -->
+                            <div class="banner-search-tabitem ticket4">
+                                <div class="search-form">
+                                    <div>
+                                        <label for="">查询类型：</label>
+                                        <label style="width: auto;"><input type="radio" name="ttype">订票日期</label>
+                                        <label style="width: auto;"><input type="radio" name="ttype">乘车日期</label>
+                                    </div>
+                                    <div>
+                                        <label for="">出发日期：</label>
+                                        <input type="date" name="" id="" value="2022-09-03">
+                                    </div>
+                                    <div>
+                                        <label for="">结束日期：</label>
+                                        <input type="date" name="" id="" value="2022-09-03">
+                                    </div>
+                                    <div>
+                                        <label for="">关键字：</label>
+                                        <input type="text" name="" id="" placeholder="简拼/全拼/汉字">
+                                    </div>
+                                    <button class="search-button" style="margin-top: 20px;">查 &nbsp;&nbsp;询</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 🔎常用查询 -->
+                    <div class="banner-search-normal">
+                        <ul class="banner-search-tab normal">
+                            <li><a href="#" class="active" data-box=".banner-search-tabitem.normal1">正晚点</a></li>
+                            <li><a href="#" data-box=".banner-search-tabitem.normal2">检票口</a></li>
+                            <li><a href="#" data-box=".banner-search-tabitem.normal3">起售时间</a></li>
+                            <li><a href="#" data-box=".banner-search-tabitem.normal4">天气查询</a></li>
+                        </ul>
+                        <div class="banner-search-tabwrapper">
+                            <!-- 正晚点 -->
+                            <div class="banner-search-tabitem normal1 active">
+                                <div class="search-form-grid">
+                                    <label for="">查询类型：</label>
+                                    <div style="text-align: left;">
+                                        <label style="width:auto"><input type="radio" name="ttype" checked>到达站</label>
+                                        <label style="width:auto"><input type="radio" name="ttype">出发站</label>
+                                    </div>
+
+                                    <label for="">车站：</label>
+                                    <input type="text" name="" id="" placeholder="简拼/全拼/汉字">
+
+                                    <label for="">车次：</label>
+                                    <input type="text" name="" id="" placeholder="请输入车次">
+
+                                    <button class="search-button" style="grid-column: 1/3;">查 &nbsp;&nbsp;询</button>
+                                </div>
+                            </div>
+
+                            <!-- 检票口 -->
+                            <div class="banner-search-tabitem normal2">
+                                <div class="search-form-grid">
+                                    <label for="">乘车日期：</label>
+                                    <input type="date" name="" id="" value="2022-09-03" required>
+
+                                    <label required for="">车次：</label>
+                                    <input type="text" name="" id="" placeholder="请输入车次" required>
+
+                                    <label for="">车站：</label>
+                                    <input type="text" name="" id="" placeholder="请选择车站" required>
+
+                                    <button class="search-button" style="grid-column: 1/3;">查 &nbsp;&nbsp;询</button>
+                                </div>
+                            </div>
+
+                            <!-- 起售时间 -->
+                            <div class="banner-search-tabitem normal3">
+                                <div class="search-form-grid">
+                                    <label for="">起售日期：</label>
+                                    <input type="date" name="" id="" value="2022-09-03" required>
+
+                                    <label for="">起售车站：</label>
+                                    <input type="text" name="" id="" placeholder="请选择车站" required>
+
+                                    <button class="search-button" style="grid-column: 1/3;">查 &nbsp;&nbsp;询</button>
+                                </div>
+                            </div>
+
+                            <!-- 天气查询 -->
+                            <div class="banner-search-tabitem normal4">
+                                <div class="search-form-grid">
+                                    <label for="">目的地：</label>
+                                    <input type="text" name="" id="" placeholder="请选择车站" required>
+
+                                    <button class="search-button" style="grid-column: 1/3;">查 &nbsp;&nbsp;询</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 🍽️订餐 -->
+                    <div class="banner-search-eat">
+                        <ul class="banner-search-tab eat">
+                            <li><a href="#" class="active" data-box=".banner-search-tabitem.eat1">预定</a></li>
+                            <li><a href="#" data-box=".banner-search-tabitem.eat2">餐饮订单</a></li>
+                        </ul>
+                        <div class="banner-search-tabwrapper">
+                            <div class="banner-search-tabitem eat1 active">
+                                <div class="search-form-flex">
+                                    <label for="">出发日期：</label>
+                                    <input type="date" name="" id="" value="2022-09-03">
+                                    <label for="">出发车次：</label>
+                                    <input type="text" name="" id="" placeholder="简拼/全拼/汉字">
+                                </div>
+                                <button class="search-button search-form-rowgap">查 &nbsp;&nbsp;询</button>
+                            </div>
+                            <div class="banner-search-tabitem eat2">
+                                <img width="150px" style="margin-top: 40px;"
+                                    src="https://img.puchedu.cn/uploads/3/253/2127851150/1610799112.jpg" alt="">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="feature page-wrapper">
+        <ul class="feature-service-list clearafter">
+            <li><a href="#">
+                    <div>👥</div>
+                    <div>重点旅客预约</div>
+                </a></li>
+            <li><a href="#">
+                    <div>🗂️</div>
+                    <div>遗失物品查找</div>
+                </a></li>
+            <li><a href="#">
+                    <div>🚕</div>
+                    <div>约车服务</div>
+                </a></li>
+            <li><a href="#">
+                    <div>🚚</div>
+                    <div>便民托运</div>
+                </a></li>
+            <li><a href="#">
+                    <div>🪧</div>
+                    <div>车站引导</div>
+                </a></li>
+            <li><a href="#">
+                    <div>🏛️</div>
+                    <div>站车风采</div>
+                </a></li>
+            <li><a href="#">
+                    <div>☎️</div>
+                    <div>用户反馈</div>
+                </a></li>
+
+        </ul>
+        <ul class="feature-service-imgs claearbefore">
+            <li><a href="#"><img src="res/abanner01.jpg" alt=""></a></li>
+            <li><a href="#"><img src="res/abanner02.jpg" alt=""></a></li>
+            <li><a href="#"><img src="res/abanner05.jpg" alt=""></a></li>
+            <li><a href="#"><img src="res/abanner06.jpg" alt=""></a></li>
+        </ul>
+    </div>
+
+    <div class="goods page-wrapper">
+        <div class="goods-head">
+            <h3> 铁路旅游 </h3>
+            <a href="#">更多></a>
+        </div>
+        <!-- 用JS来追加内容 -->
+        <div style="overflow: hiddle;">
+            <div class="load-box" style="height:492px;">
+                <img src="https://www.12306.cn/index/images/loading4.gif" alt=""
+                    style="margin-left:50%;margin-top: 150px;">
+            </div>
+            <ul class="goods-list" style="display:none;">
+                <!-- <li>
+                    <a href="#">
+                        <img src="https://travel.12306.cn/imgs/resources/uploadfiles/images/243945e6-c45d-4870-9cf5-77e488068646_product_W572_H370.jpg"
+                            alt="">
+                        <div>
+                            <h3>“环西部火车游” 高品质旅游版专线列车</h3>
+                            <span>¥</span><span>2560</span>
+                        </div>
+                    </a>
+                </li> -->
+
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- 新闻 -->
+    <div class="page-wrapper">
+        <div class="news ">
+            <ul class="news-tabhead">
+                <li><a class="active" href="javascript:void()" data-box=".news-tabitem.item1">最新发布</a></li>
+                <li><a href="javascript:void()" data-box=".news-tabitem.item2">常见问题</a></li>
+                <li><a href="javascript:void()" data-box=".news-tabitem.item3">信用信息</a></li>
+            </ul>
+            <div class="news-tabitems">
+                <!-- 最新发布 -->
+                <div class="news-tabitem item1 active">
+                    <ul>
+                    </ul>
+                    <a href="javascript:void()" class="more-by-block">更多></a>
+                </div>
+                <!-- 常见问题 -->
+                <div class="news-tabitem item2">
+                    <ul>
+                    </ul>
+                    <a href="javascript:void()" class="more-by-block">更多></a>
+                </div>
+                <!-- 信用信息 -->
+                <div class="news-tabitem item3">
+                    <div class="news-credit-box">
+                        <dl class="news-credit-box-left">
+                            <dt>
+                                <span>✉️</span>
+                                <span>失信被执行人(自然人)公示</span>
+                            </dt>
+                            <div>
+                                <img src="res/empty.png" alt="" style="margin: 10px;">
+                                <p style="color:#0005;">暂无公示数据</p>
+                            </div>
+                            <dd>
+                                <a href="javascript:void()" class="more-by-block">更多></a>
+                            </dd>
+                        </dl>
+                        <dl class="news-credit-box-right">
+                            <dt>
+                                <span>🏛️</span>
+                                <span>失信已执行人(自然人)公布</span>
+                            </dt>
+                            <div class="news-credit-list">
+                                <dd><span>李听</span><span>410403********1019</span></dd>
+                                <dd><span>李听</span><span>410403********1019</span></dd>
+                                <dd><span>李听</span><span>410403********1019</span></dd>
+                                <dd><span>李听</span><span>410403********1019</span></dd>
+                            </div>
+                            <dd>
+                                <a href="javascript:void()" class="more-by-block">更多></a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 底部 footer -->
+    <div class="footer content-table">
+        <div class="footer-link page-wrapper ">
+            <div class="foot-link-left">
+                <h2>友情链接</h2>
+                <ul class="content-table">
+                    <li><a href="#"><img src="res/link05.png" alt=""></a></li>
+                    <li><a href="#"><img src="res/link04.png" alt=""></a></li>
+                    <li><a href="#"><img src="res/link03.png" alt=""></a></li>
+                    <li><a href="#"><img src="res/link02.png" alt=""></a></li>
+                </ul>
+            </div>
+            <ul class="foot-link-right">
+                <li>
+                    <h2>中国铁路官方微信</h2><img src="res/zgtlwb.png" alt="">
+                </li>
+                <li>
+                    <h2>中国铁路官方微博</h2><img src="res/zgtlwb.png" alt="">
+                </li>
+                <li>
+                    <h2>12306 公众号</h2><img src="res/public.png" alt="">
+                </li>
+                <li>
+                    <h2>铁路12306</h2><img src="res/download.png" alt="">
+                    <div class="link-code">
+                        官方APP下载，目前铁路未授权其他网站或APP开展类似服务内容，敬请广大用户注意。
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class=" claearbefore"></div>
+        <div class="footer-text">
+            <p>
+                <span>版权所有©2008-2022</span>
+                <span>中国铁道科学研究院集团有限公司</span>
+                <span>技术支持：铁旅科技有限公司</span>
+            </p>
+            <p>
+                <span>
+                    <img src="https://www.12306.cn/index/images/gongan.png" alt="" style="width: 13px;">
+                    <a href="#">京公网安备 11010802038392号</a>
+                </span>
+                <span>|</span>
+                <span>京ICP备05020493号-4</span>
+                <span>|</span>
+                <span>ICP证：京B2-20202537</span>
+            </p>
+            <img class="service-pic" src="https://www.12306.cn/index/images/footer-slh.jpg" alt="">
+        </div>
+    </div>
+
+    <!-- 右侧悬浮按钮 -->
+    <div class="fixed-button-box">
+        <ul>
+            <li><a href="#"><span>📢</span>最新发布</a></li>
+            <li><a href="#"><span>📞</span>联系客服</a></li>
+            <li class="fixed-button-code"><a href="#"><span>🔗</span>APP下载</a>
+                <div class="fixed-button-code-tip">
+                    <h2>铁路12306</h2><img src="res/download.png" alt="">
+                    <div class="link-code">
+                        官方APP下载，目前铁路未授权其他网站或APP开展类似服务内容，敬请广大用户注意。
+                    </div>
+                </div>
+            </li>
+            <li onclick="closeFixedButton()"><a href="javascript:void(0);"><span>❌</span>关闭</a></li>
+        </ul>
+    </div>
+
+
+</body>
+
+
+<script>
+    //#region 轮播，需求：自动轮播+点击切换+切换动画
+    //基本原理：① float+超宽容器，把所有图片排成一长横排，② 然后通过position的left来实现轮播定位
+    const slideDotParent = document.querySelector(".banner-slide-dot");
+    const slideImgParent = document.querySelector(".banner-slide-img");
+    let timer;
+    let slideIndex = 1;
+    const slideMax = 6;
+    const slideTotal = 7; //补一个（复制的第一个），实现自动轮播时的完美循环
+
+    //监测窗口大小变化，初始化轮播图的大小
+    window.addEventListener("resize", debounce(iniitalSildeImg,500));
+    function iniitalSildeImg() {
+        slideImgParent.style.width = window.innerWidth * slideTotal + 'px';
+        for (const ele of slideImgParent.children) {
+            ele.style.width = window.innerWidth + 'px';
+        }
+        console.log(++num);
+    }
+    iniitalSildeImg();
+
+    //轮播圆点按钮事件
+    slideDotParent.addEventListener("click", function (e) {
+        if (e.target.tagName != "LI")
+            return;
+        slideIndex = parseInt(e.target.innerText);
+        showSlide();
+    });
+
+    //鼠标移入、移除时，停止、启动自动轮播
+    document.querySelector(".banner-slide").addEventListener("mouseover", function () {
+        window.clearInterval(timer);
+    });
+    document.querySelector(".banner-slide").addEventListener("mouseout", startTimer);
+    function startTimer() {
+        timer = setInterval(() => {
+            slideIndex += 1;
+            showSlide();
+        }, 3000);
+    }
+
+    //切换显示轮播图
+    function showSlide() {
+        //图片
+        slideImgParent.style.left = `-${window.innerWidth * (slideIndex - 1)}px`;
+        slideImgParent.style.transition = '1s';
+        if (slideIndex == slideTotal) { //最后一个的时候
+            slideIndex = 1;
+            //设置1s后悄悄把定位恢复到第一个图片位置
+            setTimeout(() => {
+                slideImgParent.style.transition = '';
+                slideImgParent.style.left = `-${window.innerWidth * (slideIndex - 1)}px`;
+            }, 1000);
+        }
+        //圆点
+        for (const ele of slideDotParent.children) {
+            ele.classList.remove("on");
+        }
+        slideDotParent.children[slideIndex - 1].classList.add("on");
+    }
+    showSlide(); //调用一次
+    //启动自动轮播
+    startTimer();
+    //#endregion
+
+    //搜索框里的各种切换
+    const tabArray = [".banner-search-side", ".banner-search-tab.ticket", ".banner-search-tab.normal",
+        ".banner-search-tab.eat", ".news-tabhead"];
+    //root>li>A[data-box='']
+    for (const css of tabArray) {
+        document.querySelector(css)?.addEventListener("click", function (e) {
+            if (e.target.tagName != "A")
+                return;
+            //切换按钮
+            for (const element of e.target.parentElement.parentElement.children) {
+                element.firstElementChild.classList.remove("active");
+            }
+            e.target.classList.add("active");
+            console.log(e.target.innerText)
+            //切换对应内容框，a标签的自定义属性 data-box="要求切换的容器"，通过其父容器遍历
+            const box = document.querySelector(e.target.dataset.box);
+            for (const ele of box?.parentElement.children) {
+                ele.classList.remove("active");
+            }
+            box.classList.add("active");
+            e.stopPropagation();
+        })
+    }
+
+    //加载旅游商品
+    function bindGoods() {
+        const goods = [{
+            img: "https://travel.12306.cn/imgs/resources/uploadfiles/images/243945e6-c45d-4870-9cf5-77e488068646_product_W572_H370.jpg",
+            h3: "“环西部火车游” 高品质旅游版专线列车", price: 2560
+        }, {
+            img: "https://travel.12306.cn/imgs/resources/uploadfiles/images/fcd7173f-7651-46e7-a126-bdc199e1f6f7_product_W572_H370.jpg",
+            h3: "“环西部火车游” 陇上江南·行摄山>水陇南三日游", price: 930
+        }, {
+            img: "https://travel.12306.cn/imgs/resources/uploadfiles/images/b0c76b21-531b-4af4-a607-cf5672c72ded_product_W572_H370.jpg",
+            h3: "“环西部火车游”华夏寻根·人文始祖天水两日游", price: 980
+        }, {
+            img: "https://travel.12306.cn/imgs/resources/uploadfiles/images/8b36f9a7-f780-4e71-b719-9300109a9ff2_product_W572_H370.jpg",
+            h3: "“环西部火车游”精品旅游线路", price: 3380
+        }, {
+            img: "https://travel.12306.cn/imgs/resources/uploadfiles/images/1716878f-79a2-4db1-af8c-b9c2039f0b3c_product_W572_H370.jpg",
+            h3: "“环西部火车游”美丽甘南三日游", price: 880
+        }, {
+            img: "https://travel.12306.cn/imgs/resources/uploadfiles/images/6d77d0ea-53d0-4518-b7e9-e53795b4920c_product_W572_H370.jpg",
+            h3: "“环西部火车游” 青海湖、茶卡2日>游", price: 880
+        }, {
+            img: "https://travel.12306.cn/imgs/resources/uploadfiles/images/c7c03732-3c86-4308-aea7-df747d4999e8_product_W572_H370.jpg",
+            h3: "“环西部火车游”嘉敦5日游", price: 2260
+        }, {
+            img: "https://travel.12306.cn/imgs/resources/uploadfiles/images/d9ae79de-2f3f-4e9f-ad6e-bdc291dda92a_product_W572_H370.jpg",
+            h3: "“环西部火车游” 敦煌一地三日游", price: 1380
+        }];
+        let str = "";
+        goods.forEach(item => {
+            str += `<li><a href="#"><img src="${item.img}" alt=""><div><h3>${item.h3}</h3><span>¥</span><span>${item.price}</span></div></a></li>`;
+        })
+        document.querySelector(".goods-list").style.display = 'grid';
+        document.querySelector(".goods-list").insertAdjacentHTML("afterbegin", str);
+        //显示内容
+        const loadbox = document.querySelector(".load-box");
+        loadbox.style.display = 'none';
+    }
+    bindGoods.delay(1000)();
+
+    //新闻
+    function bindNews() {
+        //最新news
+        let nnews = [
+            { title: "铁路旅客禁止、限制携带和托运物品目录", date: "2022-06-17" },
+            { title: "公 告", date: "2022-05-31" },
+            { title: "公 告", date: "2022-02-25" },
+            { title: "候补购票操作说明", date: "2022-02-07" },
+            { title: "公 告", date: "2022-01-04" },
+            { title: "关于调整互联网、电话订票起售时间的公", date: "告2022-09-03" },
+            { title: "中国铁路上海局集团有限公司关于2022年9月3日-2022年9月13日增开部分旅客列车的公告", date: "2022-09-02" },
+            { title: "中国铁路呼和浩特局集团有限公司关于2022年9月1日至9月28日部分旅客列车停运、加开的公告", date: "2022-09-01" },
+            { title: "中国铁路上海局集团有限公司关于2022年9月2日-2022年9月28日增开部分旅客列车的公告", date: "2022-09-01" },
+            { title: "中国铁路上海局集团有限公司关于2022年9月12日增开部分旅客列车的公告", date: "2022-09-01" },
+        ]
+        let thtml = "";
+        nnews.forEach(item => {
+            thtml += `<li><a href="javascript:void()" title="${item.title}">${item.title}</a><span>${item.date}</span></li>`;
+        });
+        document.querySelector(".news-tabitem.item1 ul").insertAdjacentHTML("afterbegin", thtml);
+        //常见问题
+        nnews = [
+            { title: "实名制车票", },
+            { title: "售票窗口购票", },
+            { title: "互联网购票", },
+            { title: "互联网改签、变更到站", },
+            { title: "互联网退票", },
+            { title: "随身携带品", },
+            { title: "进出站", },
+            { title: "丢失购票时使用的有效身份证件", },
+            { title: "使用居民身份证直接检票乘车", },
+            { title: "广深港跨境列车", },
+        ]
+        thtml = "";
+        nnews.forEach(item => {
+            thtml += `<li><a href="javascript:void()" title="${item.title}">${item.title}</a></li>`;
+        });
+        document.querySelector(".news-tabitem.item2 ul").insertAdjacentHTML("afterbegin", thtml);
+    }
+    bindNews();
+
+    //侧边栏按钮
+    function closeFixedButton() {
+        document.querySelector(".fixed-button-box").style.display = 'none';
+    }
+    const btnTop = document.querySelector(".page-top-button");
+    window.addEventListener("scroll", Fout.throttle(500))
+    function Fout() {
+        console.log(++num)
+    }
+    var num = 0
+
+
+
+    
+    // f1 = console.log.throttle(300);
+    // f1 = throttleAfter(console.log,300);
+    // f1 = throttleBefore(console.log,300);
+    // f1 = debounce(console.log,300);
+    f1("1");
+    f1("2");
+    f1("3");
+    setTimeout(() => {
+        f1("4");
+        f1("5");
+        f1("6");
+    }, 400);
+    setTimeout(() => {
+        f1("7");
+        f1("8");
+        f1("9");
+    }, 500);
+
+</script>
+
+</html>

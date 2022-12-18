@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迅雷首页</title>
+    <link rel="icon" href="res/favicon.ico">
+    <link rel="stylesheet" href="xunlei.css">
+</head>
+
+<body>
+    <div class="page">
+        <div class="nav" >
+            <div class="nav-wrap page-center">
+                <a href="#" class="logo">
+                    <img src="res/xl-logo2x.png" alt="logo">
+                </a>
+                <ul>
+                    <li class="active"><a href="#">首页</a></li>
+                    <li><a href="#">产品中心</a></li>
+                    <li><a href="#">区块链</a>
+                        <div class="nav-list">
+                            <ul>
+                                <li><a href="#">王新云</a></li>
+                                <li><a href="#">迅雷链</a></li>
+                                <li><a href="#">星域云</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="#">开放能力</a></li>
+                    <li><a href="#">关于我们</a>
+                        <div class="nav-list">
+                            <ul>
+                                <li><a href="#">公司简介</a></li>
+                                <li><a href="#">企业价值观</a></li>
+                                <li><a href="#">发展历程</a></li>
+                                <li><a href="#">公司荣誉</a></li>
+                                <li><a href="#">管理团队</a></li>
+                                <li><a href="#">新闻中心</a></li>
+                                <li><a href="#">联系我们</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="#">投资者关系</a></li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="page1 page-center">
+
+            <div class="p1-banner-list">
+                <div class="p1-banner-line">
+                    <span class="c1"></span>
+                    <span class="c2"></span>
+                </div>
+                <div class="p1-banner-content">
+                    <img src="res/xl-logo2x.png" alt="logo">
+                    <h2>迅雷11</h2>
+                    <p>更快！但不至于快！</p>
+                    <button>立即下载</button>
+                </div>
+            </div>
+            <ul class="p1-banner-nav">
+                <li>迅雷</li>
+                <li>播放器</li>
+                <li>移动端</li>
+            </ul>
+        </div>
+
+
+
+        <div class="p2-product">
+            <p>迅雷</p>
+        </div>
+
+
+    </div>
+</body>
+
+<script>
+    document.querySelector(".nav-wrap>ul").addEventListener("click", (e) => {
+        if (e.target.tagName != 'A')
+            return;
+        const arra = document.querySelectorAll(".nav-wrap>ul>li");
+        arra.forEach(ele => {
+            ele.classList.remove("active");
+        })
+        e.target.closest("li").classList.add("active");
+    });
+
+    document.addEventListener("scroll", (e) => {
+        const nav = document.querySelector(".nav");
+        if (window.scrollY > nav.clientHeight) {
+            document.querySelector(".nav").style.backgroundColor = 'rgba(0,0,0,0.5)';
+        }
+        else
+            document.querySelector(".nav").style.backgroundColor = "";
+    });
+
+</script>
+
+</html>

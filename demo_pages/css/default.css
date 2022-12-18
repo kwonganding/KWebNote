@@ -1,0 +1,48 @@
+body {
+    width: 90%;
+    margin: 0 5%;
+}
+
+hr {
+    margin: 32px 5px;
+}
+
+h1:not(:empty) {
+    background-color: lightblue;
+    text-indent: 0.5em;
+    padding: 5px 0;
+    border-radius: 3px;
+}
+
+h1:not(:empty)::before {
+    content: "⌈";
+    vertical-align: 4px;
+    margin: 0 5px;
+}
+
+h1:not(:empty)::after {
+    content: "⌋";
+    vertical-align: -4px;
+    margin: 0 5px;
+}
+
+/* 通用选择器，针对所有标签 */
+* {
+    /* font-size: 15px; */
+    font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", Heiti, "黑体", SimSun, "宋体", sans-serif;
+}
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+    /* margin: 0px; */
+    /* padding: 0px; */
+}
+
+/* 平滑滚动 */
+@media screen and (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
