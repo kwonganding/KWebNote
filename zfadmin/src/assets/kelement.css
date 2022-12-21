@@ -1,0 +1,105 @@
+/* ///////////////  element 样式   /////////////// */
+/* element默认size情况下的32px样式修改 */
+
+/* el-button：高32px */
+.el-button {
+    border-radius: 2px;
+}
+
+.el-button--medium.is-circle {
+    padding: 8px;
+}
+
+.el-button--medium.is-round,
+.el-button--medium {
+    padding: 8px 16px;
+}
+
+.el-button--text {
+    padding: 8px 4px;
+}
+
+/* radio */
+.el-radio-button--medium .el-radio-button__inner {
+    padding: 8px 16px;
+}
+
+/* el-link */
+.el-link [class*=el-icon-]+span {
+    margin-left: 2px;
+}
+
+/* el-input：高32px */
+.el-input__inner {
+    border-radius: 2px;
+}
+
+.el-input--medium .el-input__icon {
+    line-height: 32px;
+}
+
+.el-input--medium .el-input__inner {
+    height: 32px;
+    line-height: 32px;
+}
+
+.el-input-group__append,
+.el-input-group__prepend {
+    border-radius: 2px;
+}
+
+/* input-number */
+.el-input-number--medium {
+    line-height: 30px;
+}
+
+.el-input-number.is-controls-right[class*=medium] [class*=decrease],
+.el-input-number.is-controls-right[class*=medium] [class*=increase] {
+    line-height: 15px;
+}
+/* el-dialog */
+.el-dialog__header {
+    padding: 12px 15px;
+    background-color: #0001;
+}
+
+.el-dialog__headerbtn {
+    top: 15px;
+}
+.el-dialog__body{
+    padding: 20px 20px 10px;
+}
+/* el-table */
+.el-table--medium .el-table__cell {
+    padding: 8px 0;
+}
+.el-table th.el-table__cell{
+    background-color: #01010106;
+}
+
+/* el-drawer */
+.el-drawer__header{
+    background-color: #0001;
+    margin: 0px;
+    padding: 12px 15px;
+}
+.el-drawer__body{
+    padding: 10px;
+}
+
+/* ///////////////备选 */
+.el-radio--medium.is-bordered {
+    padding: 8px 16px 0 8px;
+    border-radius: 2px;
+    height: 32px;
+}
+
+.el-checkbox {
+    margin-right: 20px;
+}
+
+.el-checkbox.is-bordered.el-checkbox--medium {
+    padding: 6px 12px 0 6px;
+    border-radius: 2px;
+    height: 28px;
+}

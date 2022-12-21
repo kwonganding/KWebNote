@@ -1,8 +1,8 @@
 .DS_Store
-/dist
-/zhif_admin/dist
 node_modules
-/zhif_admin/node_modules
+/dist
+
+
 # local env files
 .env.local
 .env.*.local
