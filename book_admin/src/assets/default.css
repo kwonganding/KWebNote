@@ -1,0 +1,15 @@
+/* 通用选择器，针对所有标签 */
+* {
+    font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", Heiti, "黑体", SimSun, "宋体", sans-serif;
+}
+html{    
+    font-size: 15px;
+}
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
