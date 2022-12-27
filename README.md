@@ -4,4 +4,4 @@
 
 * 📁study_notes ：web练习demo
 
-* 📁takeout_app：一个外面app应用demo
+* 📁bookadmin：图书后台管理系统，Vue+ElementUI+Express为主的小型前后台一体Demo。

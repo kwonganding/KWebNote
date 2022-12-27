@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
 import store from './store'
+import router from './router'
 import './plugins/element.js'
-import './assets/default.css'
+import './assets/global.css'
+import constants from './assets/constants'
 
 // 引入echarts
 import * as echarts from 'echarts';
@@ -23,6 +24,8 @@ axios.interceptors.request.use(function (cfg) {
   return cfg;
 })
 
+//注入全局资源
+Vue.prototype.$consts = constants;
 
 Vue.config.productionTip = false
 new Vue({

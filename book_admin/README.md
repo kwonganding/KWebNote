@@ -13,6 +13,10 @@ $ cnpm install echarts -S
 后台用Express+Sqlite3简单弄了一个，主要为配合前端提供一些简单的接口，实现的比较粗糙。
 * 后端框架用Express搭建的，在Node环境下运行
 ```
+$ cnpm install express --save
+
+$ node book_server.js
+服务器启动成功，地址：http://localhost:8081
 ```
 * 数据库用的Sqlite3，不用安装数据库，npm安装JS插件就能跑，数据库文件也就是一个db文件。数据库管理工具用的是“”，手动创建表和一些示例数据。
 ```
