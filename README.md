@@ -4,4 +4,4 @@
 
 * **📁 demo_pages** ：一些单独的页面demo
 
-* **📁 book_admin**：图书后台管理系统，`Vue2`+`ElementUI`+`Express`+`Sqlite3`搭建的前端（后）练习Demo
+* **📁 book_admin**：[图书后台管理系统](/book_admin/README.md)，`Vue2`+`ElementUI`+`Express`+`Sqlite3`搭建的前端（后）练习Demo

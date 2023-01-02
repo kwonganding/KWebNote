@@ -1,5 +1,5 @@
 /* ///////////////  element 样式   /////////////// */
-/* element默认size情况下的32px样式修改 */
+/* element中杯“medium”size下的32px样式修改 */
 
 /* el-button：高32px */
 .el-button {
@@ -57,6 +57,16 @@
 .el-input-number.is-controls-right[class*=medium] [class*=increase] {
     line-height: 15px;
 }
+
+/* el-card */
+.el-card__header {
+    padding: 10px 15px;
+}
+
+.el-card__body {
+    padding: 5px;
+}
+
 /* el-dialog */
 .el-dialog__header {
     padding: 10px 15px;
@@ -66,24 +76,28 @@
 .el-dialog__headerbtn {
     top: 15px;
 }
-.el-dialog__body{
+
+.el-dialog__body {
     padding: 20px 20px 10px;
 }
+
 /* el-table */
 .el-table--medium .el-table__cell {
     padding: 8px 0;
 }
-.el-table th.el-table__cell{
+
+.el-table th.el-table__cell {
     background-color: #01010106;
 }
 
 /* el-drawer */
-.el-drawer__header{
+.el-drawer__header {
     background-color: #0001;
     margin: 0px;
-    padding: 12px 15px;
+    padding: 10px 15px;
 }
-.el-drawer__body{
+
+.el-drawer__body {
     padding: 10px;
 }
 

@@ -30,6 +30,7 @@
       <el-card class="chart" shadow="hover" id="chart_order"></el-card>
       <el-card class="chart" shadow="hover" id="chart_user"></el-card>
     </div>
+    
   </div>
 </template>
 
@@ -53,14 +54,16 @@ function bindEchart(id, $echats, name, data, type) {
     // legend: { data: [name] }, //图例
     title: { show: true, text: name, x: 'center', y: 'top' },
     textStyle: { fontSize: 13 },
+    tooltip: { trigger: 'item' },
     xAxis: {
       type: "category",
-      data: data.map(s => s.name),
+      data: data.map(s => s.name),//获取x轴值到数组
+      axisTick: { alignWithLabel: true }, //x轴刻度线和名称对齐
     },
     yAxis: { type: 'value' },
     series: [{
       name: name,
-      data: data.map(s => s.value),
+      data: data.map(s => s.value),//获取y轴值到数组
       type: type,
       smooth: true,
       label: { show: true }

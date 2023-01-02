@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Element from 'element-ui'
+//css
 import 'element-ui/lib/theme-chalk/index.css'
-import '../assets/kelement.css'
-
-
+//自定义的element样式
+import './element.css'
 
 //Vue注册全部
 Vue.use(Element);
+//设置默认大小为中杯，默认尺寸实在太大了
+Vue.prototype.$ELEMENT = { size: 'medium' };
 
 //扩展一下messagbox的type方法:success/warning/info/error
 const types = ['success', 'warning', 'info', 'error'];
@@ -23,6 +25,3 @@ types.forEach(type => {
     }
 })
 
-
-//设置默认大小为中杯，默认尺寸实在太大了
-Vue.prototype.$ELEMENT = { size: 'medium' };

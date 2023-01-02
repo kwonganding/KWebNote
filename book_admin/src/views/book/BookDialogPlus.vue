@@ -6,9 +6,9 @@
         <i class="el-icon-edit"></i>
         {{dialogType}} -书籍信息
       </span>
-      <span style="float:right;margin-top:-6px">
-        <el-button @click="visible=false" icon="el-icon-circle-close">取消</el-button>
-        <el-button @click="save" type="success" icon="el-icon-success" :loading="saveLoading">保存</el-button>
+      <span style="float:right;margin-top:-5px">
+        <el-button @click="visible=false" icon="el-icon-circle-close" round>取消</el-button>
+        <el-button @click="save" type="success" icon="el-icon-success" :loading="saveLoading" round>保存</el-button>
       </span>
     </template>
 

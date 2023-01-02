@@ -1,6 +1,7 @@
 // 主框架页面：头部、导航，及内容页面的容器
 <template>
-  <el-container class="page">
+  <el-container style="height:100%">
+    <!-- 头部 -->
     <el-header height="50px">
       <el-row>
         <el-col :span="8">
@@ -24,7 +25,10 @@
         </el-col>
       </el-row>
     </el-header>
-    <el-container>
+
+    <!-- 中间区域：导航栏+主内容区域 -->
+    <el-container style="height: calc(100% - 80px);">
+      <!-- 左侧 -->
       <el-aside width="auto">
         <!-- 菜单 -->
         <el-menu router :collapse="!menuVisible" :default-active="$router.currentRoute.path">
@@ -35,17 +39,21 @@
           </el-menu-item>
         </el-menu>
       </el-aside>
-      <el-main>
+
+      <!-- 主内容区域 -->
+      <el-main class="main-wrapper">
         <!-- 面包屑 -->
         <el-breadcrumb separator="/">
           <el-breadcrumb-item v-for="r in $route.matched" :key="r.name">{{r.name}}</el-breadcrumb-item>
         </el-breadcrumb>
-        <!-- 内容的容器 -->
-        <el-card style="margin:15px 0 0 0;padding:10px;height: calc(100% - 30px);position:relative" shadow="never">
-          <router-view>11</router-view>
-        </el-card>
+        <!-- 页面内容的容器 -->
+        <div shadow="never" class="main view-scroll">
+          <router-view></router-view>
+        </div>
       </el-main>
     </el-container>
+
+    <!-- footer -->
     <el-footer height="30px">{{$consts.footer}}</el-footer>
   </el-container>
 </template>
@@ -80,26 +88,8 @@ export default {
 }
 </script>
 
-<style>
-.el-card__body {
-  padding: 0;
-}
-</style>
-<style scoped lang="less">
-.page {
-  height: 100%;
-}
-.el-menu {
-  text-align: left;
-  height: 100%;
-  &:not(.el-menu--collapse) {
-    width: 200px;
-  }
-}
-.el-menu-item.is-active {
-  font-weight: bold;
-}
 
+<style scoped lang="less">
 .el-header {
   background-color: #388bf8;
   line-height: 50px;
@@ -116,30 +106,57 @@ export default {
     font-size: 18px;
     letter-spacing: 0.1em;
   }
+  .header-userbox {
+    color: white;
+    float: right;
+    margin-right: 20px;
+    img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      vertical-align: middle;
+    }
+  }
 }
 .el-divider {
   margin: 5px;
   width: auto;
 }
-.header-userbox {
-  color: white;
-  float: right;
-  margin-right: 20px;
-  img {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    vertical-align: middle;
+
+.el-menu {
+  text-align: left;
+  height: 100%;
+  &:not(.el-menu--collapse) {
+    width: 200px;
   }
 }
+.el-menu-item.is-active {
+  font-weight: bold;
+}
+
+.main-wrapper {
+  padding: 10px;
+  display: flex;
+  flex-flow: column;
+  .el-breadcrumb {
+    height: 30px;
+    line-height: 30px;
+  }
+  .main {
+    margin: 5px 0 0 0;
+    border: 1px solid #EBEEF5;
+    padding: 5px;
+    height: 100%;
+    position: relative;
+    overflow: auto;
+  }
+}
+
 .el-footer {
   line-height: 30px;
   background-color: #e9eef3;
   text-align: center;
   font-size: 14px;
 }
-.el-main {
-  // background-color: #e9eef3;
-  padding: 10px;
-}
 </style>
+

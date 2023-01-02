@@ -2,8 +2,15 @@
 * {
     font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", Heiti, "黑体", SimSun, "宋体", sans-serif;
 }
-html{    
+
+html {
     font-size: 15px;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
 }
 
 *,
@@ -12,4 +19,36 @@ html{
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
+}
+
+
+/* view页面视图区域样式，主要目的是控制页面内容的滚动，让主页框架不会滚动 */
+.view-page {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+/* 容器内容 "view-scroll" ，滚动条样式 */
+.view-scroll {
+    max-height: 100%;
+    overflow: auto;
+}
+
+.view-scroll::-webkit-scrollbar {
+    /*滚动条整体部分，*/
+    width: 8px;
+    height: 8px;
+}
+
+/* .main-scroll::-webkit-scrollbar-track { */
+    /*滚动条的轨道（里面装有Thumb）*/
+    /* background: #eee; */
+    /* border-radius: 4px; */
+/* } */
+
+.view-scroll::-webkit-scrollbar-thumb {
+    /*滚动条里面可以拖动的那部分（位置5）*/
+    background: #ccc;
+    border-radius: 4px;
 }

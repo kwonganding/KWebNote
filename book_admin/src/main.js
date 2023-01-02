@@ -3,13 +3,19 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import './plugins/element.js'
-import './assets/global.css'
 import constants from './assets/constants'
+import dayjs from 'dayjs'
+//css
+import './assets/css/iconfont.css'
+import './assets/global.css'
 
 // 引入echarts
 import * as echarts from 'echarts';
 // 在Vue原型上挂载$echarts，在vue示例中this.$echarts
 Vue.prototype.$echarts = echarts;
+
+//引入dayjs
+Vue.prototype.$dayjs = dayjs;
 
 // 引入axios
 import axios from 'axios';

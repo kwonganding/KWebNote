@@ -18,6 +18,24 @@ let db = new sqlite3.Database('book_db.db');
 
 ///////////////////// 配置api ////////////////////////////
 
+//#region 文件上传
+
+
+// 安装一个中间件“express.static”实现静态文件代理，参数为资源地址。
+// 第一个参数为url路由，
+server.use('/file', express.static('./file'));
+
+
+server.post('/upload', (req, res) => {
+    const file = req.file;
+
+    console.log(file.path);
+    // 转换一下url地址
+    res.send({ status: 'OK', name: file.originalname, url: file.path });
+});
+
+//#endregion
+
 //登录：/login
 server.post('/login', (req, res) => {
     console.log(req.body);
@@ -125,7 +143,6 @@ server.get('/book/id', (req, res) => {
         res.send({ status: 'OK', data: rows ? rows[0] : null });
     })
 })
-
 
 //新增、修改
 server.post('/book/save', (req, res) => {

@@ -1,7 +1,7 @@
 <template>
   <div class="login-page">
     <el-card shadow="hover" class="login-box">
-      <h2>登 录</h2>
+      <h2>登录</h2>
       <p class="t2">欢迎进入图书后台管理系统</p>
 
       <el-form :model="user" ref="userForm" label-width="80px" :rules="rules">
@@ -117,10 +117,11 @@ export default {
   h2 {
     text-align: center;
     margin: 20px;
+    letter-spacing: 1em;
   }
   .t2 {
     text-align: center;
-    color: #9c8c8c;
+    color: #999;
     margin: 25px 0;
     font-size: 0.9em;
   }
