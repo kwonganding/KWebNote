@@ -30,20 +30,11 @@
       <el-card class="chart" shadow="hover" id="chart_order"></el-card>
       <el-card class="chart" shadow="hover" id="chart_user"></el-card>
     </div>
-    
   </div>
 </template>
 
 <script>
 
-//加载数据
-async function loadData(ajax, api) {
-  const res = await ajax.get(api);
-  if (res.data.status == 'OK')
-    return res.data.data;
-  else
-    this.$message.error(res.data.message);
-}
 // 加载echart图表
 function bindEchart(id, $echats, name, data, type) {
   if (!data)
@@ -82,9 +73,9 @@ export default {
     }
   },
   async created() {
-    this.baseInfo = await loadData(this.$axios, '/api/stats_base');
-    this.chartOrder = await loadData(this.$axios, '/api/stats_order');
-    this.chartUser = await loadData(this.$axios, '/api/stats_user');
+    this.$api.stats_base().then(res => this.baseInfo = res.data);
+    this.$api.stats_order().then(res => this.chartOrder = res.data);
+    this.$api.stats_user().then(res => this.chartUser = res.data);
   },
   watch: {
     chartOrder(v) {

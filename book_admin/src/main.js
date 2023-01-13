@@ -10,25 +10,18 @@ import './assets/css/iconfont.css'
 import './assets/global.css'
 
 // 引入echarts
-import * as echarts from 'echarts';
+// import * as echarts from '/js/echarts.min.js';
 // 在Vue原型上挂载$echarts，在vue示例中this.$echarts
-Vue.prototype.$echarts = echarts;
+Vue.prototype.$echarts = window.echarts;
 
 //引入dayjs
 Vue.prototype.$dayjs = dayjs;
 
-// 引入axios
-import axios from 'axios';
+// 引入axios封装的api
+import api from './api/api';
 // 挂载到vue上
-Vue.prototype.$axios = axios;
+Vue.prototype.$api = api;
 // 全局设置
-axios.defaults.baseURL = '';
-axios.interceptors.request.use(function (cfg) {
-  let token = store.state.user.token;
-  if (token)
-    cfg.headers['token'] = token;
-  return cfg;
-})
 
 //注入全局资源
 Vue.prototype.$consts = constants;
@@ -39,17 +32,33 @@ new Vue({
   store,
   render: h => h(App),
   created: function () {
-    //持久化store，避免刷新后的状态丢失
-    window.addEventListener("beforeunload", () => {
-      sessionStorage.setItem('vstore', JSON.stringify(this.$store.state));
-    });
-    try {
-      const vstore = sessionStorage.getItem('vstore');
-      if (vstore)
-        this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(vstore)));
-    }
-    catch (ex) {
-      console.log(ex)
-    }
+    SaveAndLoadStore();
+    LoadUserConfig();
   }
 }).$mount('#app')
+
+
+//保存或加载vuex的数据
+function SaveAndLoadStore() {
+  //持久化store，避免刷新后的状态丢失
+  window.addEventListener("beforeunload", () => {
+    sessionStorage.setItem('bookadmin-vstore', JSON.stringify(this.$store.state));
+  });
+  try {
+    const vstore = sessionStorage.getItem('bookadmin-vstore');
+    if (vstore)
+      store.replaceState(Object.assign({}, store.state, JSON.parse(vstore)));
+  }
+  catch (ex) {
+    console.log(ex)
+  }
+}
+//加载用户配置信息
+import { userConfig, themas } from '@/model/model'
+function LoadUserConfig() {
+  let vstr = localStorage.getItem('admin-userconfig');
+  if (vstr) {
+    Object.assign(userConfig, JSON.parse(vstr));
+    userConfig.thema = themas.filter(s => s.name == userConfig.thema.name)[0];
+  }
+}

@@ -14,7 +14,7 @@ const routes = [
   {
     path: '/',
     name: '主页',
-    component: () => import('../views/Main.vue'),
+    component: () => import('@/views/Main.vue'),
     redirect: '/home',
     children: [
       {
@@ -47,7 +47,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: '/bookadmin/',
+  base: process.env.BASE_URL,
   routes,
 })
 
@@ -57,7 +57,7 @@ router.beforeEach((to, from, next) => {
     return next();
   // 除开登录页面，其他页面都验证token，如果没有token则跳转到登录页面
   // token不能放到store中，刷新时会丢失。即时做了持久化，在反序列化前也不可用
-  const token = sessionStorage.getItem('token');
+  const token = sessionStorage.getItem('admin_token');
   if (!token)
     return next('/login');
   else

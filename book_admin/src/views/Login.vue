@@ -1,16 +1,16 @@
 <template>
   <div class="login-page">
     <el-card shadow="hover" class="login-box">
-      <h2>登录</h2>
+      <h2>登 录</h2>
       <p class="t2">欢迎进入图书后台管理系统</p>
 
       <el-form :model="user" ref="userForm" label-width="80px" :rules="rules">
         <!-- 校验规则“rules”里配置了必填，这里可以不用标记“required”了 -->
-        <el-form-item label="用户名：" prop="uname" required>
-          <el-input v-model="user.uname" prefix-icon="el-icon-user" placeholder="输入用户名" maxlength="30" clearable></el-input>
+        <el-form-item label="用户名：" prop="name" required>
+          <el-input v-model="user.name" prefix-icon="el-icon-user" placeholder="输入用户名" maxlength="30" clearable></el-input>
         </el-form-item>
-        <el-form-item label="密码：" prop="upwd">
-          <el-input v-model="user.upwd" maxlength="16" prefix-icon="el-icon-lock" show-password></el-input>
+        <el-form-item label="密码：" prop="pwd">
+          <el-input v-model="user.pwd" maxlength="16" prefix-icon="el-icon-lock" show-password></el-input>
         </el-form-item>
         <el-form-item>
           <el-checkbox label="记住用户名" v-model="remember"></el-checkbox>
@@ -21,7 +21,6 @@
           <el-button type="warning" @click="$refs.userForm.resetFields()" icon="el-icon-refresh-left">重置</el-button>
         </div>
       </el-form>
-
     </el-card>
     <!-- <div class="footer">{{constants.footer}}</div> -->
     <div class="footer">{{$consts.footer}}</div>
@@ -35,10 +34,10 @@ export default {
 
   data: function () {
     return {
-      user: { uname: '', upwd: '' },
+      user: { name: '', pwd: '' },
       rules: {
-        uname: [{ required: true, message: '用户名不能为空' }, { min: 3, max: 8, message: "长度应为3-8" }],
-        upwd: [{ required: true, message: '密码不能为空' }, { min: 3, max: 8, message: "长度应为3-8" }],
+        name: [{ required: true, message: '用户名不能为空' }, { min: 3, max: 8, message: "长度应为3-8" }],
+        pwd: [{ required: true, message: '密码不能为空' }, { min: 3, max: 8, message: "长度应为3-8" }],
       },
       loading: false,
       remember: false,
@@ -47,6 +46,12 @@ export default {
 
   methods: {
     login() {
+
+      this.$api.stats_base()
+        .then(data => console.log('data', data))
+        .catch(err => console.log('error', err))
+
+
       this.loading = true;
       this.$refs.userForm.validate((valid, mes) => {
         if (!valid) {
@@ -56,23 +61,22 @@ export default {
           return;
         }
         //调用后端api进行登录
-        this.$axios.post('/api/login', this.user).then(res => {
-          if (res.status == '200' && res.data.status == 'OK') {
-            this.$message.success(this.user.uname + ' 登录成功！');
-            //更新一些信息：
-            // vuex存储用户信息
-            this.$store.commit('setUser', { name: this.user.uname, token: res.data.token });
-            sessionStorage.setItem('token', res.data.token);
-            //记住登录用户名
-            localStorage.removeItem('login_name');
-            if (this.remember) {
-              localStorage.setItem('login_name', this.user.uname);
-            }
-            //跳转
-            this.$router.push('/home');
+        this.$api.login(this.user).then(res => {
+          this.$message.success(res.message)
+          //更新一些信息：
+          // vuex存储用户信息
+          this.$store.commit('setUser', { name: this.user.name, token: res.token });
+          sessionStorage.setItem('admin_token', res.token);
+          //记住登录用户名
+          localStorage.removeItem('admin_login_name');
+          if (this.remember) {
+            localStorage.setItem('admin_login_name', this.user.name);
           }
-          else
-            this.$message.error(res.data.message);
+          //跳转
+          this.$router.push('/home');
+        }).catch(err => {
+          this.$message.error(err);
+        }).finally(() => {
           this.loading = false;
         })
       })
@@ -80,10 +84,10 @@ export default {
   },
   created: function () {
     //记住用户名-加载
-    let uname = localStorage.getItem('login_name');
-    if (uname) {
+    let name = localStorage.getItem('admin_login_name');
+    if (name) {
       this.remember = true;
-      this.user.uname = uname;
+      this.user.name = name;
     }
   }
 }
@@ -102,7 +106,7 @@ export default {
 }
 .login-box {
   background-color: #fff;
-  width: 450px;
+  width: 480px;
   height: max-content;
   // 居中，垂直、水平
   margin: auto;
@@ -112,12 +116,12 @@ export default {
   top: 0;
   bottom: 0;
   border-radius: 8px;
-  padding: 0 20px;
+  padding: 0 40px;
 
   h2 {
     text-align: center;
+    font-size: 2em;
     margin: 20px;
-    letter-spacing: 1em;
   }
   .t2 {
     text-align: center;
@@ -134,7 +138,7 @@ export default {
   color: #fff;
   position: absolute;
   bottom: 10px;
-//   水平居中
+  //   水平居中
   left: 50%;
   transform: translateX(-50%);
 }

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../util/css/reset.css">
+  <link rel="stylesheet" href="../util/css/normalize.css">
+</head>
+
+<body>
+  <h1>H1111标题</h1>
+  <p class="ellipsis">内容1223333333333333333333333内容1223333333333333333333333333333333333333333内容1223333333333333333333333333333333333333333333333333333333333</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <a href="">ssss</a>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+  <p>内容1223</p>
+</body>
+<script>
+  window.addEventListener('resize', () => {
+    const w = document.documentElement.clientWidth;
+    //按照页面宽度750 = 根字体大小16px 的比例来设置
+    //设置边界值为10px——16px
+    //
+    let f = w / 750 * 16;
+
+    console.log(f);
+    document.documentElement.style.fontSize = f + 'px';
+  })
+  // 更完整的版本
+
+  let aa = {
+    name: 'ss',
+    get value() {
+      this.value = this.name + '1';
+      return this.value;
+    }
+
+  }
+</script>
+<style>
+  html {
+    font-size: 100px;
+  }
+
+
+  html {
+    font-size: 13.333333vw;
+  }
+
+  @media screen and (min-width:750px) {
+    html {
+      font-size: 100px;
+    }
+  }
+
+  body {
+    font-size: 16px;
+    max-width: 750px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+</style>
+
+</html>

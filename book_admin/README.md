@@ -60,7 +60,7 @@ db.run(sql, params, (result, err) => {
 
 ---
 
-## Project setup
+# Project setup
 ```
 npm install
 ```
@@ -78,3 +78,15 @@ npm run build
 ### Lints and fixes files
 ```
 npm run lint
+```
+
+---
+
+# 其他备注
+
+## 资源URL规则：
+
+* `/`   ：基于 `public` 根目录的**绝对路径**
+* `../` ：相对路径，上一级路径
+* `~`   ：指向模块 `node_modules` 中的资源
+* `@`   ：指向 `<projectRoot>/src` 的一个路径别名
