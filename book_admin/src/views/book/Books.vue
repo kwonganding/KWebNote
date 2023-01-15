@@ -102,6 +102,7 @@ function Book() {
 }
 
 export default {
+  name:'Books',
   components: {
     BookDetail, BookDialog, BookDialogPlus, Pagination
   },

@@ -8,42 +8,56 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/login',
-    name: '登录',
+    name: 'Login',
+    meta: { title: '登录' },
     component: () => import('../views/Login.vue')
   },
   {
     path: '/',
-    name: '主页',
+    name: 'Main',
+    meta: { title: '主页' },
     component: () => import('@/views/Main.vue'),
     redirect: '/home',
     children: [
       {
         path: '/home',
-        name: '首页',
-        meta: { icon: 'el-icon-s-home' },
+        name: 'Home',
+        meta: { title: '首页', icon: 'el-icon-s-home', affix: true },//affix固定在标签栏
         component: () => import('../views/Home.vue'),
       },
       {
         path: '/book',
-        name: '图书管理',
-        meta: { icon: 'el-icon-notebook-2' },
+        name: 'Books',
+        meta: { title: '图书管理', icon: 'el-icon-notebook-2' },
         component: () => import('../views/book/Books.vue'),
       },
       {
         path: '/book/add',
-        name: '新增书籍',
-        meta: { notshow: true }, //不显示在导航菜单汇总
+        meta: { title: '新增书籍', notshow: true }, //notshow不显示在导航菜单
         component: () => import('../views/book/BookEdit.vue'),
       },
       {
         path: '/book/update/:id',
-        name: '编辑书籍',
-        meta: { notshow: true }, //不显示在导航菜单汇总
+        meta: { title: '编辑书籍', notshow: true },
         component: () => import('../views/book/BookEdit.vue'),
-      }
+      },
+      {
+        path: '/test',
+        name: 'Test',
+        meta: { title: 'Test-View', icon: 'el-icon-video-camera' },
+        component: () => import('../views/Test.vue'),
+      },
+      {
+        path: '/dic',
+        name: 'DicList',
+        meta: { title: '字典管理', icon: 'el-icon-s-order' },
+        component: () => import('../views/dic/DicList.vue'),
+      },
     ]
   },
 ]
+
+// 创建路由
 
 const router = new VueRouter({
   mode: 'history',
@@ -65,7 +79,7 @@ router.beforeEach((to, from, next) => {
 })
 router.afterEach((to, from) => {
   //更新网页标题
-  document.title = constants.sysName + '-' + to.name;
+  document.title = constants.sysName + '-' + to.meta.title;
 })
 
 export default router

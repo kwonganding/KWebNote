@@ -23,6 +23,7 @@ const themas = [
   { name: "酱紫", backgroundColor: '#d0378d', color: '#FFF' },
   { name: "珍珠", backgroundColor: '#EEE', color: '#333' },
   { name: "玄青", backgroundColor: '#3D3B4F', color: '#EEE' },
+  { name: "葱青", backgroundColor: '#0EB83A', color: '#EEE' },
 ]
 
 // 用户配置

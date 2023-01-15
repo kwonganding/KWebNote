@@ -7,8 +7,10 @@
 
       <h2>📖{{$consts.sysName}}</h2>
 
-      <!-- 先空着 -->
-      <div style="flex:1"></div>
+      <!-- 标签工具栏 -->
+      <div style="flex:1;overflow:hidden">
+        <TabsBar ref="tabsBar"></TabsBar>
+      </div>
 
       <el-button type="text" icon="el-icon-setting" v-on:click="$refs.userConfig.show()" title="系统设置"></el-button>
 
@@ -36,7 +38,7 @@
           <el-menu-item v-for="item in menuItems" :index="item.path" :key="item.path">
             <i :class="item.meta.icon"></i>
             <!-- 名称用title插槽，折叠时才有效 -->
-            <span slot="title">{{item.name}}</span>
+            <span slot="title">{{item.meta.title}}</span>
           </el-menu-item>
         </el-menu>
       </el-aside>
@@ -45,13 +47,13 @@
       <el-main class="main-wrapper">
         <!-- 面包屑 -->
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item v-for="r in $route.matched" :key="r.name">{{r.name}}</el-breadcrumb-item>
+          <el-breadcrumb-item v-for="r in $route.matched" :key="r.name">{{r.meta.title}}</el-breadcrumb-item>
         </el-breadcrumb>
         <!-- 页面内容的容器 -->
         <div shadow="never" class="main view-scroll">
           <!-- 加了切换动画、保存页面状态 -->
           <transition :name="config.routerAnimation?'fade-transform':''" mode="out-in">
-            <keep-alive>
+            <keep-alive :include="cacheNames">
               <router-view></router-view>
             </keep-alive>
           </transition>
@@ -67,7 +69,8 @@
 </template>
 
 <script>
-import UserConfig from "./mainview/UserConfig.vue"
+import UserConfig from "./main/UserConfig.vue"
+import TabsBar from "./main/TabsBar"
 import { userConfig as config } from "@/model/model.js"
 
 export default {
@@ -77,8 +80,13 @@ export default {
       config,
     }
   },
+  computed: {
+    cacheNames() {
+      return this.$store.state.tabBars.cacheRoutes?.map(s => s.name);
+    }
+  },
   components: {
-    UserConfig,
+    UserConfig, TabsBar
   },
   methods: {
     handleCommand(command) {
@@ -97,7 +105,7 @@ export default {
           this.$alert.warning('还未实现about！');
           break
       }
-    }
+    },
   },
   created: function () {
     this.menuItems = this.$router.options.routes.find((v) => v.path == '/').children.filter(v => !v.meta.notshow);

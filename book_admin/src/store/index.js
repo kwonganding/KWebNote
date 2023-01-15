@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import tabBars from './tabBars'
 
 Vue.use(Vuex)
 
@@ -9,6 +10,7 @@ export default new Vuex.Store({
     user: { id: '', name: '', img: '', token: '', }
   },
   getters: {
+    cacheRoutes(state) { return state.tabBars.cacheRoutes; },
   },
   mutations: {
     //更新用户信息
@@ -20,5 +22,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
+    tabBars
   }
 })

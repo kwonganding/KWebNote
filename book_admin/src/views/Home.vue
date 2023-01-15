@@ -65,6 +65,7 @@ function bindEchart(id, $echats, name, data, type) {
 }
 
 export default {
+  name:'Home',
   data() {
     return {
       baseInfo: {},
