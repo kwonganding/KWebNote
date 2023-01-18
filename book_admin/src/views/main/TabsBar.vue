@@ -9,7 +9,7 @@
       @contextmenu.prevent.native="showMenu(r,$event)"
     >
       <i :class="r.meta.icon"></i>
-      {{r.meta.title}}
+      {{r.meta?.lang ? $t('menu.' + r.meta.lang) : r.meta?.title}}
       <i class="el-icon-close close" v-if="!isAffix(r)" @click.prevent.stop="handleClose(r)"></i>
     </router-link>
 
@@ -28,9 +28,6 @@
         <li @click="handleCloseAll">
           <i class="el-icon-error"></i> 关闭所有
         </li>
-        <el-button @click="$router.push('/home')">home</el-button>
-        <el-button @click="$router.go(-1)">go-1</el-button>
-        <el-button @click="$router.go(0)">go-0</el-button>
       </ul>
     </el-card>
   </div>
@@ -75,10 +72,9 @@ export default {
     },
     initialAffix() {
       //初始化固定的标签页
-      const affixs = this.$router.options.routes.find((v) => v.path == '/')
-        .children.filter(v => v.meta.affix);
+      const affixs = this.$router.options.routes.filter((v) => v.meta?.affix);
       affixs.forEach(v => {
-        this.$store.commit('tabBars/Add', v);
+        this.$store.commit('tabBars/add', v);
       });
     },
     // 显示标签的右键菜单
@@ -89,30 +85,29 @@ export default {
       this.tagMenu.left = event.clientX;
     },
     // 刷新，重新加载？
+    // 缓存排除；不显示到标签链
     refresh(tag) {
-      //先移除，再加载，移除的目的是去掉缓存
-      this.$store.commit('tabBars/Remove', tag);
+      //移除去掉缓存，在重定向跳转到当前页面
+      this.$store.commit('tabBars/removeName', this.$route);
       this.$nextTick(() => {
         this.$router.replace({
           path: '/redirect' + tag.path
         })
       })
-
-      // this.$router.push({ path: tag.fullPath });
     },
     closeMenu() {
       this.tagMenu.visible = false;
     },
     addTag() {
-      //添加到缓存路由中，只添加可显示的
-      if (this.$route.meta.notshow)
+      //添加到缓存路由中，排除跳转页面，
+      if (this.$route.name === 'Redirect')
         return;
-      this.$store.commit('tabBars/Add', this.$route);
+      this.$store.commit('tabBars/add', this.$route);
     },
     handleClose(tag) {
       tag ??= this.selectedTag;
       const index = this.cachedRoutes.indexOf(tag);
-      this.$store.commit('tabBars/Remove', tag);
+      this.$store.commit('tabBars/remove', tag);
       if (this.isActive(tag)) {
         if (this.cachedRoutes[index])
           this.$router.push(this.cachedRoutes[index]);
@@ -124,18 +119,19 @@ export default {
       // 前面始终会有一个固定的首页
     },
     handleCloseOther() {
-      this.$store.commit('tabBars/RemoveOther', this.selectedTag);
+      this.$store.commit('tabBars/removeOther', this.selectedTag);
       // 如果选中的是激活，则不跳转；否则跳转到选中项
       if (!this.isActive(this.selectedTag)) {
         this.$router.push(this.selectedTag);
       }
     },
     handleCloseAll() {
-      this.$store.commit('tabBars/RemoveAll');
+      this.$store.commit('tabBars/removeAll');
       //路由到剩下的
-      this.$router.push(this.cachedRoutes[0] ?? '/');
+      if (!this.isActive(this.cachedRoutes[0])) {
+        this.$router.push(this.cachedRoutes[0] ?? '/');
+      }
     },
-
   }
 }
 </script>
@@ -144,7 +140,7 @@ export default {
 .tabs-bar {
   list-style-type: none;
   display: flex;
-  margin: 20px 20px 0 20px;
+  margin: 20px 20px 0 0px;
   line-height: 30px;
   font-size: 14px;
   .item {

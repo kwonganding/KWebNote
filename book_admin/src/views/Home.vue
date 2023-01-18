@@ -6,22 +6,22 @@
       <el-card shadow="hover">
         <i class="el-icon-s-custom" style="color:skyblue"></i>
         <p class="value">{{baseInfo.user | format}}</p>
-        <p class="title">注册用户数</p>
+        <p class="title">{{$t('home.user')}}</p>
       </el-card>
       <el-card shadow="hover">
         <i class="el-icon-notebook-1" style="color:orange"></i>
         <p class="value">{{baseInfo.book?.toLocaleString()}}</p>
-        <p class="title">图书数量</p>
+        <p class="title">{{$t('home.book')}}</p>
       </el-card>
       <el-card shadow="hover">
         <i class="el-icon-s-cooperation" style="color:green"></i>
         <p class="value">{{baseInfo.order| format}}</p>
-        <p class="title">订单数量</p>
+        <p class="title">{{$t('home.order')}}</p>
       </el-card>
       <el-card shadow="hover">
         <i class="el-icon-money" style="color:gold"></i>
         <p class="value">￥{{baseInfo.money | format}}</p>
-        <p class="title">销售总额</p>
+        <p class="title">{{$t('home.money')}}</p>
       </el-card>
     </div>
 
@@ -65,7 +65,7 @@ function bindEchart(id, $echats, name, data, type) {
 }
 
 export default {
-  name:'Home',
+  name: 'Home',
   data() {
     return {
       baseInfo: {},
@@ -108,10 +108,12 @@ export default {
 .charts {
   display: flex;
   justify-content: space-between;
-  .el-card {
-    width: 100%;
-    margin: 10px;
-  }
+  text-align: left;
+}
+
+.el-card {
+  width: 100%;
+  margin: 10px;
 }
 
 .cards .el-card {

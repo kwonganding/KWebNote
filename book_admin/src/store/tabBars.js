@@ -2,30 +2,45 @@
 export default {
   namespaced: true,
   state: {
-    cacheRoutes: []
+    cacheRoutes: [], //缓存的路由，用于标签栏使用
+    cacheNames: [],  //缓存的打开的路由名称，用于Keep-alive的缓存白名单
   },
   mutations: {
     //更新用户信息
-    Add(state, obj) {
-      if (state.cacheRoutes.some(s => s.path === obj.path))
-        return
-      state.cacheRoutes.push(obj);
+    add(state, obj) {
+      if (!state.cacheRoutes.some(s => s.path === obj.path))
+        state.cacheRoutes.push(obj);
+      state.cacheNames = state.cacheRoutes.map(s => s.name);
     },
-    Remove(state, obj) {
+    remove(state, obj) {
       const i = state.cacheRoutes.findIndex(s => s.path === obj.path);
       if (i < 0)
         return;
       state.cacheRoutes.splice(i, 1);
+      state.cacheNames = state.cacheRoutes.map(s => s.name);
     },
-    RemoveAll(state) {
+    removeAll(state) {
       // 移除所有，除了固定的
       const affixItems = state.cacheRoutes.filter(s => s.meta.affix);
       state.cacheRoutes = affixItems;
+      state.cacheNames = state.cacheRoutes.map(s => s.name);
     },
-    RemoveOther(state, obj) {
+    removeOther(state, obj) {
       // 移除其他的，不含固定、当前
-      console.log(obj)
       state.cacheRoutes = state.cacheRoutes.filter(s => s.meta.affix || s.path === obj.path);
+      state.cacheNames = state.cacheRoutes.map(s => s.name);
+    },
+    removeName(state, obj) {
+      //只移除缓存名字
+      const i = state.cacheNames.findIndex(s => s === obj.name);
+      if (i < 0)
+        return;
+      state.cacheNames.splice(i, 1);
+    },
+    clear(state) {
+      //清空所有
+      state.cacheRoutes = [];
+      state.cacheNames = [];
     }
   },
   actions: {

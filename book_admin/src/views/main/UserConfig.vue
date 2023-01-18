@@ -1,16 +1,16 @@
 <template>
-  <el-drawer title="系统设置" :visible.sync="visible" size="300px" :modal="false">
-    <b>主题（Header）：</b>
+  <el-drawer :title="$t('userConfig.title')" :visible.sync="visible" size="300px" :modal="false">
+    <b>{{$t('userConfig.thema')}}</b>
     <ul class="teama-box" @click="handleThemaClick($event)">
       <li v-for="t in themas" :style="t" :key="t.name" :class="t.name==config.thema.name?'active':''">{{t.name}}</li>
     </ul>
 
-    <b>是否启用路由动画：</b>
-    <el-switch v-model="config.routerAnimation" class="config-box" active-text="启用"></el-switch>
-    <b>语言（Language）：</b>
+    <b>{{$t('userConfig.routeAnimation')}}</b>
+    <el-switch v-model="config.routerAnimation" class="config-box" :active-text="$t('userConfig.enable')"></el-switch>
+    <b>{{$t('userConfig.language')}}</b>
     <el-radio-group v-model="config.language" class="config-box">
-      <el-radio label="cn">中文</el-radio>
-      <el-radio label="zh">English</el-radio>
+      <el-radio label="zh">中文</el-radio>
+      <el-radio label="en">English</el-radio>
     </el-radio-group>
   </el-drawer>
 </template>
@@ -30,6 +30,8 @@ export default {
     //监听配置变更，持久化存储到本地
     this.$watch('config', () => {
       localStorage.setItem('admin-userconfig', JSON.stringify(this.config));
+      //更新语言
+      this.$i18n.locale = this.config.language;
     }, { deep: true })
   },
   methods: {

@@ -1,8 +1,12 @@
 const { defineConfig } = require('@vue/cli-service')
 
 module.exports = defineConfig({
-  transpileDependencies: true, //默认false，是否需要转译的第三方依赖
-  publicPath: '/bookadmin/', //基本url，多用于指定子路径
+  //默认false，是否需要转译的第三方依赖
+  transpileDependencies: true,
+
+  //基本url，多用于指定子路径
+  publicPath: '/bookadmin/',
+
   devServer: {
     proxy: {
       '/server': { //用 “/api” 代理 “http://localhost:8081”
@@ -13,6 +17,7 @@ module.exports = defineConfig({
       }
     }
   },
+
   configureWebpack: config => {
     config.optimization = {
       splitChunks: {                 // 开启分离js
@@ -49,6 +54,16 @@ module.exports = defineConfig({
         }
       }
     };
+  },
+
+  pluginOptions: {
+    i18n: {
+      locale: 'zh',
+      fallbackLocale: 'en',
+      localeDir: 'locales',
+      enableInSFC: false,
+      enableBridge: false
+    }
   }
 })
 

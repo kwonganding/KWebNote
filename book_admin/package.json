@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
   },
   "dependencies": {
     "axios": "^1.2.2",
@@ -14,6 +15,7 @@
     "echarts": "^5.4.1",
     "element-ui": "^2.4.5",
     "vue": "^2.6.14",
+    "vue-i18n": "^8.26.3",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"
   },
@@ -34,6 +36,7 @@
     "less": "^4.0.0",
     "less-loader": "^8.0.0",
     "vue-cli-plugin-element": "~1.0.1",
+    "vue-cli-plugin-i18n": "~2.3.1",
     "vue-template-compiler": "^2.6.14"
   },
   "browserslist": [

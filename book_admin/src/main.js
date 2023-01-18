@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import router from './router'
+import i18n from './lang/index'
 import './plugins/element.js'
 import constants from './assets/constants'
 import dayjs from 'dayjs'
@@ -31,6 +32,8 @@ new Vue({
   router,
   store,
   render: h => h(App),
+  i18n,
+
   created: function () {
     SaveAndLoadStore();
     LoadUserConfig();
@@ -53,12 +56,16 @@ function SaveAndLoadStore() {
     console.log(ex)
   }
 }
+
 //加载用户配置信息
 import { userConfig, themas } from '@/model/model'
+
 function LoadUserConfig() {
   let vstr = localStorage.getItem('admin-userconfig');
   if (vstr) {
     Object.assign(userConfig, JSON.parse(vstr));
     userConfig.thema = themas.filter(s => s.name == userConfig.thema.name)[0];
+    //语言
+    i18n.locale = userConfig.language;
   }
 }
