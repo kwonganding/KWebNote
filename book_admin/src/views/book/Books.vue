@@ -57,7 +57,7 @@
           <!-- <el-tag slot-scope="scope" :type="$consts.bookStatus[scope.row.status].type">{{$consts.bookStatus[scope.row.status].text}}</el-tag> -->
         </el-table-column>
         <el-table-column label="修改日期" width="100px" align="center">
-          <template slot-scope="scope">{{$dayjs(scope.row.lasttime).format('YYYY-MM-DD')}}</template>
+          <!-- <template slot-scope="scope">{{$dayjs(scope.row.lasttime).format('YYYY-MM-DD')}}</template> -->
         </el-table-column>
 
         <el-table-column label="操作" class-name="link-btton" width="90px" align="center">
@@ -102,7 +102,7 @@ function Book() {
 }
 
 export default {
-  name:'Books',
+  name: 'Books',
   components: {
     BookDetail, BookDialog, BookDialogPlus, Pagination
   },

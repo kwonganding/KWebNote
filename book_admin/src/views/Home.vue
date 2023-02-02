@@ -31,16 +31,16 @@
       <el-card class="chart" shadow="hover" id="chart_user"></el-card>
     </div>
   </div>
+  
 </template>
-
 <script>
 
 // 加载echart图表
-function bindEchart(id, $echats, name, data, type) {
+function bindEchart(id, name, data, type) {
   if (!data)
     return;
   const dom = document.getElementById(id);
-  const chart = $echats.init(dom);
+  const chart = window.echarts.init(dom);
   let option = {
     // legend: { data: [name] }, //图例
     title: { show: true, text: name, x: 'center', y: 'top' },
@@ -90,10 +90,10 @@ export default {
   },
   methods: {
     loadChartOrder() {
-      bindEchart('chart_order', this.$echarts, '订单数量统计', this.chartOrder, 'bar');
+      bindEchart('chart_order','订单数量统计', this.chartOrder, 'bar');
     },
     loadChartUser() {
-      bindEchart('chart_user', this.$echarts, '用户增长曲线', this.chartUser, 'line');
+      bindEchart('chart_user', '用户增长曲线', this.chartUser, 'line');
     }
   },
   // 千分位的过滤器

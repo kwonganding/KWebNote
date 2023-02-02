@@ -87,7 +87,7 @@ export default {
     // 刷新，重新加载？
     // 缓存排除；不显示到标签链
     refresh(tag) {
-      //移除去掉缓存，在重定向跳转到当前页面
+      //移除去掉缓存，再重定向跳转到当前页面
       this.$store.commit('tabBars/removeName', this.$route);
       this.$nextTick(() => {
         this.$router.replace({

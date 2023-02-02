@@ -2,15 +2,17 @@
 export default {
   namespaced: true,
   state: {
+    //注意：持久化vuex时，state需要序列化为JSON字符串，不支持组件，因此路由信息中不应包含component
     cacheRoutes: [], //缓存的路由，用于标签栏使用
     cacheNames: [],  //缓存的打开的路由名称，用于Keep-alive的缓存白名单
   },
   mutations: {
-    //更新用户信息
     add(state, obj) {
-      if (!state.cacheRoutes.some(s => s.path === obj.path))
-        state.cacheRoutes.push(obj);
-      state.cacheNames = state.cacheRoutes.map(s => s.name);
+      if (!state.cacheRoutes.some(s => s.path === obj.path)) {
+        //添加打开的路由，只需要path、name、mata
+        state.cacheRoutes.push({ path: obj.path, name: obj.name, meta: obj.meta });
+        state.cacheNames = state.cacheRoutes.map(s => s.name);
+      }
     },
     remove(state, obj) {
       const i = state.cacheRoutes.findIndex(s => s.path === obj.path);

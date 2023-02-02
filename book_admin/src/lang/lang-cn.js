@@ -1,3 +1,4 @@
+
 export default {
   sysName: '图书管理系统',
   menu: {

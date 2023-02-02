@@ -3,14 +3,9 @@
 
 <template>
   <el-pagination
-    style="text-align:right;margin:6px 2px"
-    :total="total"
-    background
-    :current-page="currentPage"
-    :page-size="pageSize"
-    :page-sizes="[5, 10, 20, 50]"
-    @current-change="pageChanged"
-    @size-change="pageSizeChanged"
+    style="text-align:right;margin:6px 2px" background
+    :total="total" :current-page="currentPage" :page-size="pageSize" :page-sizes="[5, 10, 20, 50]"
+    @current-change="pageChanged" @size-change="pageSizeChanged"
     layout="total, sizes, prev, pager, next, jumper"
   ></el-pagination>
 </template>
@@ -19,38 +14,21 @@
 export default {
   props: {
     //总数
-    total: {
-      type: Number,
-      default: 0,
-    },
+    total: { type: Number, default: 0, },
     //页码，外部绑定，加修饰符.sync
-    size: {
-      type: Number,
-      default: 10,
-    },
+    size: { type: Number, default: 10, },
     // 当前页码，外部绑定，加修饰符.sync
-    index: {
-      type: Number,
-      default: 1,
-    }
+    index: { type: Number, default: 1, }
   },
   computed: {
     // 用修饰符“.sync”来实现更新父组件的值
     currentPage: {
-      get() {
-        return this.index
-      },
-      set(val) {
-        this.$emit('update:index', val)
-      }
+      get() { return this.index },
+      set(val) { this.$emit('update:index', val) }
     },
     pageSize: {
-      get() {
-        return this.size
-      },
-      set(val) {
-        this.$emit('update:size', val)
-      }
+      get() { return this.size },
+      set(val) { this.$emit('update:size', val) }
     }
   },
   methods: {

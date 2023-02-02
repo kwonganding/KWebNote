@@ -130,11 +130,7 @@ export default [
       },
     ]
   },
-  {
-    path: '/404',
-    name: 'Page404',
-    meta: { title: '404' },
-  },
+  { path: '*', redirect: '/404', meta: { title: '404' }, },
 
 ]
 

@@ -1,17 +1,15 @@
-// import { from } from 'core-js/core/array'
 import constants from '@/assets/constants'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 //路由配置
 import baseRoutes from './routes'
-
+//注册路由插件
 Vue.use(VueRouter)
-
 // 创建路由
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'history',           //模式
   base: process.env.BASE_URL,
-  routes: baseRoutes,
+  routes: baseRoutes,        //路由配置
 })
 
 // 路由全局守卫-导航前，登录token判断

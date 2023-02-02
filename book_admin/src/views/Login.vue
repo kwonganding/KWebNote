@@ -22,7 +22,6 @@
         </div>
       </el-form>
     </el-card>
-    <!-- <div class="footer">{{constants.footer}}</div> -->
     <div class="footer">{{$consts.footer}}</div>
   </div>
 </template>
@@ -46,12 +45,6 @@ export default {
 
   methods: {
     login() {
-
-      this.$api.stats_base()
-        .then(data => console.log('data', data))
-        .catch(err => console.log('error', err))
-
-
       this.loading = true;
       this.$refs.userForm.validate((valid, mes) => {
         if (!valid) {
@@ -115,8 +108,8 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  border-radius: 8px;
-  padding: 0 40px;
+  border-radius: 2px;
+  padding: 0 30px;
 
   h2 {
     text-align: center;

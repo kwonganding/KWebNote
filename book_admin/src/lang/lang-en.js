@@ -1,3 +1,4 @@
+
 export default {
   sysName: 'Books Admin',
   menu: {

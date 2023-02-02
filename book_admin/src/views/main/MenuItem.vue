@@ -16,11 +16,6 @@
 <script>
 export default {
   name: 'MenuItem',
-  data() {
-    return {
-      routeItem: {}
-    }
-  },
   props: ['item'],
   computed: {
     children() {
@@ -29,7 +24,6 @@ export default {
     hasChildren() {
       return this.item?.children?.length > 0;
     },
-
   },
   methods: {
     title(item) {
