@@ -7,8 +7,8 @@ let server = new express();
 //启用json解析支持，解析body数据
 server.use(express.json());
 
-//***** 安装静态资源插件  *****/
-// 安装一个中间件“express.static”实现静态文件代理，参数为资源地址。
+//***** 静态资源  *****/
+// 使用内置的“express.static”实现静态文件代理，参数为资源地址。
 // 第一个参数为url路由，
 
 //图片静态资源

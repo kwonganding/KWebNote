@@ -12,6 +12,7 @@ const URL = {
   book_list: '/api/book/list',
   book_id: '/api/book/id',
   book_save: '/api/book/save',
+  upload: proxy + '/upload',
 }
 
 // 引入axios
@@ -61,7 +62,7 @@ api.book_list = function (param) {
 }
 
 api.book_id = function (param) {
-  return api.get(URL.book_id, { param });
+  return api.get(URL.book_id, { params: param });
 }
 
 api.book_save = function (param) {

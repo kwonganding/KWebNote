@@ -8,6 +8,7 @@ import constants from './assets/constants'
 //css
 import './assets/css/iconfont.css'
 import './assets/global.css'
+import '@/../../util/js/util.js'
 
 // 引入axios封装的api
 import api from './api/api';

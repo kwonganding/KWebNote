@@ -8,11 +8,10 @@ export default {
   },
   mutations: {
     add(state, obj) {
-      if (!state.cacheRoutes.some(s => s.path === obj.path)) {
+      if (!state.cacheRoutes.some(s => s.path === obj.path))
         //添加打开的路由，只需要path、name、mata
         state.cacheRoutes.push({ path: obj.path, name: obj.name, meta: obj.meta });
-        state.cacheNames = state.cacheRoutes.map(s => s.name);
-      }
+      state.cacheNames = state.cacheRoutes.map(s => s.name);
     },
     remove(state, obj) {
       const i = state.cacheRoutes.findIndex(s => s.path === obj.path);

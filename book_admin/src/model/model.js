@@ -1,14 +1,18 @@
-function Book() {
+export function Book() {
   this.id = "";
   this.name = "";
   this.author = "";
   this.introduction = "";
-  this.imgs = [];
-  this.status = '';
+  this.imgs = '';
+  this.price = 0;
+  this.status = 'normal';
+  this.tag = '';
 }
 
-const bookRules = {
-
+export const bookRules = {
+  name: [{ required: true, message: '必填', trigger: 'blur' }],
+  author: [{ required: true, message: '必填', trigger: 'blur' }],
+  price: [{ type:'number',min: 0, max: 99999, message: '价格应该为0到99999的数值', trigger: 'change' }],
 }
 
 function User() {
@@ -17,7 +21,8 @@ function User() {
   this.img = '';
 }
 
-const themas = [
+// 主题配置，极简
+export const themas = [
   { name: "靛青", backgroundColor: '#177CB0', color: '#FFF' },
   { name: "橘黄", backgroundColor: '#FF8936', color: '#FFF' },
   { name: "酱紫", backgroundColor: '#d0378d', color: '#FFF' },
@@ -27,7 +32,7 @@ const themas = [
 ]
 
 // 用户配置
-let userConfig = {
+export let userConfig = {
   routerAnimation: true,
   menuCollapse: false,
   language: 'cn',
@@ -35,5 +40,3 @@ let userConfig = {
 }
 
 
-
-export { Book, User, userConfig, themas }

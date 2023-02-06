@@ -12,7 +12,7 @@
 
 .el-button--medium.is-round,
 .el-button--medium {
-    padding: 8px 16px;
+    padding: 8px 14px;
 }
 
 .el-button--text {
@@ -21,7 +21,7 @@
 
 /* radio */
 .el-radio-button--medium .el-radio-button__inner {
-    padding: 8px 16px;
+    padding: 8px 14px;
 }
 
 /* el-link */

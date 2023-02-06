@@ -5,7 +5,7 @@
       <h1 :class="config.menuCollapse?'collapse':''">{{$t('sysName')}}</h1>
     </div>
     <!-- 菜单 -->
-    <el-menu router :collapse="config.menuCollapse" :default-active="$route.path">
+    <el-menu router class="view-scroll" :collapse="config.menuCollapse" :default-active="$route.path">
       <MenuItem v-for="item in menuItems" :item="item" :key="item.path" />
     </el-menu>
   </div>
@@ -66,6 +66,7 @@ export default {
 .el-menu {
   text-align: left;
   height: 100%;
+  overflow-x: hidden;
   &:not(.el-menu--collapse) {
     width: 200px;
   }

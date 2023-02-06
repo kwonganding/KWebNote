@@ -9,7 +9,7 @@ router.post('/book/list', (req, res) => {
   //构造sql，查询总数量的“sqlTotal”，以及查询列表的“sql”
   //共用where
   let sqlTotal = 'select count(id) as total from books';
-  let sql = 'select id,name,author,tag,price,comments,imgs,lasttime from books';
+  let sql = 'select id,name,author,tag,price,comments,imgs,status,lasttime from books';
   let wheresql = ' where 1=1';
   let params = [];
   if (req.body.status) {
@@ -51,7 +51,7 @@ router.post('/book/list', (req, res) => {
 
 //获取单个book数据
 router.get('/book/id', (req, res) => {
-  let sql = "select id,name,author,introduction,imgs,status,catgory,price,tag,comments,createtime,lasttime, from books where id =?";
+  let sql = "select id,name,author,introduction,imgs,status,catgory,price,tag,comments,createtime,lasttime from books where id =?";
   db.queryData(sql, [req.query.id], (resData, rows) => {
     resData.data = rows[0];
     res.send(resData);
@@ -61,7 +61,7 @@ router.get('/book/id', (req, res) => {
 //新增、修改
 router.post('/book/save', (req, res) => {
   let sql = '';
-  let params = [req.body.name, req.body.author, req.body.introduction, req.body.img, req.body.status,
+  let params = [req.body.name, req.body.author, req.body.introduction, req.body.imgs, req.body.status,
   req.body.catgory, req.body.price, req.body.tag, req.body.comments, req.body.createtime ?? Date.now(), Date.now()];
 
   if (req.body.id) {//update

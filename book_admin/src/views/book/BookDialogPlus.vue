@@ -1,17 +1,18 @@
 // 图书编辑的弹框组件，覆盖父视图，不影响其他功能
 <template>
-  <el-dialog :visible="visible" :show-close="false" class="editDialogPlus" width="100%" style="height:100%" top="0" :modal="false">
+  <el-dialog v-loading="loading" :visible="visible" :show-close="false" class="editDialogPlus" width="100%" top="0" :modal="false">
     <template #title>
       <span style="font-weight:bold">
         <i class="el-icon-edit"></i>
         {{dialogType}} -书籍信息
       </span>
       <span style="float:right;margin-top:-5px">
-        <el-button @click="visible=false" icon="el-icon-circle-close" round>取消</el-button>
-        <el-button @click="save" type="success" icon="el-icon-success" :loading="saveLoading" round>保存</el-button>
+        <el-button @click="visible=false" icon="el-icon-circle-close">取消</el-button>
+        <el-button @click="save" type="primary" icon="el-icon-success" :loading="saveLoading">保存</el-button>
       </span>
     </template>
 
+    <!-- 表单 -->
     <el-form :model="book" ref="bookForm" :rules="bookRules" label-width="90px">
       <el-row>
         <el-col :span="12">
@@ -30,79 +31,99 @@
           <el-radio border v-for="e in $consts.bookStatus.entries" :label="e.key" :key="e.key">{{e.text}}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="简介：">
-        <el-input v-model="book.introduction" maxlength="600" type="textarea" :autosize="{ minRows: 2, maxRows: 5}" show-word-limit></el-input>
-      </el-form-item>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item label="价格：" prop="price">
+            <el-input v-model.number="book.price" placeholder="输入价格"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="标签：" prop="tag">
+            <el-select v-model="book.tag" style="width:100%"></el-select>
+          </el-form-item>
+        </el-col>
+      </el-row>
       <el-form-item label="图片：">
-        <el-input v-model="book.img" placeholder="图片url地址"></el-input>
+        <ImgUpload v-model="book.imgs"></ImgUpload>
       </el-form-item>
 
-      <el-form-item label>
-        <div class="dialog-imgbox">
-          <img :src="book.img" alt v-show="book.img" />
-        </div>
+      <el-form-item label="内容简介：">
+        <Editor :html.sync="book.introduction" height="300px"></Editor>
       </el-form-item>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item label="创建时间：" prop="price">
+            <span>{{parseTime(book.createtime,'{y}-{m}-{d} {h}:{i}:{s}')}}</span>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="更新时间：" prop="tag">
+            <span>{{parseTime(book.lasttime,'{y}-{m}-{d} {h}:{i}:{s}')}}</span>
+          </el-form-item>
+        </el-col>
+      </el-row>
     </el-form>
   </el-dialog>
 </template>
 
-<script> 
+<script>
+import { Book, bookRules } from '@/model/model.js'
+import Editor from '@/components/Editor.vue'
+import ImgUpload from '@/components/ImgUpload.vue'
+import { parseTime } from '@/../../util/js/date.js'
 
 export default {
+  components: { Editor, ImgUpload },
   data: () => {
     return {
       visible: false,
       fullscreen: false,
       saveLoading: false,
+      loading: false,
 
       book: {},
       dialogType: "新增",
-      bookRules: {
-        name: [{ required: true, message: '必填', trigger: 'blur' }],
-        author: [{ required: true, message: '必填', trigger: 'blur' }],
-      },
+      bookRules,
     }
   },
   methods: {
+    parseTime,
     save() {
-      this.saveLoading = true;
       this.$refs.bookForm.validate((valid, mes) => {
         if (!valid) {
           this.$message.error('输入有误，请修改后重新提交！');
           return;
         }
         //调用后端api
-        this.$axios.post('/api/book/save', this.book).then(res => {
-          if (res.status == '200' && res.data.status == 'OK') {
-            this.$message.success('保存成功');
-            //触发一个自定义事件，通知更新成功
-            this.$emit('updated')
-          }
-          else
-            this.$message.error(res.data.message);
-        })
-        this.visible = false;
+        this.saveLoading = true;
+        this.$api.book_save(this.book).then(res => {
+          this.$message.success('保存成功');
+          //触发一个自定义事件，通知更新成功
+          this.$emit('updated');
+          this.visible = false;
+        }).catch(err => {
+          this.$message.error(err);
+        }).finally(() => { this.saveLoading = false });
       })
-      this.saveLoading = false;
     },
-    add(book) {
-      this.book = book;
-      this.book.status = 'normal';
-      this.dialogType = '新增';
+    //外部调用-打开编辑框
+    show(book) {
       this.visible = true;
-    },
-    update(book) {
+      //参数为空，新增
+      if (!book) {
+        this.book = new Book();
+        return;
+      }
+      //更新
       this.dialogType = "修改";
-      this.visible = true;
       //调用API获取最新的对象
-      this.$axios.get('/api/book/id', { params: { id: book.id } }).then(res => {
-        if (res.status == '200' && res.data.status == 'OK') {
-          this.book = res.data.data;
-        }
-        else
-          this.$message.error(res.data.message);
-      })
-    }
+      this.loading = true;
+      this.$api.book_id({ id: book.id }).then(res => {
+        this.book = res.data;
+      }).catch(err => {
+        this.$message.error(err);
+      }).finally(() => { this.loading = false });
+    },
   }
 }
 </script>
@@ -120,12 +141,13 @@ export default {
 }
 </style>
 
+// 最大化弹框样式
 <style>
 .editDialogPlus {
   position: absolute;
   overflow: inherit;
 }
 .editDialogPlus .el-dialog {
-  height: 100% !important;
+  min-height: 100% !important;
 }
 </style>

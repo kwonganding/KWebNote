@@ -32,7 +32,7 @@ db.queryData = function (sql, params, callback) {
 db.executeSql = function (sql, params, callback) {
   db.run(sql, params, function (error) {
     db.printError(error);
-    let resData = new ResponsData(error, okMessage);
+    let resData = new ResponsData(error);
     callback(resData);
   })
 }

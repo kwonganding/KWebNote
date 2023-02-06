@@ -37,8 +37,8 @@ body {
 
 .view-scroll::-webkit-scrollbar {
     /*滚动条整体部分，*/
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
 }
 
 /* .main-scroll::-webkit-scrollbar-track { */
