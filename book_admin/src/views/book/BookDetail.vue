@@ -1,30 +1,68 @@
 //用于显示图书详情的组件，抽屉形式展示
 <template>
-  <el-drawer title="图书详情" :visible.sync="visible" size="500px" class="detail-box">
-    <strong>名称：</strong>
-    <span>{{book?.name}}</span>
-    <strong>作者：</strong>
-    <span>{{book?.author}}</span>
-    <strong>简介：</strong>
-    <span>{{book?.introduction}}</span>
-    <strong>封面：</strong>
-    <img :src="book?.img" width="100%" />
+  <el-drawer v-loading="loading" :title="book?.name" :visible.sync="visible" size="700px" custom-class="detail-box view-scroll">
+    <h4>作者：</h4>
+    <p class="item">{{book?.author}}</p>
+
+    <h4>上架状态：</h4>
+    <el-tag class="item" :type="$consts.bookStatus[book?.status]?.type">{{$consts.bookStatus[book?.status]?.text}}</el-tag>
+
+    <h4>价格：</h4>
+    <p class="item">{{book?.price}}</p>
+
+    <h4>标签：</h4>
+    <p class="item">{{book?.tag}}</p>
+
+    <h4>图片：</h4>
+    <ul class="item imglist">
+      <li v-for="img in imgList" :key="img">
+        <el-popover placement="bottom" trigger="click">
+          <img :src="$api.URL.proxy + img" width="80px" height="80px" slot="reference" style="vertical-align: middle;" />
+          <img :src="$api.URL.proxy + img" width="600px" />
+        </el-popover>
+      </li>
+    </ul>
+
+    <h4>内容简介：</h4>
+    <div class="item" v-html="book?.introduction"></div>
+
+    <h4>创建时间：</h4>
+    <p class="item">{{parseTime(book?.createtime,'{y}-{m}-{d} {h}:{i}:{s}')}}</p>
+
+    <h4>更新时间：</h4>
+    <p class="item">{{parseTime(book?.lasttime,'{y}-{m}-{d} {h}:{i}:{s}')}}</p>
   </el-drawer>
 </template>
 
 <script>
+
+import { parseTime } from '@/../../util/js/date.js'
+
 export default {
   data() {
     return {
       visible: false,
+      loading: false,
       book: {},
     }
   },
-  props: [],
+  computed: {
+    imgList() {
+      if (!this.book?.imgs) return [];
+      return this.book?.imgs?.split(',');
+    }
+  },
   methods: {
-    show(bookInfo) {
-      this.book = bookInfo;
+    parseTime,
+    show(book) {
       this.visible = true;
+      //调用API获取最新的对象
+      this.loading = true;
+      this.$api.book_id({ id: book.id }).then(res => {
+        this.book = res.data;
+      }).catch(err => {
+        this.$message.error(err);
+      }).finally(() => { this.loading = false });
     }
   }
 
@@ -33,17 +71,27 @@ export default {
 
 <style scoped lang="less">
 .detail-box {
-  * {
-    padding: 10px;
-    max-width: 100%;
+  h4 {
+    margin: 5px 2px;
+    padding: 0;
+    &::before {
+      content: "▍";
+      color: #66a2e4;
+    }
+  }
+  .item {
+    margin: 5px 2px 15px 15px;
+    color: #000c;
+  }
+  .imglist {
+    list-style-type: none;
     display: flex;
-    flex-flow: column wrap;
-  }
-  strong {
-    color: #0008;
-  }
-  span {
-    text-indent: 1em;
+    li {
+      margin: 0 5px;
+      img {
+        object-fit: contain;
+      }
+    }
   }
 }
 </style>

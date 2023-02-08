@@ -124,9 +124,9 @@ export default [
       },
       {
         path: '/dic',
-        name: 'DicList',
+        name: 'Dictionary',
         meta: { title: '字典管理', icon: 'el-icon-s-order' },
-        component: () => import('@/views/dic/DicList.vue'),
+        component: () => import('@/views/dic/Dictionary.vue'),
       },
     ]
   },

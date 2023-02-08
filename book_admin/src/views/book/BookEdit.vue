@@ -1,4 +1,4 @@
-//图书的编辑页面，通过路由打开，动态路由参数传值
+//图书的编辑页面，通过路由打开，动态路由参数传值，弃用
 <template>
   <div style="margin-top:15px">
     <el-form :model="book" ref="bookForm" :rules="bookRules" label-width="90px">

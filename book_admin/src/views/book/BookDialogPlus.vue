@@ -50,7 +50,7 @@
       <el-form-item label="内容简介：">
         <Editor :html.sync="book.introduction" height="300px"></Editor>
       </el-form-item>
-      <el-row>
+      <el-row v-show="book.id">
         <el-col :span="12">
           <el-form-item label="创建时间：" prop="price">
             <span>{{parseTime(book.createtime,'{y}-{m}-{d} {h}:{i}:{s}')}}</span>
@@ -77,7 +77,6 @@ export default {
   data: () => {
     return {
       visible: false,
-      fullscreen: false,
       saveLoading: false,
       loading: false,
 
@@ -129,16 +128,7 @@ export default {
 </script>
 
 <style scoped lang='less'>
-.dialog-imgbox {
-  border: 1px dashed #0003;
-  width: 150px;
-  height: 100px;
-  text-align: center;
-  img {
-    height: 100%;
-    object-fit: contain;
-  }
-}
+
 </style>
 
 // 最大化弹框样式

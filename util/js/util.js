@@ -124,7 +124,7 @@ export let mixin_store_persistent = {
 
 /******************************   Array 扩展  ******************************/
 
-//filter,function(v,index)
+//删除集合中指定条件的数据
 Array.prototype.remove = function (filter) {
     const arr = this;
     const items = arr.filter(filter);
@@ -133,5 +133,9 @@ Array.prototype.remove = function (filter) {
         if (index >= 0)
             arr.splice(index, 1);
     }
+}
 
+//返回集合的最后一个元素
+Array.prototype.last = function () {
+    return this[this.length - 1];
 }

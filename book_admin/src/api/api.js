@@ -5,6 +5,7 @@
 const proxy = process.env.NODE_ENV === 'production' ? '' : '/server';
 const URL = {
   proxy: proxy,
+  upload: proxy + '/upload',
   login: '/api/login',
   stats_base: '/api/stats_base',
   stats_order: '/api/stats_order',
@@ -12,7 +13,10 @@ const URL = {
   book_list: '/api/book/list',
   book_id: '/api/book/id',
   book_save: '/api/book/save',
-  upload: proxy + '/upload',
+  dictype: '/api/sys/dictype/list',
+  dicdata: '/api/sys/dicdata/list',
+  dicdata_save: '/api/sys/dicdata/save',
+  dicdata_delete: '/api/sys/dicdata/delete',
 }
 
 // 引入axios
@@ -57,18 +61,29 @@ api.stats_user = function () {
   return api.get(URL.stats_user);
 }
 
+// 书籍管理
 api.book_list = function (param) {
   return api.post(URL.book_list, param);
 }
-
 api.book_id = function (param) {
   return api.get(URL.book_id, { params: param });
 }
-
 api.book_save = function (param) {
   return api.post(URL.book_save, param);
 }
 
-
+//字典管理
+api.dictype = function () {
+  return api.get(URL.dictype);
+}
+api.dicdata = function (param) {
+  return api.get(URL.dicdata, { params: param });
+}
+api.dicdata_save = function (param) {
+  return api.post(URL.dicdata_save, param);
+}
+api.dicdata_delete = function (param) {
+  return api.post(URL.dicdata_delete, param);
+}
 
 export default api;

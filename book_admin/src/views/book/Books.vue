@@ -5,12 +5,12 @@
     <!-- 1、工具栏 -->
     <div class="actionbar">
       <!-- 操作按钮 -->
-      <div>
+      <div style="padding-top: 2px;">
         <el-button @click="$refs.bookDialogPlus.show()" type="primary" icon="icon icon-add" title="弹窗模式-覆盖父视图">新增</el-button>
 
-        <el-button @click="handleAdd" icon="el-icon-plus" type="primary" title="普通弹窗模式">新增</el-button>
-        <el-button @click="handleAdd" title="路由到新视图">新增3(路由)</el-button>
-        <el-button @click="handleEdit" title="路由到新视图">修改(路由)</el-button>
+        <el-button @click="$refs.bookDialog.show()" icon="el-icon-plus" type="primary" title="普通弹窗模式">新增2</el-button>
+        <!-- <el-button @click="handleAdd" title="路由到新视图">新增3(路由)</el-button> -->
+        <!-- <el-button @click="handleEdit" title="路由到新视图">修改(路由)</el-button> -->
         <el-button @click="handleDeletItems" icon="el-icon-delete" title="删除选择项" type="warning" :disabled="$refs.bookTable?.selection.length<1">删除</el-button>
       </div>
       <!-- 查询 -->

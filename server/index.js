@@ -13,6 +13,8 @@ server.use(express.json());
 
 //图片静态资源
 server.use('/file', express.static('./file'));
+//兼容前端的跨域代理路径
+server.use('/server/file', express.static('./file'));
 
 //管理后台"book_admin"的部署
 server.use('/bookadmin', express.static('./book_admin'))
@@ -29,10 +31,13 @@ const book = require('./api/book.js');
 const file = require('./api/file.js');
 // 订单管理api
 const order = require('./api/order.js');
+// 系统管理功能API
+const system = require('./api/system.js');
 
 server.use(path, base);
 server.use(path, book);
 server.use(path, order);
+server.use(path, system);
 server.use(file);
 
 //*****  配置端口，启用监听端口 *****/

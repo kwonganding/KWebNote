@@ -21,7 +21,8 @@ db.printError = function (error) {
 
 //查询数据
 db.queryData = function (sql, params, callback) {
-  let aa = db.all(sql, params, function (error, rows) {
+  if (!params) params = {};
+  db.all(sql, params, function (error, rows) {
     db.printError(error);
     let resData = new ResponsData(error);
     callback(resData, rows);
