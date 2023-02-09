@@ -26,7 +26,6 @@ router.get('/sys/dicdata/list', (req, res) => {
 router.post('/sys/dicdata/save', (req, res) => {
   let sql = '';
   const params = [req.body.name, req.body.code, req.body.sort, req.body.pid ?? 0];
-  console.log(req.body)
   //upate
   if (req.body.id) {
     sql = 'update dicdata set name=?,code=?,sort=?,pid=? where id=?';

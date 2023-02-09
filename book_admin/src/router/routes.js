@@ -109,10 +109,10 @@ export default [
     meta: { title: '订单管理', lang: 'order', icon: 'el-icon-s-shop' },
     children: [
       {
-        path: '/test',
-        name: 'Test',
-        meta: { title: 'Test-View', lang: 'order', icon: 'el-icon-video-camera' },
-        component: () => import('@/views/Test.vue'),
+        path: '/order',
+        name: 'Orders',
+        meta: { title: '订单管理', lang: 'order', icon: 'el-icon-video-camera' },
+        component: () => import('@/views/order/Orders.vue'),
       },
     ]
   },
@@ -123,16 +123,16 @@ export default [
     meta: { title: '系统管理', lang: 'sysManagement', icon: 'el-icon-s-tools' },
     children: [
       {
-        path: '/test',
-        name: 'Test',
-        meta: { title: 'Test-View', icon: 'el-icon-video-camera' },
-        component: () => import('@/views/Test.vue'),
-      },
-      {
         path: '/dic',
         name: 'Dictionary',
         meta: { title: '字典管理', icon: 'el-icon-s-order' },
         component: () => import('@/views/dic/Dictionary.vue'),
+      },
+      {
+        path: '/test',
+        name: 'Test',
+        meta: { title: 'Test-View', icon: 'el-icon-video-camera' },
+        component: () => import('@/views/Test.vue'),
       },
     ]
   },

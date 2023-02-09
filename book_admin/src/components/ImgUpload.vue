@@ -68,8 +68,12 @@ export default {
         return;
       }
       //同步已有文件，只在外部传入值时执行
-      this.fileList = nval ? nval.split(',').map(f => { return { url: f } }) : [];
+      this.fileList = this.value ? this.value.split(',').map(f => { return { url: f } }) : [];
     }
+  },
+  mounted() {
+    //首次初始化
+    this.fileList = this.value ? this.value.split(',').map(f => { return { url: f } }) : [];
   },
   methods: {
     //超出数量限制
@@ -121,7 +125,7 @@ export default {
   img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
   // 缩略图上加一个状态提示
   &.success::before {
@@ -160,6 +164,6 @@ export default {
 /* 调整/取消动画 */
 .el-list-enter-active,
 .el-list-leave-active {
-  transition: all 0.1s;
+  transition: none;
 }
 </style>

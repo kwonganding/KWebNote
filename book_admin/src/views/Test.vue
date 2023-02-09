@@ -1,7 +1,8 @@
 <template>
   <div>
-    TEST Page
+    <br />TEST Page
     <div>
+      <br />
       <el-input v-model="name" placeholder></el-input>
     </div>
   </div>
@@ -9,7 +10,7 @@
 
 <script>
 export default {
-  name:'Test',
+  name: 'Test',
   data() {
     return {
       name: '',

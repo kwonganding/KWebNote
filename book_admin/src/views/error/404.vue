@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>没有找到该页面资源！</h1>
+    <b>404 😭😭😭</b>
+    <br>
+    <i>没有找到该页面资源！</i>
   </div>
 </template>
 
@@ -16,4 +18,10 @@ export default {
 </script>
 
 <style lang='less' scoped>
+div {
+  font-size: 30px;
+  color: #0008;
+  line-height: 2em;
+  margin: 1em;
+}
 </style>

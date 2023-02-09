@@ -28,8 +28,6 @@ export default {
   },
   watch: {
     value(nval) {
-      console.log('value', nval, this.value);
-
       //如果是内部文件变化，则不处理，避免循环更新
       if (this.innerValueChange) {
         this.innerValueChange = false;
