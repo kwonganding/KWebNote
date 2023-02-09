@@ -8,7 +8,7 @@ import Login from '../views/Login.vue'
  * hidden：是否隐藏，不显示在导航菜单中
  * meta.title：标题
  * meta.icon：icon图标
- * meta.affix：是否固定，固定在标签栏
+ * meta.affix：是否固定，固定在标签栏，默认加载到标签栏，且不可删除
  */
 
 // 路由配置
@@ -36,6 +36,12 @@ export default [
         path: '/doc',
         name: 'Doc',
         component: () => import('@/views/Doc.vue'),
+      },
+      {
+        path: '/user',
+        name: 'User',
+        component: () => import('@/views/User.vue'),
+        meta: { title: '用户中心', icon: 'el-icon-user-solid' },
       },
       {
         path: '/404',

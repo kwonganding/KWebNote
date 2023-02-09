@@ -27,6 +27,9 @@
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="pwd">修改密码</el-dropdown-item>
               <el-dropdown-item command="about">关于</el-dropdown-item>
+              <el-dropdown-item command="user">
+                <i class="el-icon-user-solid"></i> 个人中心
+              </el-dropdown-item>
               <el-divider></el-divider>
               <el-dropdown-item command="logout" icon="el-icon-circle-close">退出登录</el-dropdown-item>
             </el-dropdown-menu>
@@ -97,11 +100,14 @@ export default {
           }).catch(() => { });
           break;
         case 'pwd':
-          this.$alert.warning('还未实现pwd！');
-          break
+          this.$alert.warning('还未实现！');
+          break;
         case 'about':
-          this.$alert.warning('还未实现about！');
-          break
+          this.$alert("<p><b>关于作者：</b> <a href='https://www.yuque.com/kanding' target='_blank'>语雀「 安木夕」</a> | <a href='https://github.com/kwonganding' target='_blank'>Github「 Kanding」</a></p>", { dangerouslyUseHTMLString: true });
+          break;
+        case 'user':
+          this.$router.push('/user');
+          break;
       }
     },
   },
@@ -133,6 +139,7 @@ export default {
   .header-userbox {
     color: inherit;
     margin: 0 10px;
+    cursor: pointer;
     img {
       width: 36px;
       height: 36px;

@@ -189,7 +189,7 @@ export default {
   color: #000;
   font-size: 14px;
   padding: 0px;
-  z-index: 99;
+  z-index: 2004;
   li {
     padding: 0 8px;
     line-height: 32px;

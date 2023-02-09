@@ -8,7 +8,6 @@
         字典数据（{{currentType.name}}）
       </p>
       <el-button type="primary" icon="el-icon-document-add" @click="addItem()">添加</el-button>
-      <DicTreeSelect :data="dicdataList" v-model="dicData.id"></DicTreeSelect>
     </div>
     <!-- 2、内容列表 -->
     <el-table :data="dicdataList" ref="tableList" row-key="id" default-expand-all border stripe style="margin-top:5px">
@@ -69,11 +68,9 @@
 
 <script>
 import { queryDicData, updateTreeDisabled, cascaderOption } from '@/api/dicdata.js'
-import DicTreeSelect from '@/components/DicDicTreeSelect'
 
 export default {
   name: 'DicData',
-  components: { DicTreeSelect },
   data() {
     return {
       currentType: {},  //当前选择的字典类型
@@ -94,7 +91,7 @@ export default {
       if (!this.currentType) return;
       //更新
       this.loading = true;
-      queryDicData(this.currentType)
+      queryDicData(this.currentType.code, this.currentType.tree)
         .then(data => {
           this.dicdataList = data;
         })
@@ -153,7 +150,7 @@ export default {
             //更新列表数据
             this.updateDicList();
           });
-      });
+      }).catch(() => { });
     }
   }
 }

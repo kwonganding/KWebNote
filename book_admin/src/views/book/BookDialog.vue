@@ -26,11 +26,21 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="上架状态：" prop="status">
-          <el-radio-group v-model="book.status">
-            <el-radio border v-for="e in $consts.bookStatus.entries" :label="e.key" :key="e.key">{{e.text}}</el-radio>
-          </el-radio-group>
-        </el-form-item>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="图书分类：" prop="catgory">
+              <TreeSelect style="width:100%" :data="bookTypes" v-model="book.catgory"></TreeSelect>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="标签：" prop="tag">
+              <el-select v-model="book.tag" style="width:100%" clearable>
+                <el-option v-for="item in bookTags" :key="item.id" :label="item.name" :value="item.name"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
         <el-row>
           <el-col :span="12">
             <el-form-item label="价格：" prop="price">
@@ -38,8 +48,10 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="标签：" prop="tag">
-              <el-select v-model="book.tag" style="width:100%"></el-select>
+            <el-form-item label="上架状态：" prop="status">
+              <el-radio-group v-model="book.status">
+                <el-radio border v-for="e in $consts.bookStatus.entries" :label="e.key" :key="e.key">{{e.text}}</el-radio>
+              </el-radio-group>
             </el-form-item>
           </el-col>
         </el-row>
@@ -77,20 +89,25 @@
 import { Book, bookRules } from '@/model/model.js'
 import Editor from '@/components/Editor.vue'
 import ImgUpload from '@/components/ImgUpload.vue'
+import TreeSelect from '@/components/TreeSelect'
+
 import { parseTime } from '@/../../util/js/date.js'
+import { queryDicData, TYPES } from '@/api/dicdata.js'
 
 export default {
-  components: { Editor, ImgUpload },
+  components: { Editor, ImgUpload, TreeSelect },
   data: () => {
     return {
       visible: false,
       fullscreen: false,
       loading: false,
       saveLoading: false,
-
       book: {},
       dialogType: "新增",
       bookRules,
+      //字典选项数据
+      bookTags: [],
+      bookTypes: [],
     }
   },
 
@@ -117,6 +134,7 @@ export default {
     //外部调用-打开编辑框
     show(book) {
       this.visible = true;
+      this.loadDicData();
       //参数为空，新增
       if (!book) {
         this.book = new Book();
@@ -132,6 +150,13 @@ export default {
         this.$message.error(err);
       }).finally(() => { this.loading = false });
     },
+    loadDicData() {
+      queryDicData(TYPES.bookTag)
+        .then(data => this.bookTags = data)
+        .catch(err => { console.log(err) });
+      queryDicData(TYPES.bookType, true)
+        .then(data => this.bookTypes = data);
+    }
   }
 }
 </script>

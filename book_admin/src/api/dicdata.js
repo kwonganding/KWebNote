@@ -4,20 +4,32 @@ import api from './api'
 
 const ROOT_PID = 0;
 
+//************ TYPES
+
+export const TYPES = {
+  bookTag: 'bookTag',
+  bookType: 'bookType',
+}
+
+//************ cascaderOption
+
 export const cascaderOption = { value: 'id', label: 'name', emitPath: false, checkStrictly: true, disabled: 'disabled' };
 
 //************  queryDicData
 
-export function queryDicData(item) {
-  return api.dicdata({ code: item.code }).then(res => {
+// type: 字典类型编码code
+// istree：字典数据是否树形结构，如果是树形结构则会构造树形
+export function queryDicData(type, istree = false) {
+  return api.dicdata({ code: type }).then(res => {
     if (!res.data || res.data.length <= 0) return [];
     //构造树形结构
-    if (!item.tree)
+    if (!istree)
       return res.data.sort(sortDicData);
     let sortItems = buildDicTree(res.data, ROOT_PID);
     return sortItems;
   })
 }
+
 function buildDicTree(items, pid) {
   let sortItems = items.filter(s => s.pid == pid);
   if (!sortItems || sortItems.length <= 0) return [];
@@ -34,7 +46,7 @@ function sortDicData(item1, item2) {
 
 //************  updateTreeDisabled
 
-// 编辑数据是，级联选项中不能选择自己及自己的子级
+// 编辑数据时，级联选项中不能选择自己及自己的子级
 export function updateTreeDisabled(items, currentItem) {
   //重置
   setDisabled(items, false);
