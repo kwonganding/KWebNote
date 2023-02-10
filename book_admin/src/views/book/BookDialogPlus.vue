@@ -1,41 +1,43 @@
-// 图书编辑的弹框组件，覆盖父视图，不影响其他功能
+// 编辑的弹框组件（Plus版），覆盖父视图，不影响其他功能
 <template>
-  <el-dialog v-loading="loading" :visible="visible" :show-close="false" class="editDialogPlus" width="100%" top="0" :modal="false">
-    <template #title>
-      <span style="font-weight:bold">
+  <el-dialog v-loading="loading" :visible="visible" :show-close="false" class="dialogPlus" width="100%" top="0" :modal="false">
+    <!-- 标题栏：标题+按钮 -->
+    <div slot="title" style="display:flex;justify-content:space-between;">
+      <span style="font-weight:bold;line-height: 32px;">
         <i class="el-icon-edit"></i>
         {{dialogType}} -书籍信息
       </span>
-      <span style="float:right;margin-top:-5px">
+      <!-- 按钮 -->
+      <span>
         <el-button @click="visible=false" icon="el-icon-circle-close">取消</el-button>
         <el-button @click="save" type="primary" icon="el-icon-success" :loading="saveLoading">保存</el-button>
       </span>
-    </template>
+    </div>
 
     <!-- 表单 -->
-    <el-form :model="book" ref="bookForm" :rules="bookRules" label-width="90px">
+    <el-form :model="item" ref="itemForm" :rules="itemRules" label-width="90px">
       <el-row>
         <el-col :span="12">
           <el-form-item label="名称：" prop="name">
-            <el-input v-model="book.name" placeholder="输入书籍名称" maxlength="50"></el-input>
+            <el-input v-model="item.name" placeholder="输入书籍名称" maxlength="50"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="作者：" prop="author">
-            <el-input v-model="book.author" placeholder="输入书籍作者" maxlength="50"></el-input>
+            <el-input v-model="item.author" placeholder="输入书籍作者" maxlength="50"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
           <el-form-item label="图书分类：" prop="catgory">
-            <TreeSelect style="width:100%" :data="bookTypes" v-model="book.catgory"></TreeSelect>
+            <TreeSelect style="width:100%" :data="bookTypes" v-model="item.catgory"></TreeSelect>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="标签：" prop="tag">
-            <el-select v-model="book.tag" style="width:100%" clearable>
-              <el-option v-for="item in bookTags" :key="item.id" :label="item.name" :value="item.name"></el-option>
+            <el-select v-model="item.tag" style="width:100%" clearable>
+              <el-option v-for="tag in bookTags" :key="tag.id" :label="tag.name" :value="tag.name"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
@@ -44,47 +46,49 @@
       <el-row>
         <el-col :span="12">
           <el-form-item label="价格：" prop="price">
-            <el-input v-model.number="book.price" placeholder="输入价格"></el-input>
+            <el-input v-model.number="item.price" placeholder="输入价格"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="上架状态：" prop="status">
-            <el-radio-group v-model="book.status">
+            <el-radio-group v-model="item.status">
               <el-radio border v-for="e in $consts.bookStatus.entries" :label="e.key" :key="e.key">{{e.text}}</el-radio>
             </el-radio-group>
           </el-form-item>
         </el-col>
       </el-row>
       <el-form-item label="图片：">
-        <ImgUpload v-model="book.imgs"></ImgUpload>
+        <ImgUpload v-model="item.imgs"></ImgUpload>
       </el-form-item>
 
       <el-form-item label="内容简介：">
-        <Editor :html.sync="book.introduction" height="300px"></Editor>
+        <Editor :html.sync="item.introduction"></Editor>
       </el-form-item>
-      <el-row v-show="book.id">
+      <el-row v-show="item.id">
         <el-col :span="12">
           <el-form-item label="创建时间：" prop="price">
-            <span>{{parseTime(book.createtime,'{y}-{m}-{d} {h}:{i}:{s}')}}</span>
+            <span>{{formatTime(item.createtime,'{y}-{m}-{d} {h}:{i}:{s}')}}</span>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="更新时间：" prop="tag">
-            <span>{{parseTime(book.lasttime,'{y}-{m}-{d} {h}:{i}:{s}')}}</span>
+            <span>{{formatTime(item.lasttime,'{y}-{m}-{d} {h}:{i}:{s}')}}</span>
           </el-form-item>
         </el-col>
       </el-row>
     </el-form>
+
   </el-dialog>
 </template>
 
 <script>
-import { Book, bookRules } from '@/model/model.js'
+//Vue组件
 import Editor from '@/components/Editor.vue'
 import ImgUpload from '@/components/ImgUpload.vue'
 import TreeSelect from '@/components/TreeSelect'
-
-import { parseTime } from '@/../../util/js/date.js'
+// JS组件
+import { Book, bookRules } from '@/model/model.js'
+import { formatTime } from '@/../../util/js/date.js'
 import { queryDicData, TYPES } from '@/api/dicdata.js'
 
 
@@ -93,29 +97,30 @@ export default {
   data: () => {
     return {
       visible: false,
-      saveLoading: false,
-      loading: false,
-      book: {},
+      loading: false, //页面数据加载状态
+      saveLoading: false, //保存状态
+      item: {}, //待编辑的数据
+      itemRules: bookRules, //验证规则
       dialogType: "新增",
-      bookRules,
       //字典选项数据
       bookTags: [],
       bookTypes: [],
     }
   },
   methods: {
-    parseTime,
+    formatTime,
+    //保存
     save() {
-      this.$refs.bookForm.validate((valid, mes) => {
+      this.$refs.itemForm.validate((valid, mes) => {
         if (!valid) {
           this.$message.error('输入有误，请修改后重新提交！');
           return;
         }
         //调用后端api
         this.saveLoading = true;
-        this.$api.book_save(this.book).then(res => {
+        this.$api.book_save(this.item).then(res => {
           this.$message.success('保存成功');
-          //触发一个自定义事件，通知更新成功
+          //触发一个自定义事件，通知更新
           this.$emit('updated');
           this.visible = false;
         }).catch(err => {
@@ -123,25 +128,26 @@ export default {
         }).finally(() => { this.saveLoading = false });
       })
     },
-    //外部调用-打开编辑框
-    show(book) {
+    //外部使用，调用show()方法显示当前组件
+    //不传入参数为新增，否则修改
+    show(item) {
       this.visible = true;
       this.loadDicData();
-      //参数为空，新增
-      if (!book) {
-        this.book = new Book();
+      //参数为空，为新增
+      if (!item) {
+        this.item = new Book();
         return;
       }
-      //更新
+      //修改模式，更新待修改数据item
       this.dialogType = "修改";
-      //调用API获取最新的对象
       this.loading = true;
-      this.$api.book_id({ id: book.id }).then(res => {
-        this.book = res.data;
+      this.$api.book_id({ id: item.id }).then(res => {
+        this.item = res.data;
       }).catch(err => {
         this.$message.error(err);
       }).finally(() => { this.loading = false });
     },
+    //加载字典数据
     loadDicData() {
       queryDicData(TYPES.bookTag)
         .then(data => this.bookTags = data)
@@ -153,16 +159,23 @@ export default {
 }
 </script>
 
-<style scoped lang='less'>
-</style>
-
-// 最大化弹框样式
-<style>
-.editDialogPlus {
+<style  lang='less'>
+// 最大化弹框样式，以及内容溢出滚动
+.dialogPlus {
   position: absolute;
   overflow: inherit;
-}
-.editDialogPlus .el-dialog {
-  min-height: 100% !important;
+  .el-dialog {
+    min-height: 100% !important;
+    max-height: 100%;
+    display: flex;
+    flex-flow: column;
+    .el-dialog__header {
+      padding: 4px 10px;
+    }
+    .el-dialog__body {
+      overflow: auto;
+      max-height: 100%;
+    }
+  }
 }
 </style>

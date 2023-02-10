@@ -16,11 +16,15 @@
             <TabsBar ref="tabsBar"></TabsBar>
           </div>
 
-          <el-button type="text" icon="el-icon-setting" v-on:click="$refs.userConfig.show()" title="系统设置"></el-button>
+          <i class="el-icon-message-solid h-button" title="系统通知，啥也不是！" style="padding:0 4px">
+            <sup class="el-badge__content hbadge">12</sup>
+          </i>
+
+          <i class="el-icon-setting h-button" v-on:click="$refs.userConfig.show()" title="系统设置"></i>
 
           <el-dropdown class="header-userbox" @command="handleCommand">
             <span>
-              <img src="https://pic1.zhimg.com/80/v2-5a36e8dbd1ec84d633fdd9789a0b1470_720w.webp" alt="头像" />
+              <img :src="$api.URL.proxy+'/file/f1.jpg'" alt="头像" />
               [ {{$store.state.user.name}} ]
               <i class="el-icon-arrow-down el-icon--right" style="font-size:12px"></i>
             </span>
@@ -149,17 +153,38 @@ export default {
   }
 }
 
-.el-button {
+.h-button {
+  height: 100%;
+  opacity: 0.9;
+  padding: 0 10px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: inherit;
+  // 数量标签
+  .hbadge {
+    position: relative;
+    left: -2px;
+    height: 16px;
+    line-height: 16px;
+    padding: 0 4px;
+  }
+  &:hover {
+    background: #fff7;
+    opacity: 1;
+  }
+}
+
+.hbtn.el-button {
   font-size: 18px;
   color: inherit;
-  opacity: 0.8;
+  opacity: 0.9;
   padding: 0 8px;
   &:focus {
     color: inherit;
   }
   &:hover {
-    background-color: #fff3;
-    color: #0003;
+    background-color: #fff8;
+    opacity: 1;
   }
 }
 .el-divider {

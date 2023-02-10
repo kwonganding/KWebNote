@@ -38,16 +38,28 @@ body {
 .view-scroll::-webkit-scrollbar {
     /*滚动条整体部分，*/
     width: 6px;
-    height: 6px;
+    height: 7px;
 }
 
 /* .main-scroll::-webkit-scrollbar-track { */
-    /*滚动条的轨道（里面装有Thumb）*/
-    /* background: #eee; */
-    /* border-radius: 4px; */
+/*滚动条的轨道（里面装有Thumb）*/
+/* background: #eee; */
+/* border-radius: 4px; */
 /* } */
 
 .view-scroll::-webkit-scrollbar-thumb {
+    /*滚动条里面可以拖动的那部分（位置5）*/
+    background: #ccc;
+    border-radius: 4px;
+}
+
+div::-webkit-scrollbar {
+    /*滚动条整体部分，*/
+    width: 6px;
+    height: 7px;
+}
+
+div::-webkit-scrollbar-thumb {
     /*滚动条里面可以拖动的那部分（位置5）*/
     background: #ccc;
     border-radius: 4px;

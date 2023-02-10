@@ -26,7 +26,7 @@ export default {
   components: { ImgUpload },
   data() {
     return {
-      user: { img: '/file/f1.jpg', name: '安木夕' }
+      user: { img: '/file/f1.jpg', name: '小卤蛋' }
     }
   },
   methods: {

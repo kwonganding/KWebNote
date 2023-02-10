@@ -1,8 +1,12 @@
+// 时间日期处理函数
+// 参考资料：
 
-/*
-* 解析日期并格式化，格式化参数：{y}-{m}-{d} {h}:{i}:{s}
+/** 解析日期，并格式化为字符串，格式化参数：{y}-{m}-{d} {h}:{i}:{s}
+ * @param {any} time
+ * @param {string} cFormat {y}-{m}-{d} {h}:{i}:{s}
+ * @returns {string}
 */
-export function parseTime(time, cFormat) {
+export function formatTime(time, cFormat) {
   if (arguments.length === 0 || !time) {
     return null
   }
@@ -11,6 +15,7 @@ export function parseTime(time, cFormat) {
   if (typeof time === 'object') {
     date = time
   } else {
+    // 数字字符串
     if ((typeof time === 'string')) {
       if ((/^[0-9]+$/.test(time))) {
         // support "1548221490638"
@@ -21,7 +26,7 @@ export function parseTime(time, cFormat) {
         time = time.replace(new RegExp(/-/gm), '/')
       }
     }
-
+    // 10位时间戳转13位长度
     if ((typeof time === 'number') && (time.toString().length === 10)) {
       time = time * 1000
     }
@@ -39,19 +44,19 @@ export function parseTime(time, cFormat) {
   const time_str = format.replace(/{([ymdhisa])+}/g, (result, key) => {
     const value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
-    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value ] }
+    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value] }
     return value.toString().padStart(2, '0')
   })
   return time_str
 }
 
 
-/**
+/**解析日期，并格式化为当前时间的字符串描述，如“20分钟前”、“3小时前”等
  * @param {number} time
- * @param {string} option
+ * @param {string} option {y}-{m}-{d} {h}:{i}:{s}
  * @returns {string}
  */
- export function formatTime(time, option) {
+export function formatNow(time, option) {
   if (('' + time).length === 10) {
     time = parseInt(time) * 1000
   } else {
@@ -72,21 +77,5 @@ export function parseTime(time, cFormat) {
   } else if (diff < 3600 * 24 * 2) {
     return '1天前'
   }
-  if (option) {
-    return parseTime(time, option)
-  } else {
-    return (
-      d.getMonth() +
-      1 +
-      '月' +
-      d.getDate() +
-      '日' +
-      d.getHours() +
-      '时' +
-      d.getMinutes() +
-      '分'
-    )
-  }
+  return formatTime(time, option || "{y}-{m}-{d}")
 }
-
-//copy from：

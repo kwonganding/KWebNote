@@ -1,12 +1,15 @@
 <template>
   <el-drawer :title="$t('userConfig.title')" :visible.sync="visible" size="300px" :modal="false">
+    <!-- 主题 -->
     <b>{{$t('userConfig.thema')}}</b>
     <ul class="teama-box" @click="handleThemaClick($event)">
       <li v-for="t in themas" :style="t" :key="t.name" :class="t.name==config.thema.name?'active':''">{{t.name}}</li>
     </ul>
-
+    <!-- 路由切换动画 -->
     <b>{{$t('userConfig.routeAnimation')}}</b>
     <el-switch v-model="config.routerAnimation" class="config-box" :active-text="$t('userConfig.enable')"></el-switch>
+    
+    <!-- 多语言 -->
     <b>{{$t('userConfig.language')}}</b>
     <el-radio-group v-model="config.language" class="config-box">
       <el-radio label="zh">中文</el-radio>
@@ -74,6 +77,7 @@ b {
     display: inline-block;
     margin: 5px;
     padding: 4px 10px;
+    border-radius: 2px;
     cursor: pointer;
     &:hover {
       opacity: 0.8;

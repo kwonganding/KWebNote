@@ -22,7 +22,7 @@ export default {
   components: { Editor, Toolbar },
   props: {
     html: { type: String },//富文本内容，外部传入，需用.sync修饰
-    height: { default: '300px' }//高度
+    height: { default: '200px' }//高度
   },
   computed: {
     content: {

@@ -45,6 +45,11 @@ api.interceptors.response.use(res => {
   return Promise.reject(err.message);
 })
 
+//一个空的、没有价值的api
+api.api = function (param) {
+  return Promise.resolve();
+}
+
 api.login = function (param) {
   return api.post(URL.login, param);
 }
