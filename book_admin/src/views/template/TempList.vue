@@ -1,4 +1,4 @@
-//列表管理页面：图书列表，图书的各种增删改查管理
+//列表管理页面：增删改查管理入口
 <template>
   <!-- 全局样式“view-page”，及内容区域“view-scroll”，目的是为了控制内容滚动条 -->
   <div class="view-page">
@@ -15,17 +15,11 @@
       </div>
       <!-- 1.2、查询 -->
       <el-form :model="search" inline ref="searchForm">
-        <el-form-item prop="status">
-          <el-radio-group v-model="search.status">
-            <el-radio-button border label>All</el-radio-button>
-            <el-radio-button v-for="e in $consts.bookStatus.entries" :label="e.key" :key="e.key">{{e.text}}</el-radio-button>
-          </el-radio-group>
+        <el-form-item label="编号" prop="id">
+          <el-input v-model="search.name" placeholder="请输入编号关键词" maxlength="50"></el-input>
         </el-form-item>
         <el-form-item label="名称" prop="name">
           <el-input v-model="search.name" placeholder="请输入名称关键词" maxlength="50"></el-input>
-        </el-form-item>
-        <el-form-item label="作者" prop="author">
-          <el-input v-model="search.author" placeholder="请输入作者关键词" maxlength="50"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button icon="el-icon-search" type="primary" @click="searchData" :loading="loading">查询</el-button>
@@ -43,22 +37,7 @@
         <el-table-column label="名称" min-width="200" width="auto" prop="name" show-overflow-tooltip>
           <el-link slot-scope="scope" @click="$refs.itemDetail.show(scope.row)" type="primary">{{scope.row.name}}</el-link>
         </el-table-column>
-        <el-table-column label="作者" width="200" prop="author" show-overflow-tooltip></el-table-column>
-        <el-table-column label="标签" width="80" align="center" prop="tag"></el-table-column>
-        <el-table-column label="价格" width="80" align="center" prop="price"></el-table-column>
-        <el-table-column label="评论数" width="80" align="center" prop="comments"></el-table-column>
-        <el-table-column label="图片" width="65" align="center">
-          <template slot-scope="scope">
-            <el-popover placement="bottom" trigger="click">
-              <img :src="previewImg(scope.row.imgs)" width="40px" slot="reference" style="vertical-align: middle;" />
-              <img :src="previewImg(scope.row.imgs)" width="500px" />
-            </el-popover>
-          </template>
-        </el-table-column>
-        <!-- 枚举常量 -->
-        <el-table-column label="状态" width="70" align="center" prop="status" :formatter="$consts.bookStatus.tableFormater">
-          <el-tag slot-scope="scope" :type="$consts.bookStatus[scope.row.status].type">{{$consts.bookStatus[scope.row.status].text}}</el-tag>
-        </el-table-column>
+
         <el-table-column label="修改日期" width="100" align="center" prop="lasttime">
           <template slot-scope="scope">{{formatTime(scope.row.lasttime,'{y}-{m}-{d}')}}</template>
         </el-table-column>
@@ -77,28 +56,28 @@
 
     <!-- 4、其他弹框组件 -->
     <!-- 4.1 详情-抽屉弹框 -->
-    <BookDetail ref="itemDetail"></BookDetail>
+    <ItemDetail ref="itemDetail"></ItemDetail>
     <!-- 4.2 编辑弹框 -->
-    <BookDialog ref="itemDialog" v-on:updated="loadData"></BookDialog>
+    <ItemDialog ref="itemDialog" v-on:updated="loadData"></ItemDialog>
     <!-- 4.3 编辑弹框plus版，100%遮罩当前视图 -->
-    <BookDialogPlus ref="itemDialogPlus" v-on:updated="loadData"></BookDialogPlus>
+    <ItemDialogPlus ref="itemDialogPlus" v-on:updated="loadData"></ItemDialogPlus>
   </div>
 </template>
 
 <script>
 // vue组件
-import BookDetail from './BookDetail.vue'
-import BookDialog from './BookDialog.vue'
-import BookDialogPlus from './BookDialogPlus.vue'
+import ItemDetail from './ItemDetail.vue'
+import ItemDialog from './ItemDialog.vue'
+import ItemDialogPlus from './ItemDialogPlus.vue'
 import Pagination from '@/components/Pagination.vue'
 
 // js组件
 import { formatTime, formatNow } from '@/../../util/js/date.js'
 
 export default {
-  name: 'Books',
+  name: 'TempList',
   components: {
-    BookDetail, BookDialog, BookDialogPlus, Pagination
+    ItemDetail, ItemDialog, ItemDialogPlus, Pagination
   },
   data() {
     return {
@@ -106,7 +85,7 @@ export default {
       loading: false, //加载状态
       total: 10,      //列表总数
       search: {       //查询对象
-        status: 'normal', name: '', author: '',
+        id: '', name: '',
         index: 1, //页码
         size: 10, //页大小，页行数
       },
@@ -121,7 +100,7 @@ export default {
     //加载数据
     loadData() {
       this.loading = true;
-      this.$api.book_list(this.search)
+      this.$api.api(this.search)
         .then(res => {
           this.listData = res.data;
           this.total = res.total;
@@ -131,7 +110,19 @@ export default {
         })
         .finally(() => {
           this.loading = false;
-        })
+        });
+
+      //TODO:******* 测试数据 *******/
+      setTimeout(() => {
+        let list = [];
+        for (let i = 0; i <= this.search.size; i++) {
+          list.push({
+            id: '10' + i, name: '测试数据-模板页面测试数据' + i,
+            lasttime: 1675319639624 - i * 10000000, createtime: 1675319639624 - i * 30000000
+          })
+        }
+        this.listData = list;
+      }, 100);
     },
     //执行查询，需要重置页码到第一页
     searchData() {
@@ -159,24 +150,6 @@ export default {
         })
         .catch(() => { })
     },
-
-    //列表中的图片缩略图地址处理，显示第一张，加上代理
-    previewImg(imgs) {
-      if (!imgs) return;
-      return this.$api.URL.proxy + imgs?.split(',')[0];
-    },
-    // 弃用
-    handleAdd() {
-      this.$router.push('/book/add');
-    },
-    handleEdit() {
-      let srows = this.$refs.listTable.selection;
-      if (!srows || srows.length < 1) {
-        this.$message.warning('未选中任何项！');
-        return;
-      }
-      this.$router.push('/book/update/' + srows[0].id);
-    }
   }
 }
 </script>
@@ -195,4 +168,5 @@ export default {
   }
 }
 </style>
+
 

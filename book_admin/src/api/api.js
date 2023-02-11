@@ -47,7 +47,7 @@ api.interceptors.response.use(res => {
 
 //一个空的、没有价值的api
 api.api = function (param) {
-  return Promise.resolve();
+  return Promise.resolve({ data: [], total: 10 });
 }
 
 api.login = function (param) {

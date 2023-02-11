@@ -32,7 +32,7 @@ export const themas = [
 export let userConfig = {
   routerAnimation: true,
   menuCollapse: false,
-  language: 'cn',
+  language: 'zh',
   thema: themas[0],
 }
 

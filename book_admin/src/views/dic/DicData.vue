@@ -15,7 +15,7 @@
       <el-table-column label="名称" width="auto" prop="name" align="left"></el-table-column>
       <el-table-column label="排序" width="80px" prop="sort" align="center"></el-table-column>
 
-      <el-table-column label="操作" width="140px" align="center" class-name="link-btton">
+      <el-table-column label="操作" width="140px" align="center" class-name="table-link-btton">
         <template slot-scope="scope">
           <el-link @click="addItem(scope.row)" v-if="currentType?.tree" type="success">添加</el-link>
           <el-link @click="editItem(scope.row)" type="primary">修改</el-link>
@@ -157,10 +157,6 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.link-btton a + a {
-  margin: 0 5px;
-}
-
 .bar {
   display: flex;
   justify-content: space-between;

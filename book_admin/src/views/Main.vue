@@ -174,19 +174,6 @@ export default {
   }
 }
 
-.hbtn.el-button {
-  font-size: 18px;
-  color: inherit;
-  opacity: 0.9;
-  padding: 0 8px;
-  &:focus {
-    color: inherit;
-  }
-  &:hover {
-    background-color: #fff8;
-    opacity: 1;
-  }
-}
 .el-divider {
   margin: 5px;
   width: auto;

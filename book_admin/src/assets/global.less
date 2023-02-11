@@ -1,0 +1,78 @@
+/*  ********** 滚动样式 ************/
+/* view页面视图区域样式，主要目的是控制页面内容的滚动，让主页框架不会滚动 */
+.view-page {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+/* 容器内容 "view-scroll" ，滚动条样式 */
+.view-scroll {
+  max-height: 100%;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    /*滚动条整体部分，*/
+    width: 6px;
+    height: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    /*滚动条里面可以拖动的那部分（位置5）*/
+    background: #ccc;
+    border-radius: 4px;
+  }
+}
+
+div,
+section {
+  &::-webkit-scrollbar {
+    /*滚动条整体部分，*/
+    width: 6px;
+    height: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    /*滚动条里面可以拖动的那部分（位置5）*/
+    background: #ccc;
+    border-radius: 4px;
+  }
+}
+
+// ********** 表格内容列的滚动样式 ************/
+.table-scroll.el-table {
+  height: 100%;
+
+  .el-table__body-wrapper {
+    overflow-y: auto;
+    // 标题标题40px
+    height: calc(100% - 40px);
+  }
+}
+
+// ********** 表格中link-button的间距 ************/
+.table-link-btton a+a {
+  margin: 0 5px;
+}
+
+// ********** 最大化弹框样式，以及内容溢出滚动 ************/
+.dialogPlus {
+  position: absolute;
+  overflow: inherit;
+
+  .el-dialog {
+    min-height: 100% !important;
+    max-height: 100%;
+    display: flex;
+    flex-flow: column;
+
+    .el-dialog__header {
+      padding: 4px 10px;
+    }
+
+    .el-dialog__body {
+      overflow: auto;
+      max-height: 100%;
+    }
+  }
+}

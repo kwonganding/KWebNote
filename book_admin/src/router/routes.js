@@ -129,10 +129,10 @@ export default [
         component: () => import('@/views/dic/Dictionary.vue'),
       },
       {
-        path: '/test',
-        name: 'Test',
-        meta: { title: 'Test-View', icon: 'el-icon-video-camera' },
-        component: () => import('@/views/Test.vue'),
+        path: '/template',
+        name: 'TempList',
+        meta: { title: '模板页', icon: 'el-icon-video-camera' },
+        component: () => import('@/views/template/TempList.vue'),
       },
     ]
   },

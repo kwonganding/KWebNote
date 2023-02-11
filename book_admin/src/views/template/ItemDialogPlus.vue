@@ -28,20 +28,6 @@
           </el-form-item>
         </el-col>
       </el-row>
-      <el-row>
-        <el-col :span="12">
-          <el-form-item label="图书分类：" prop="catgory">
-            <TreeSelect style="width:100%" :data="bookTypes" v-model="item.catgory"></TreeSelect>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="标签：" prop="tag">
-            <el-select v-model="item.tag" style="width:100%" clearable>
-              <el-option v-for="tag in bookTags" :key="tag.id" :label="tag.name" :value="tag.name"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-      </el-row>
 
       <el-row>
         <el-col :span="12">
@@ -77,7 +63,6 @@
         </el-col>
       </el-row>
     </el-form>
-
   </el-dialog>
 </template>
 
@@ -87,10 +72,7 @@ import Editor from '@/components/Editor.vue'
 import ImgUpload from '@/components/ImgUpload.vue'
 import TreeSelect from '@/components/TreeSelect'
 // JS组件
-import { Book, bookRules } from '@/model/model.js'
 import { formatTime } from '@/../../util/js/date.js'
-import { queryDicData, TYPES } from '@/api/dicdata.js'
-
 
 export default {
   components: { Editor, ImgUpload, TreeSelect },
@@ -100,11 +82,8 @@ export default {
       loading: false, //页面数据加载状态
       saveLoading: false, //保存状态
       item: {}, //待编辑的数据
-      itemRules: bookRules, //验证规则
+      itemRules: { name: { required: true, message: '必填' } }, //验证规则
       dialogType: "新增",
-      //字典选项数据
-      bookTags: [],
-      bookTypes: [],
     }
   },
   methods: {
@@ -118,7 +97,7 @@ export default {
         }
         //调用后端api
         this.saveLoading = true;
-        this.$api.book_save(this.item).then(res => {
+        this.$api.api(this.item).then(res => {
           this.$message.success('保存成功');
           //触发一个自定义事件，通知更新
           this.$emit('updated');
@@ -132,29 +111,25 @@ export default {
     //不传入参数为新增，否则修改
     show(item) {
       this.visible = true;
-      this.loadDicData();
       //参数为空，为新增
       if (!item) {
-        this.item = new Book();
+        this.item = {};
         return;
       }
       //修改模式，更新待修改数据item
       this.dialogType = "修改";
       this.loading = true;
-      this.$api.book_id({ id: item.id }).then(res => {
-        this.item = res.data;
+      this.$api.api({ id: item.id }).then(res => {
+        // this.item = res.data;
       }).catch(err => {
         this.$message.error(err);
       }).finally(() => { this.loading = false });
+
+      //TODO:******* 测试数据 *******/
+      setTimeout(() => {
+        this.item = item;
+      }, 100);
     },
-    //加载字典数据
-    loadDicData() {
-      queryDicData(TYPES.bookTag)
-        .then(data => this.bookTags = data)
-        .catch(err => { console.log(err) });
-      queryDicData(TYPES.bookType, true)
-        .then(data => this.bookTypes = data);
-    }
   }
 }
 </script>
