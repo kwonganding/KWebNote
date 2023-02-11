@@ -5,6 +5,7 @@ export default {
     main: 'Main',
     home: 'Home',
     doc: 'Document',
+    bookshop: 'Books Mail',
     book: 'Books',
     order: 'Orders',
     sysManagement: 'System'

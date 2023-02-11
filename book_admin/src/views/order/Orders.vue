@@ -6,20 +6,18 @@
     <div class="toolbar">
       <!-- 1.1、操作按钮 -->
       <div style="padding-top: 2px;">
-        <el-button @click="$refs.itemDialogPlus.show()" type="primary" icon="icon icon-add" title="弹窗模式-覆盖父视图">新增</el-button>
-
-        <el-button @click="$refs.itemDialog.show()" icon="el-icon-plus" type="primary" title="普通弹窗模式">新增2</el-button>
-        <!-- <el-button @click="handleAdd" title="路由到新视图">新增3(路由)</el-button> -->
-        <!-- <el-button @click="handleEdit" title="路由到新视图">修改(路由)</el-button> -->
         <el-button @click="handleDeletItems" icon="el-icon-delete" title="删除选择项" type="warning" :disabled="$refs.listTable?.selection.length<1">删除</el-button>
       </div>
       <!-- 1.2、查询 -->
       <el-form :model="search" inline ref="searchForm">
-        <el-form-item label="编号" prop="id">
-          <el-input v-model="search.name" placeholder="请输入编号关键词" maxlength="50"></el-input>
+        <el-form-item prop="status">
+          <el-radio-group v-model="search.status">
+            <el-radio-button border label>All</el-radio-button>
+            <el-radio-button v-for="e in $consts.orderStatus.entries" :label="e.key" :key="e.key">{{e.text}}</el-radio-button>
+          </el-radio-group>
         </el-form-item>
-        <el-form-item label="名称" prop="name">
-          <el-input v-model="search.name" placeholder="请输入名称关键词" maxlength="50"></el-input>
+        <el-form-item label="" prop="products">
+          <el-input v-model="search.products" placeholder="请输入商品关键词" maxlength="50"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button icon="el-icon-search" type="primary" @click="searchData" :loading="loading">查询</el-button>
@@ -33,18 +31,25 @@
     <div class="view-scroll">
       <el-table :data="listData" ref="listTable" row-key="id" border stripe v-loading="loading" class="table-scroll">
         <el-table-column type="selection" width="39"></el-table-column>
-        <el-table-column label="ID" width="54px" prop="id" align="center"></el-table-column>
-        <el-table-column label="名称" min-width="200" width="auto" prop="name" show-overflow-tooltip>
-          <el-link slot-scope="scope" @click="$refs.itemDetail.show(scope.row)" type="primary">{{scope.row.name}}</el-link>
+        <el-table-column label="订单编号" width="80" prop="id" align="center">
+          <el-link slot-scope="scope" @click="$refs.itemDetail.show(scope.row)" type="primary">{{scope.row.id.toString().padStart(6,'0')}}</el-link>
+        </el-table-column>
+        <el-table-column label="用户" width="80" prop="name"></el-table-column>
+
+        <el-table-column label="订单金额" width="80" prop="money"></el-table-column>
+        <el-table-column label="状态" width="80" prop="status">
+          <el-tag slot-scope="scope" :type="$consts.orderStatus[scope.row.status].type">{{$consts.orderStatus[scope.row.status].text}}</el-tag>
         </el-table-column>
 
-        <el-table-column label="修改日期" width="100" align="center" prop="lasttime">
-          <template slot-scope="scope">{{formatTime(scope.row.lasttime,'{y}-{m}-{d}')}}</template>
+        <el-table-column label="商品信息" min-width="200" width="auto" prop="products" show-overflow-tooltip></el-table-column>
+
+        <el-table-column label="创建时间" width="100" align="center" prop="createtime">
+          <template slot-scope="scope">{{formatTime(scope.row.createtime,'{y}-{m}-{d}')}}</template>
         </el-table-column>
         <!-- 操作列 -->
         <el-table-column label="操作" class-name="table-link-btton" width="90" align="center">
           <template slot-scope="scope">
-            <el-link @click="$refs.itemDialogPlus.show(scope.row)" type="primary">修改</el-link>
+            <!-- <el-link @click="$refs.itemDialogPlus.show(scope.row)" type="primary">修改</el-link> -->
             <el-link @click="handleDelet(scope.row)" type="warning">删除</el-link>
           </template>
         </el-table-column>
@@ -57,27 +62,21 @@
     <!-- 4、其他弹框组件 -->
     <!-- 4.1 详情-抽屉弹框 -->
     <ItemDetail ref="itemDetail"></ItemDetail>
-    <!-- 4.2 编辑弹框 -->
-    <ItemDialog ref="itemDialog" v-on:updated="loadData"></ItemDialog>
-    <!-- 4.3 编辑弹框plus版，100%遮罩当前视图 -->
-    <ItemDialogPlus ref="itemDialogPlus" v-on:updated="loadData"></ItemDialogPlus>
   </div>
 </template>
 
 <script>
 // vue组件
 import ItemDetail from './ItemDetail.vue'
-import ItemDialog from './ItemDialog.vue'
-import ItemDialogPlus from './ItemDialogPlus.vue'
 import Pagination from '@/components/Pagination.vue'
 
 // js组件
 import { formatTime } from '@/../../util/js/date.js'
 
 export default {
-  name: 'TempList',
+  name: 'Orders',
   components: {
-    ItemDetail, ItemDialog, ItemDialogPlus, Pagination
+    ItemDetail, Pagination
   },
   data() {
     return {
@@ -85,7 +84,7 @@ export default {
       loading: false, //加载状态
       total: 10,      //列表总数
       search: {       //查询对象
-        id: '', name: '',
+        uid: '', status: '', products: '',
         index: 1, //页码
         size: 10, //页大小，页行数
       },
@@ -100,7 +99,7 @@ export default {
     //加载数据
     loadData() {
       this.loading = true;
-      this.$api.api(this.search)
+      this.$api.order_list(this.search)
         .then(res => {
           this.listData = res.data;
           this.total = res.total;
@@ -111,18 +110,6 @@ export default {
         .finally(() => {
           this.loading = false;
         });
-
-      //TODO:******* 测试数据 *******/
-      setTimeout(() => {
-        let list = [];
-        for (let i = 0; i <= this.search.size; i++) {
-          list.push({
-            id: '10' + i, name: '测试数据-模板页面测试数据' + i,
-            lasttime: 1675319639624 - i * 10000000, createtime: 1675319639624 - i * 30000000
-          })
-        }
-        this.listData = list;
-      }, 100);
     },
     //执行查询，需要重置页码到第一页
     searchData() {
@@ -164,7 +151,7 @@ export default {
     margin: 0px 6px 6px 6px;
   }
   .el-input {
-    width: 140px;
+    width: 160px;
   }
 }
 </style>

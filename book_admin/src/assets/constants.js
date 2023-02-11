@@ -14,13 +14,14 @@ export default {
   }),
   //订单状态枚举
   orderStatus: new EnumFactory({
-    default: { text: '正常', type: 'info' },
-    notpaid: { text: '待支付', type: 'warning' },
+    unpay: { text: '未支付', type: 'warning' },
     canceled: { text: '已取消', type: 'danger' },
-    completed: { text: '已完成', type: 'success' }
+    done: { text: '已完成', type: 'success' }
   }),
 }
 
 //❓直接赋值枚举值，需输入字符串，易出错
 //this.book.status = 'normal';
 //js中不好解决，提示输入也是个问题，还有语法校验也不好做。可以试试TS
+
+

@@ -1,4 +1,4 @@
-//详情（抽屉）展示组件：图书详情
+//详情（抽屉）展示组件：详情
 <template>
   <el-drawer v-loading="loading" :title="item?.name" :visible.sync="visible" size="540px" custom-class="detail-box">
     <span class="ititle">标题：</span>
@@ -28,12 +28,6 @@ export default {
       visible: false,
       loading: false,
       item: {}, //数据对象
-    }
-  },
-  computed: {
-    imgList() {
-      if (!this.item?.imgs) return [];
-      return this.item?.imgs?.split(',');
     }
   },
   methods: {

@@ -79,7 +79,7 @@ export default [
   {
     path: '/book',
     component: Main,
-    meta: { title: '书籍管理', lang: 'book', icon: 'el-icon-notebook-2' },
+    meta: { title: '书籍商城', lang: 'bookshop', icon: 'el-icon-notebook-2' },
     name: '书籍管理',
     children: [
       {
@@ -100,18 +100,10 @@ export default [
         meta: { title: '编辑书籍', icon: 'el-icon-edit' },
         component: () => import('@/views/book/BookEdit.vue'),
       },
-    ]
-  },
-  // 订单管理
-  {
-    path: '/order',
-    component: Main,
-    meta: { title: '订单管理', lang: 'order', icon: 'el-icon-s-shop' },
-    children: [
       {
         path: '/order',
         name: 'Orders',
-        meta: { title: '订单管理', lang: 'order', icon: 'el-icon-video-camera' },
+        meta: { title: '图书订单', lang: 'order', icon: 'el-icon-s-shop' },
         component: () => import('@/views/order/Orders.vue'),
       },
     ]

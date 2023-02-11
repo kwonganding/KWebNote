@@ -17,6 +17,8 @@ const URL = {
   dicdata: '/api/sys/dicdata/list',
   dicdata_save: '/api/sys/dicdata/save',
   dicdata_delete: '/api/sys/dicdata/delete',
+  order_list: '/api/order/list',
+  order_save: '/api/order/save',
 }
 
 // 引入axios
@@ -91,4 +93,8 @@ api.dicdata_delete = function (param) {
   return api.post(URL.dicdata_delete, param);
 }
 
+//订单
+api.order_list = function (param) {
+  return api.post(URL.order_list, param);
+}
 export default api;
