@@ -96,5 +96,6 @@ export default {
 .dicdata {
   width: 100%;
   margin-left: 5px;
+  overflow: auto;
 }
 </style>

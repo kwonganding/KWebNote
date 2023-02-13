@@ -52,7 +52,7 @@ export default {
       }
       this.emitValue(item);
     },
-    // 清除
+    //清除
     handelClear() {
       this.emitValue({});
       this.$refs.tree.setCurrentKey(null);
@@ -64,6 +64,7 @@ export default {
       this.currentItem = node ? node.data : {};
       this.$refs.tree.setCurrentKey(key);
     },
+    // 更新值
     emitValue(item) {
       this.currentItem = item;
       this.innerValueChange = true;

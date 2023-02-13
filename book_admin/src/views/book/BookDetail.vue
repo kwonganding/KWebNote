@@ -75,6 +75,7 @@ export default {
   .ititle {
     margin: 5px 2px;
     display: block;
+    color: #0009;
     &::before {
       content: "▍";
       color: #66a2e4;

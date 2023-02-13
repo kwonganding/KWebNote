@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkbookadmin=self.webpackChunkbookadmin||[]).push([[286],{1286:function(n,t,e){e.r(t),e.d(t,{default:function(){return r}});var u={name:"Page404",data(){return{}}},r=(0,e(1001).Z)(u,(function(){return this._self._c,this._m(0)}),[function(){var n=this,t=n._self._c;return t("div",[t("b",[n._v("404 😭😭😭")]),t("br"),t("i",[n._v("没有找到该页面资源！")])])}],!1,null,"1711a4b2",null).exports}}]);
+//# sourceMappingURL=286.d58594df.js.map

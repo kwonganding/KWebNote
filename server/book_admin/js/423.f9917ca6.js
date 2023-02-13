@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkbookadmin=self.webpackChunkbookadmin||[]).push([[423],{7423:function(e,r,t){t.r(r),t.d(r,{default:function(){return n}});var u={created(){this.$router.replace({path:"/"+this.$route.params.path,query:this.$route.query})},render:function(e){return e()}},n=(0,t(1001).Z)(u,void 0,void 0,!1,null,null,null).exports}}]);
+//# sourceMappingURL=423.f9917ca6.js.map

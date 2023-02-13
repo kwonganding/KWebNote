@@ -16,10 +16,6 @@ server.use('/file', express.static('./file'));
 //兼容前端的跨域代理路径
 server.use('/server/file', express.static('./file'));
 
-//管理后台"book_admin"的部署
-server.use('/bookadmin', express.static('./book_admin'))
-
-
 //*****  加载api路由 *****/
 
 const path='/api';
@@ -39,6 +35,18 @@ server.use(path, book);
 server.use(path, order);
 server.use(path, system);
 server.use(file);
+
+//管理后台"book_admin"的部署
+const fs = require('fs')
+const rpath = require('path')
+//静态资源
+server.use('/bookadmin', express.static('./book_admin'));
+//前端路由的重定向
+server.get('/bookadmin/*', function(req, res) {
+  const html = fs.readFileSync(rpath.resolve(__dirname, '../server/book_admin/index.html'), 'utf-8')
+  res.send(html)
+})
+
 
 //*****  配置端口，启用监听端口 *****/
 server.listen(3000, err => {

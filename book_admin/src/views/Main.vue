@@ -30,9 +30,11 @@
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="pwd">修改密码</el-dropdown-item>
-              <el-dropdown-item command="about">关于</el-dropdown-item>
+              <el-dropdown-item command="about">
+                <i class="el-icon-info"></i>关于
+              </el-dropdown-item>
               <el-dropdown-item command="user">
-                <i class="el-icon-user-solid"></i> 个人中心
+                <i class="el-icon-user-solid"></i>个人中心
               </el-dropdown-item>
               <el-divider></el-divider>
               <el-dropdown-item command="logout" icon="el-icon-circle-close">退出登录</el-dropdown-item>
@@ -107,7 +109,7 @@ export default {
           this.$alert.warning('还未实现！');
           break;
         case 'about':
-          this.$alert("<p><b>关于作者：</b> <a href='https://www.yuque.com/kanding' target='_blank'>语雀「 安木夕」</a> | <a href='https://github.com/kwonganding' target='_blank'>Github「 Kanding」</a></p>", { dangerouslyUseHTMLString: true });
+          this.$router.push('/doc');
           break;
         case 'user':
           this.$router.push('/user');
@@ -226,6 +228,7 @@ export default {
   transform: translateX(-30px);
 }
 </style>
+
 
 
 

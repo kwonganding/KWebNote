@@ -70,12 +70,11 @@
 //Vue组件
 import Editor from '@/components/Editor.vue'
 import ImgUpload from '@/components/ImgUpload.vue'
-import TreeSelect from '@/components/TreeSelect'
 // JS组件
 import { formatTime } from '@/../../util/js/date.js'
 
 export default {
-  components: { Editor, ImgUpload, TreeSelect },
+  components: { Editor, ImgUpload },
   data: () => {
     return {
       visible: false,

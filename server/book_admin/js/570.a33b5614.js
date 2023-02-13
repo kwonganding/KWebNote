@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkbookadmin=self.webpackChunkbookadmin||[]).push([[570],{2570:function(n,t,e){e.r(t),e.d(t,{default:function(){return r}});var u={name:"Page401",data(){return{}}},r=(0,e(1001).Z)(u,(function(){return this._self._c,this._m(0)}),[function(){var n=this._self._c;return n("div",[n("h1",[this._v("你没有权限访问当前页面！")])])}],!1,null,"949592e0",null).exports}}]);
+//# sourceMappingURL=570.a33b5614.js.map

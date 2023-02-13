@@ -1,10 +1,10 @@
 <template>
-  <el-menu-item v-if="!hasChildren" :index="item.path">
+  <el-menu-item v-if="!hasChildren" :index="item.path" class="mitem">
     <i :class="item.meta.icon"></i>
     <!-- 名称用title插槽，折叠时才有效 -->
     <span slot="title">{{title(item)}}</span>
   </el-menu-item>
-  <el-submenu v-else :index="item.path">
+  <el-submenu v-else :index="item.path" class="msub-item">
     <template slot="title">
       <i :class="item.meta.icon"></i>
       <span slot="title">{{title(item)}}</span>
@@ -33,7 +33,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .el-menu--vertical:not(.el-menu--collapse) {
   width: 200px;
 }

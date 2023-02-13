@@ -1,0 +1,31 @@
+.cards[data-v-2fae202d],
+.charts[data-v-2fae202d] {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+}
+.el-card[data-v-2fae202d] {
+  width: 100%;
+  margin: 10px;
+}
+.cards .el-card[data-v-2fae202d] {
+  text-align: center;
+}
+.cards .el-card *[data-v-2fae202d] {
+  margin: 15px 0;
+}
+.cards .el-card i[data-v-2fae202d] {
+  font-size: 50px;
+}
+.cards .el-card .value[data-v-2fae202d] {
+  font-size: 20px;
+  font-weight: bold;
+}
+.cards .el-card .title[data-v-2fae202d] {
+  color: #0009;
+}
+.charts .el-card[data-v-2fae202d] {
+  height: 360px;
+  padding: 10px 5px 0;
+}
+

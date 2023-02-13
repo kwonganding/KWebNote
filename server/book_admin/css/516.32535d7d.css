@@ -1,0 +1,15 @@
+.dialog-imgbox[data-v-eb8ea79a] {
+  border: 1px dashed #0003;
+  width: 150px;
+  height: 100px;
+  text-align: center;
+}
+.dialog-imgbox img[data-v-eb8ea79a] {
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.footer[data-v-eb8ea79a] {
+  text-align: center;
+}
+

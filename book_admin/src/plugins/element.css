@@ -101,6 +101,18 @@
     padding: 10px;
 }
 
+/* 菜单项的高度样式 */
+.el-submenu .el-menu-item {
+    height: 42px;
+    line-height: 42px;
+}
+
+.el-menu-item,
+.el-submenu__title {
+    height: 50px;
+    line-height: 50px;
+}
+
 /* ///////////////备选 */
 .el-radio--medium.is-bordered {
     padding: 8px 16px 0 8px;

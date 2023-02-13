@@ -1,0 +1,59 @@
+.imgbox[data-v-ada29738] {
+  width: 100%;
+  height: 100%;
+}
+.imgbox img[data-v-ada29738] {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.imgbox.success[data-v-ada29738]::before {
+  content: "";
+  position: absolute;
+  right: 0px;
+  width: 0;
+  height: 0;
+  text-align: center;
+  border-top: 24px solid #13ce66;
+  border-left: 30px solid transparent;
+}
+.imgbox.success[data-v-ada29738]::after {
+  content: "✓";
+  position: absolute;
+  right: 3px;
+  top: -4px;
+  color: #fff;
+}
+
+
+.imgdialog {
+  width: -moz-max-content;
+  width: max-content;
+  height: -moz-max-content;
+  height: max-content;
+  max-width: 80%;
+}
+.imgdialog .el-dialog__header {
+  background: none;
+}
+/* 达到数量时，隐藏上传按钮 */
+.hide .el-upload--picture-card {
+  display: none;
+}
+/* 调整/取消动画 */
+.el-list-enter-active,
+.el-list-leave-active {
+  transition: none;
+}
+
+.page[data-v-ebe96f1e] {
+  margin: 10px;
+}
+.page .h[data-v-ebe96f1e] {
+  line-height: 40px;
+}
+.page form[data-v-ebe96f1e] {
+  width: 600px;
+}
+
