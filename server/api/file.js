@@ -23,6 +23,7 @@ router.post('/upload', upload.single('file'), function (req, res, next) {
     return;
   }
   let file = req.file;
+  //返回响应消息：文件的相对URL地址
   res.json({
     status: 'OK',
     name: file.filename,

@@ -9,7 +9,7 @@ import lang_en from './lang-en'
 Vue.use(VueI18n);
 //申明i18n
 const i18n = new VueI18n({
-  locale: 'en',     //选中的语言
+  locale: 'zh',     //选中的语言
   messages: {
     en: {
       ...lang_en,   //英文语言配置

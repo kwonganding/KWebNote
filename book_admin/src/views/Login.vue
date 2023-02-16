@@ -1,6 +1,6 @@
 <template>
   <div class="login-page">
-    <el-card shadow="hover" class="login-box">
+    <el-card shadow="always" class="login-box" >
       <h2>登 录</h2>
       <p class="t2">欢迎进入图书后台管理系统</p>
 

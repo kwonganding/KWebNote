@@ -9,9 +9,8 @@ server.use(express.json());
 
 //***** 静态资源  *****/
 // 使用内置的“express.static”实现静态文件代理，参数为资源地址。
-// 第一个参数为url路由，
 
-//图片静态资源
+//图片静态资源，第一个参数为url路由，
 server.use('/file', express.static('./file'));
 //兼容前端的跨域代理路径
 server.use('/server/file', express.static('./file'));
@@ -37,10 +36,11 @@ server.use(path, system);
 server.use(file);
 
 //管理后台"book_admin"的部署
-const fs = require('fs')
-const rpath = require('path')
 //静态资源
 server.use('/bookadmin', express.static('./book_admin'));
+
+const fs = require('fs')
+const rpath = require('path')
 //前端路由的重定向
 server.get('/bookadmin/*', function(req, res) {
   const html = fs.readFileSync(rpath.resolve(__dirname, '../server/book_admin/index.html'), 'utf-8')
@@ -53,3 +53,6 @@ server.listen(3000, err => {
   if (!err)
     console.log('服务器启动成功，地址：http://localhost:3000')
 })
+
+
+

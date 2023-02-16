@@ -1,7 +1,9 @@
 // 书籍管理
-
+//引入express
 let express = require('express');
+//获取Express的路由
 let router = express.Router();
+//引入db库
 const db = require('../db/db.js');
 
 //获取book列表，带分页、查询条件
@@ -49,26 +51,28 @@ router.post('/book/list', (req, res) => {
   }
 })
 
-//获取单个book数据
+//设置路由：获取单个book数据，get方式
 router.get('/book/id', (req, res) => {
+  //sql语句
   let sql = "select id,name,author,introduction,imgs,status,catgory,price,tag,comments,createtime,lasttime from books where id =?";
+  //调用db封装的查询api，返回数据
   db.queryData(sql, [req.query.id], (resData, rows) => {
     resData.data = rows[0];
     res.send(resData);
   });
 })
 
-//新增、修改
+//设置路由：新增、修改，post方式
 router.post('/book/save', (req, res) => {
   let sql = '';
-  let params = [req.body.name, req.body.author, req.body.introduction, req.body.imgs, req.body.status,
-  req.body.catgory, req.body.price, req.body.tag, req.body.comments, req.body.createtime ?? Date.now(), Date.now()];
-
-  if (req.body.id) {//update
+  // 参数，在sql中用？占位（按照顺序）
+  let params = [req.body.name, req.body.author, req.body.introduction, req.body.imgs, req.body.status, req.body.catgory, req.body.price, req.body.tag, req.body.comments, req.body.createtime ?? Date.now(), Date.now()];
+  //update 修改数据
+  if (req.body.id) {
     sql = "update books set name=?,author=?,introduction=?,imgs=?,status=?,catgory=?,price=?,tag=?,comments=?,createtime=?,lasttime=? where id=?";
     params.push(req.body.id);
   }
-  else //(name,author,introduction,img,status) 
+  else //insert 新增数据 (name,author,introduction,img,status) 
     sql = "insert into books values(NULL,?,?,?,?,?,?,?,?,?,?,?)";
   db.executeSql(sql, params, resData => {
     if (resData.status == 'OK')

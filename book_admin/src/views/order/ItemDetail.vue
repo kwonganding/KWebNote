@@ -4,7 +4,7 @@
     <span class="ititle">订单ID：</span>
     <p class="ivalue">{{item?.id}}</p>
 
-    <span class="ititle">用户：</span>
+    <span class="ititle">用户（id）：</span>
     <p class="ivalue">{{item?.name}}（{{item?.uid}}）</p>
 
     <span class="ititle">订单金额：</span>
