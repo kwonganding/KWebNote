@@ -1,6 +1,7 @@
 //数据字典的数据
 
-import api from './api'
+// import api from './api'
+import api from './mockapi.js';
 
 const ROOT_PID = 0;
 

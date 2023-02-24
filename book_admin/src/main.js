@@ -12,7 +12,8 @@ import './assets/global.less'
 import '@/../../util/js/util.js'
 
 // 引入axios封装的api
-import api from './api/api';
+// import api from './api/api';
+import api from './api/mockapi.js';
 // 挂载到vue上
 Vue.prototype.$api = api;
 // 全局设置

@@ -33,7 +33,7 @@ export default {
     //监听配置变更，持久化存储到本地
     this.$watch('config', () => {
       localStorage.setItem('admin_userconfig', JSON.stringify(this.config));
-      //更新语言
+      //手动更新语言
       this.$i18n.locale = this.config.language;
     }, { deep: true })
   },

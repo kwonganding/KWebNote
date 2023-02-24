@@ -1,0 +1,25 @@
+.detail-box .ititle[data-v-72c52d62] {
+  margin: 5px 2px;
+  display: block;
+}
+.detail-box .ititle[data-v-72c52d62]::before {
+  content: "▍";
+  color: #66a2e4;
+}
+.detail-box .ivalue[data-v-72c52d62] {
+  margin: 5px 2px 15px 15px;
+  color: #000c;
+}
+
+.toolbar[data-v-4c335468] {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.toolbar .el-form-item[data-v-4c335468] {
+  margin: 0px 6px 6px 6px;
+}
+.toolbar .el-input[data-v-4c335468] {
+  width: 160px;
+}
+

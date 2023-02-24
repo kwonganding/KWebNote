@@ -10,7 +10,11 @@
     >
       <i :class="r.meta.icon"></i>
       {{r.meta?.lang ? $t('menu.' + r.meta.lang) : r.meta?.title}}
-      <i class="el-icon-close close" v-if="!isAffix(r)" @click.prevent.stop="handleClose(r)"></i>
+      <i
+        class="el-icon-close close"
+        v-if="!isAffix(r)"
+        @click.prevent.stop="handleClose(r)"
+      ></i>
     </router-link>
 
     <!-- 页签按钮的右键菜单 -->
@@ -51,6 +55,7 @@ export default {
     this.addTag();
   },
   watch: {
+    //监测路由变化
     $route() {
       this.addTag();
     },
@@ -134,6 +139,7 @@ export default {
     },
   }
 }
+
 </script>
 
 <style lang='less' scoped>
@@ -175,10 +181,30 @@ export default {
     color: #0c43f7;
     font-weight: bold;
     margin-right: -1px; //遮住分隔符“⋮”
+    position: relative;
     & .close {
       display: initial;
       position: relative;
       left: 3px;
+    }
+    // 加一点连接凹槽弧度效果
+    &::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      position: absolute;
+      left: -5px;
+      bottom: 0;
+      background: radial-gradient(circle at 0 0, transparent 5px, #fff 6px);
+    }
+    &::after {
+      content: "";
+      width: 5px;
+      height: 5px;
+      position: absolute;
+      right: -5px;
+      bottom: 0;
+      background: radial-gradient(circle at 100% 0, transparent 5px, #fff 6px);
     }
   }
 }
