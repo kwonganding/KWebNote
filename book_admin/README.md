@@ -22,7 +22,7 @@
 
 🔸**在线体验地址**[🔥🔥](https://www.yuque.com/go/doc/109169187)：[http://kanding.gitee.io/kwebnote](http://kanding.gitee.io/kwebnote) （通过gitee静态页面Gitee Pages部署的，所以这里部署的版本是写了个mock模拟api，路由用的hash模式）。
 
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/393451/1676380466321-faead484-bdc9-4ea3-a0cf-81b057002350.png#averageHue=%23fdfdfc&clientId=u6c2f01aa-5024-4&from=paste&height=481&id=u3b06bc98&name=image.png&originHeight=481&originWidth=960&originalType=binary&ratio=1&rotation=0&showTitle=false&size=67471&status=done&style=stroke&taskId=uf15516af-2609-478e-a31f-2777511d810&title=&width=960)
+![image.png](../img/b2.png)
 
 
 ---

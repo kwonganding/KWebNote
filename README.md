@@ -7,11 +7,11 @@
 
 # 图书商城全栈Vue+Element+Node+TS项目练习
 
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/393451/1676519699862-88bd7986-9e87-4c08-be09-7b8d4a8256dd.png#averageHue=%23c2d7e1&clientId=u434ae4f9-4db3-4&from=paste&height=281&id=u49e05df5&name=image.png&originHeight=281&originWidth=450&originalType=binary&ratio=1&rotation=0&showTitle=false&size=136045&status=done&style=none&taskId=u97d7c1d4-4d57-4311-a067-1f1afb6a126&title=&width=450)
+![image.png](./img/b1.png)
 
 本项目是为学习Vue的项目练习，尽量详细记录一下一个完整项目的开发过程。面向初学者，本人也是初学者，搬砖技术还不成熟。项目在技术上勉强算是全栈，从基础的数据库（Sqlite）、到后端服务Node.js（Express），再到Web端的Vue，包含服务端、管理后台、商城网站、小程序/App。
 
-![](https://cdn.nlark.com/yuque/0/2023/jpeg/393451/1677406076160-15834936-5088-47b6-9bb4-6bf3ea85b98e.jpeg)
+![](./img/b3.jfif)
 
 * **📁 book_admin**：[图书后台管理系统](/book_admin/README.md)，`Vue2`+`ElementUI`
   - 图书系统的管理后台，管理员或商家使用。提供了登录、图书管理、订单管理、字典管理等各种管理功能，满足系统的运营、管理需求。
