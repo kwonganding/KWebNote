@@ -22,6 +22,7 @@ export default {
     },
     removeAll(state) {
       // 移除所有，除了固定的
+      // 退出登录的时候调用
       const affixItems = state.cacheRoutes.filter(s => s.meta.affix);
       state.cacheRoutes = affixItems;
       state.cacheNames = state.cacheRoutes.map(s => s.name);

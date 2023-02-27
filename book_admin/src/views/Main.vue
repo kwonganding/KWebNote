@@ -102,7 +102,9 @@ export default {
       switch (command) {
         case 'logout':
           this.$confirm.warning("确定要退出登录吗？").then(() => {
+            //清除token、保存的标签
             sessionStorage.removeItem('token');
+            this.$store.commit('tabBars/removeAll');
             this.$router.push('/login');
           }).catch(() => { });
           break;

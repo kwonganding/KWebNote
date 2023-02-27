@@ -15,7 +15,7 @@
 - `express.static`：静态资源托管，express提供的，无需额外安装。
 - `multer`：文件上传
 
-🔸**源代码地址**：[Github / KWebNote](https://github.com/kwonganding/KWebNote)，后台服务端代码在目录📁[server](https://github.com/kwonganding/KWebNote/tree/main/server)下。
+🔸**源代码地址**：[Github / KWebNote](https://github.com/kwonganding/KWebNote)，[Gitee / KWebNote](https://gitee.com/kanding/KWebNote)，后台服务端代码在目录📁[server]下。
 
-# 相关文档
+---
 

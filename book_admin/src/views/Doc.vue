@@ -37,10 +37,13 @@
     <h1>相关文档：</h1>
     <ul>
       <li>
-        <el-link href="https://www.yuque.com/kanding" target="_blank" type="primary">图书商城全栈Vue+Element+Node项目练习</el-link>
+        <el-link href="https://www.yuque.com/kanding/ktech/hug6bigq29z7mq0p" target="_blank" type="primary">图书商城全栈Vue+Element+Node+TS项目练习🔗</el-link>
       </li>
       <li>
-        <el-link href="https://www.yuque.com/kanding" target="_blank" type="primary">图书商城全栈①管理后台Vue2/ElementUI</el-link>
+        <el-link href="https://www.yuque.com/kanding/ktech/ddvf8utw8t8xrqek" target="_blank" type="primary">图书商城①管理后台Vue2+ElementUI🔗</el-link>
+      </li>
+      <li>
+        <el-link href="https://www.yuque.com/kanding/ktech/te6pvvp4ufgm4n3k" target="_blank" type="primary">图书商城②后端服务Node+Express+Sqlite🔗</el-link>
       </li>
     </ul>
   </div>

@@ -30,11 +30,13 @@ export default [
       {
         path: '/home',
         name: 'Home',
+        meta: { title: '主页' },
         component: () => import('@/views/Home.vue'),
       },
       {
         path: '/doc',
         name: 'Doc',
+        meta: { title: '文档' },
         component: () => import('@/views/Doc.vue'),
       },
       {

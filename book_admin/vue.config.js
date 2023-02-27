@@ -5,7 +5,7 @@ module.exports = defineConfig({
   //默认false，是否需要转译的第三方依赖
   transpileDependencies: true,
 
-  //基本url，多用于指定子路径
+  //基本url，多用于指定子路径，同process.env.BASE_URL
   publicPath: "/kwebnote/",
 
   devServer: {

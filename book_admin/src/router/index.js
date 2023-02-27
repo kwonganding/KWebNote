@@ -7,7 +7,7 @@ import baseRoutes from './routes'
 Vue.use(VueRouter)
 // 创建路由
 const router = new VueRouter({
-  mode: 'history',           //模式
+  mode: 'hash',           //模式
   base: process.env.BASE_URL,
   routes: baseRoutes,        //路由配置
 })
