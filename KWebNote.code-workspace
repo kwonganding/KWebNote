@@ -5,6 +5,10 @@
 		}
 	],
 	"settings": {
-		"terminal.integrated.tabs.location": "right"
+		"terminal.integrated.tabs.location": "right",
+		"livePreview.portNumber": 8082,
+		"editor.codeActionsOnSave": {
+			
+		}
 	}
 }

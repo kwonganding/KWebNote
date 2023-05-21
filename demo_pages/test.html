@@ -12,7 +12,9 @@
 
 <body>
   <h1>H1111标题</h1>
-  <p class="ellipsis">内容1223333333333333333333333内容1223333333333333333333333333333333333333333内容1223333333333333333333333333333333333333333333333333333333333</p>
+  <p class="ellipsis">
+    内容1223333333333333333333333内容1223333333333333333333333333333333333333333内容1223333333333333333333333333333333333333333333333333333333333
+  </p>
   <p>内容1223</p>
   <p>内容1223</p>
   <a href="">ssss</a>
@@ -97,5 +99,145 @@
     font-size: 2em;
   }
 </style>
+
+
+<script>
+
+
+  ///深拷贝一个对象，target为待拷贝的对象，hash用于内部缓存对象，不用传
+  function deepClone(target, hash = new WeakMap()) {
+    //值类型直接返回
+    if (target === null || typeof target !== 'object')
+      return target;
+    //对象属性值都放入map中,避免循环引用
+    if (hash.get(target))
+      return hash.get(target);
+    // 兼容数组
+    let newObj = Array.isArray(target) ? [] : {};
+    //原型、构造器赋值
+    newObj.__proto__ = target.__proto__;
+    newObj.constructor = target.constructor;
+    //缓存到map中
+    hash.set(target, newObj);
+    for (let key in target) {
+      //只处理自己的一级属性，过滤原型继承的
+      if (!target.hasOwnProperty(key)) continue;
+      // 值类型直接赋值，引用类型递归
+      if (target[key] === null || typeof target[key] !== 'object')
+        newObj[key] = target[key];
+      else
+        newObj[key] = deepClone(target[key], hash);
+    }
+    return newObj;
+  }
+
+  let obj = { age: 0, k1: { ss: 33 }, k3: [1, 2, 3], fly() { console.log('fly') } };
+  obj.k2 = obj;
+  obj.__proto__ = { name: 'sam' };
+
+  let nobj = deepClone(obj);
+  console.log(nobj)
+
+
+
+  //构造树形结构
+  //数据
+  const data = [
+    { "id": 1, "name": "用户中心", "sort": 1, "pid": 0 },
+    { "id": 2, "name": "订单中心", "sort": 2, "pid": 0 },
+    { "id": 3, "name": "系统管理", "sort": 3, "pid": 0 },
+
+    { "id": 12, "name": "所有订单", "sort": 1, "pid": 2 },
+    { "id": 14, "name": "待发货", "sort": 1.2, "pid": 2 },
+    { "id": 15, "name": "订单导出", "sort": 2, "pid": 2 },
+
+    { "id": 18, "name": "菜单设置", "sort": 1, "pid": 3 },
+    { "id": 19, "name": "权限管理", "sort": 2, "pid": 3 },
+    { "id": 21, "name": "系统权限", "sort": 1, "pid": 19 },
+    { "id": 22, "name": "角色设置", "sort": 2, "pid": 19 },
+  ];
+
+  //递归函数，pid默认0为根节点
+  function buildTree(items, pid = 0) {
+    //查找pid子节点
+    let pitems = items.filter(s => s.pid === pid);
+    if (!pitems || pitems.length <= 0)
+      return null;
+    //排序,Array.prototype.sort():对数组的元素进行排序，并返回数组
+    pitems.sort(sortItem);
+    //递归
+    pitems.forEach(item => {
+      const res = buildTree(items, item.id);
+      if (res && res.length > 0)
+        item.children = res.sort(sortItem);
+    })
+    return pitems;
+  }
+  function sortItem(item1, item2) {
+    return item2.sort - item1.sort;
+  }
+
+  function buildTreeWithMap(items) {
+    let result = [];
+    //map存放所有对象,id作为key
+    let map = {};
+    items.forEach(item => {
+      map[item.id] = item;
+    })
+    //遍历设置根节点、父级节点
+    items.forEach(item => {
+      //根节点
+      if (item.pid === 0)
+        result.push(item);
+      else {
+        map[item.pid].children ??= [];
+        map[item.pid].children?.push(item);
+      }
+    })
+    return result;
+  }
+
+  function sortTree(items) {
+    if (!items) return;
+    items.sort(sortItem).forEach(item => {
+      sortTree(item.children);
+    })
+  }
+
+  // console.log(JSON.stringify(buildTree(data)));
+
+  let items = buildTreeWithMap(data);
+  sortTree(items);
+  console.log(JSON.stringify(items));
+
+
+
+  let sitems = [
+    { "id": 1, "name": "用户中心", "sort": 1, "pid": 0 },
+    {
+      "id": 2, "name": "订单中心", "sort": 2, "pid": 0,
+      "children": [
+        { "id": 12, "name": "所有订单", "sort": 1, "pid": 2 },
+        { "id": 14, "name": "待发货", "sort": 1.2, "pid": 2 },
+        { "id": 15, "name": "订单导出", "sort": 2, "pid": 2 }
+      ]
+    },
+    {
+      "id": 3, "name": "系统管理", "sort": 3, "pid": 0,
+      "children": [
+        { "id": 18, "name": "菜单设置", "sort": 1, "pid": 3 },
+        {
+          "id": 19, "name": "权限管理", "sort": 2, "pid": 3,
+          "children": [
+            { "id": 21, "name": "系统权限", "sort": 1, "pid": 19 },
+            { "id": 22, "name": "角色设置", "sort": 2, "pid": 19 }
+          ]
+        }
+      ]
+    }
+  ]
+
+
+</script>
 
 </html>

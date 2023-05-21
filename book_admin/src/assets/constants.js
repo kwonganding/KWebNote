@@ -8,10 +8,7 @@ export default {
 
   ////////业务变量
   //书籍状态枚举
-  bookStatus: new EnumFactory({
-    normal: { text: '正常', type: 'success' },
-    disable: { text: '下架', type: 'warning' }
-  }),
+  bookStatus: new EnumFactory({ normal: { text: '正常', type: 'success' }, disable: { text: '下架', type: 'warning' } }),
   //订单状态枚举
   orderStatus: new EnumFactory({
     unpay: { text: '未支付', type: 'warning' },

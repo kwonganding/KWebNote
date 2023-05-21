@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="vue1">
+    <p>{{mes.toUpperCase()}}</p>
+    <p v-text="mes.toUpperCase() + '123'"></p>
+    <button @click.left="clickme($event)">{{arr}}</button>
+  </div>
+  <script>
+    let app = new Vue({
+      el: '#vue1',
+      data: {
+        mes: 'messsss',
+        user: {},
+        arr: [1, 2, 3],
+        v: Vue.version,
+      },
+      methods: {
+        clickme(e) {
+          console.log(e.target.tagName);
+        }
+      },
+
+    });
+    app.$set(app.user, 'name', { first: 'fff' });
+
+    app.user.name.first = 123;
+    app.arr[0] = 100;
+    queueMicrotask(() => app.arr[0] = 300);
+    setTimeout(() => {
+      app.arr[0] = 200;
+    }, 0);
+    app.$forceUpdate();
+
+
+    class Duck {
+      constructor(name) {
+        this.name = name;
+      }
+      age;
+      fly() {
+        console.log('fly');
+      }
+      cry() {
+        console.log('cry');
+      }
+    }
+
+
+  </script>
+
+</body>
+
+</html>

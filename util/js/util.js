@@ -122,6 +122,32 @@ export let mixin_store_persistent = {
     }
 }
 
+/******************************   deepClone深拷贝对象  ******************************/
+
+///深拷贝一个对象，target为待拷贝的对象，hash用于内部缓存对象，不用传
+function deepClone(target, hash = new WeakMap()) {
+    //值类型直接返回
+    if (target === null || typeof target !== 'object')
+        return target;
+    //对象属性值都放入map中,避免循环引用
+    if (hash.get(target))
+        return hash.get(target);
+    // 兼容数组
+    let newObj = Array.isArray(target) ? [] : {};
+    //缓存到map中
+    hash.set(target, newObj);
+    for (let key in target) {
+        //只处理自己的一级属性，过滤原型继承的
+        if (!target.hasOwnProperty(key)) continue;
+        // 值类型直接赋值，引用类型递归
+        if (target[key] === null || typeof target[key] !== 'object')
+            newObj[key] = target[key];
+        else
+            newObj[key] = deepClone(target[key], hash);
+    }
+    return newObj;
+}
+
 /******************************   Array 扩展  ******************************/
 
 //删除集合中指定条件的数据

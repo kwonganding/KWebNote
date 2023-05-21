@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <div class="clearfix">
+      <p style="background: silver;float: left; padding: 20px;">111</p>
+    </div>
+
+    <p style="background: skyblue; ">2222</p>
+  </div>
+  <p class="line-over" onclick="alert('ok')">333<label>aaaaa</label><strong>sssss</strong></p>
+
+  <style>
+    .clearfix::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    .line-over {
+      width: 100px;
+      background-color: burlywood;
+      text-overflow: ellipsis;
+      /* 溢出内容显示为省略号 */
+      overflow: hidden;
+      /* 隐藏溢出内容 */
+      white-space: nowrap;
+      /* 文本默认会自己换行，强制显示在一行*/
+      opacity: 0;
+    }
+  </style>
+
+  <div>
+    <h1>1px问题</h1>
+    <button class="btn">bt1</button>
+    <button class="btn btn05 border">bt1</button>
+
+    <style>
+      .btn {
+        background: #FFF;
+        padding: 6px 12px;
+        border: 3px solid black;
+        border-radius: 16px;
+        height: 32px;
+        width: 200px;
+      }
+
+      .btn05 {
+        border-width: .5px;
+        width: 100px;
+      }
+
+      .border::after {
+        content: "after";
+        box-sizing: border-box;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 200%;
+        height: 200%;
+        border: 1px solid gray;
+        transform: scale(0.5);
+        transform-origin: 0 0;
+      }
+    </style>
+  </div>
+
+
+
+
+</body>
+
+<script>
+  function isObject(value) {
+    return typeof value === 'object' && value !== null;
+  }
+
+
+</script>
+
+<!-- 跨域 -->
+<script src="http:www.thrid.com/cors/api?q=key&callback=back"></script>
+<script>
+  function back(data) {
+    console.log(data);
+  }
+
+  function jsonp(url, args, cbName) {
+    return new Promise((resolve, reject) => {
+      const ele = document.createElement('script');
+      window[cbName] = (data) => {
+        resolve(data);
+        document.body.removeChild(ele);
+      }
+      args = { ...args, callback: cbName };
+      ele.src = `${url}?${Object.keys(args).map(k => `${k}=${args[k]}`).join('&')}`;
+      console.log(ele.src);
+      document.body.appendChild(ele);
+    });
+  }
+  //使用
+  jsonp('https://sug.so.360.cn/suggest', { format: 'jsonp', word: 'china' }, 'search')
+    .then(function (data) {
+      console.log(data.result.map(s => s.word))
+    });
+
+
+
+
+</script>
+
+
+
+</html>

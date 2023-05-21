@@ -8,9 +8,7 @@
 export default {
   name: 'Page401',
   data() {
-    return {
-
-    }
+    return {    }
   },
 }
 </script>
