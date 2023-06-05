@@ -1,11 +1,11 @@
 # KWebNote
 
 * **📁 demo_pages** ：一些单独的页面demo
-* 其他为图书商城全栈Vue+Element+Node+TS项目练习
+* 其他为图书商城Vue+Element+Node+TS项目练习
 
 ---
 
-# 图书商城全栈Vue+Element+Node+TS项目练习
+# 图书商城Vue+Element+Node+TS项目练习
 
 ![image.png](./img/b1.png)
 
@@ -26,7 +26,7 @@
   - 进行中
 
 > **🪧相关文章**：
-> - [图书商城全栈Vue+Element+Node+TS项目练习](https://www.yuque.com/kanding/ktech/hug6bigq29z7mq0p)🔗
+> - [图书商城Vue+Element+Node+TS项目练习](https://www.yuque.com/kanding/ktech/hug6bigq29z7mq0p)🔗
 > - [图书商城①管理后台Vue2+ElementUI](https://www.yuque.com/kanding/ktech/ddvf8utw8t8xrqek)
 > - [图书商城②后端服务Node+Express+Sqlite](https://www.yuque.com/kanding/ktech/te6pvvp4ufgm4n3k)
 > - 图书商城③商城网站Vue3+TS

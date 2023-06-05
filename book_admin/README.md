@@ -20,7 +20,7 @@
 
 🔸**源代码地址**：[Github / KWebNote](https://github.com/kwonganding/KWebNote)，[Gitee / KWebNote](https://gitee.com/kanding/KWebNote)，管理后台代码在目录📁[book_admin]下。
 
-🔸**在线体验地址**[🔥🔥](https://www.yuque.com/go/doc/109169187)：[http://kanding.gitee.io/kwebnote](http://kanding.gitee.io/kwebnote) （通过gitee静态页面Gitee Pages部署的，所以这里部署的版本是写了个mock模拟api，路由用的hash模式）。
+🔸**在线体验地址**[🔥🔥](https://www.yuque.com/go/doc/109169187)：[http://kanding.gitee.io/kwebnote](http://kanding.gitee.io/kwebnote) （任意用户名、密码。通过gitee静态页面Gitee Pages部署的，所以这里部署的版本是写了个mock模拟api，路由用的hash模式）。
 
 ![image.png](../img/b2.png)
 
