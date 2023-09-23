@@ -9,6 +9,8 @@
 
 ![image.png](./img/b1.png)
 
+在线地址： http://kanding.gitee.io/kwebnote
+
 本项目是为学习Vue的项目练习，尽量详细记录一下一个完整项目的开发过程。面向初学者，本人也是初学者，搬砖技术还不成熟。项目在技术上勉强算是全栈，从基础的数据库（Sqlite）、到后端服务Node.js（Express），再到Web端的Vue，包含服务端、管理后台、商城网站、小程序/App。
 
 ![](./img/b3.jfif)
